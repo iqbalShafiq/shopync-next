@@ -1,28 +1,39 @@
 import { Button } from "@/app/components/shared/Button";
 import InputText from "@/app/components/shared/InputText";
 import { authService } from "@/app/lib/services/auth";
+import { redirect, RedirectType } from "next/navigation";
+import type React from "react";
+import { hasErrorResult } from "@/app/lib/utils";
 
 async function loginAction(formData: FormData) {
 	"use server";
 
-	try {
-		const email = formData.get("email") as string;
-		const password = formData.get("password") as string;
+	const email = formData.get("email") as string;
+	const password = formData.get("password") as string;
 
-		console.log({ email, password });
+	const response = await authService.login({
+		email,
+		password,
+	});
 
-		const response = await authService.login({
-			email,
-			password,
-		});
-
-		console.log({ response });
-	} catch (error) {
-		console.error("Login error:", error);
+	console.log({ response });
+	if (hasErrorResult(response.data)) {
+		console.log(`Login error: ${response.data.message}`);
+		redirect(
+			`/login?error=${encodeURIComponent(response.data.message)}`,
+			RedirectType.push,
+		);
 	}
+
+	redirect("/products", RedirectType.push);
 }
 
-const Login = () => {
+const Login = async ({
+	searchParams,
+}: { searchParams: Promise<{ error?: string }> }) => {
+	const params = await searchParams;
+	const errorMessage = params.error;
+
 	return (
 		<div
 			className={
@@ -33,7 +44,7 @@ const Login = () => {
 				<h1 className={"text-2xl font-semibold text-center mb-6"}>
 					Login into your account
 				</h1>
-				<form action={loginAction}>
+				<form>
 					<InputText
 						label={"Email"}
 						type={"email"}
@@ -47,7 +58,10 @@ const Login = () => {
 						id={"password"}
 						name={"password"}
 					/>
-					<Button type={"submit"} variant={"primary"}>
+					{errorMessage && (
+						<p className={"text-red-500 text-center mb-4"}>{errorMessage}</p>
+					)}
+					<Button formAction={loginAction} type={"submit"} variant={"primary"}>
 						Login
 					</Button>
 

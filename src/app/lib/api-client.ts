@@ -1,8 +1,5 @@
-"use client";
+import {getToken, removeToken} from "@/app/lib/auth";
 
-import { useRouter } from "next/navigation";
-
-const router = useRouter();
 const baseURL = "http://localhost:8000";
 
 // Define types for request options
@@ -15,12 +12,23 @@ type ApiResponse<T = unknown> = Promise<T>;
 
 interface ApiClient {
 	get: <T>(url: string, options?: RequestOptions) => ApiResponse<T>;
-	post: <T>(url: string, data?: unknown, options?: RequestOptions) => ApiResponse<T>;
-	put: <T>(url: string, data?: unknown, options?: RequestOptions) => ApiResponse<T>;
+	post: <T>(
+		url: string,
+		data?: unknown,
+		options?: RequestOptions,
+	) => ApiResponse<T>;
+	put: <T>(
+		url: string,
+		data?: unknown,
+		options?: RequestOptions,
+	) => ApiResponse<T>;
 	delete: <T>(url: string, options?: RequestOptions) => ApiResponse<T>;
 }
 
-async function fetchWithInterceptor<T>(url: string, options: RequestOptions = {}): ApiResponse<T> {
+async function fetchWithInterceptor<T>(
+	url: string,
+	options: RequestOptions = {},
+): ApiResponse<T> {
 	// Prepare headers
 	const headers: Record<string, string> = {
 		"Content-Type": "application/json",
@@ -28,7 +36,7 @@ async function fetchWithInterceptor<T>(url: string, options: RequestOptions = {}
 	};
 
 	// Add token if exists
-	const token = localStorage.getItem("token");
+	const token = getToken();
 	if (token) {
 		headers.Authorization = `Bearer ${token}`;
 	}
@@ -44,13 +52,7 @@ async function fetchWithInterceptor<T>(url: string, options: RequestOptions = {}
 
 		// Handle 401 Unauthorized
 		if (response.status === 401) {
-			localStorage.removeItem("token");
-			router.push("/login");
-		}
-
-		// Check if response is ok (status in range 200-299)
-		if (!response.ok) {
-			return Promise.reject(response);
+			await removeToken();
 		}
 
 		return response.json();

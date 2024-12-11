@@ -1,5 +1,6 @@
 import { api } from "@/app/lib/api-client";
 import { setToken } from "@/app/lib/auth";
+import type { Failure } from "@/app/lib/types";
 
 export interface RegisterCredentials {
 	name: string;
@@ -13,12 +14,16 @@ export interface LoginCredentials {
 }
 
 export interface AuthResponse {
-	token: string;
-	user: {
+	data: {
 		id: string;
 		email: string;
 		name: string;
+		token: string;
 	};
+}
+
+export default function isAuthResponse(response: unknown): response is AuthResponse {
+	return (response as AuthResponse).data !== undefined;
 }
 
 export const authService = {
@@ -27,9 +32,14 @@ export const authService = {
 	},
 
 	login: async (credentials: LoginCredentials) => {
-		const data = await api.post<AuthResponse>("/auth/login", credentials);
-
-		setToken(data.token);
-		return data;
+		const data = await api.post<AuthResponse | Failure>(
+			"/auth/login",
+			credentials,
+		);
+		if (isAuthResponse(data)) {
+			await setToken(data.data.token);
+		}
+		console.log(`data: ${isAuthResponse(data)}`);
+		return { data };
 	},
 };

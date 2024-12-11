@@ -1,14 +1,23 @@
-export function setToken(token: string) {
-  document.cookie = `token=${token}; path=/; max-age=86400; secure; samesite=strict`;
+import {cookies} from "next/headers";
+
+export async function setToken(token: string) {
+	(await cookies()).set({
+		name: 'token',
+		value: token,
+		httpOnly: true,
+		secure: process.env.NODE_ENV === 'production',
+		sameSite: 'strict',
+		path: '/',
+		maxAge: 86400 // 24 hours
+	});
 }
 
-export function getToken() {
-  return document.cookie
-    .split("; ")
-    .find((row) => row.startsWith("token="))
-    ?.split("=")[1];
+export async function getToken() {
+	const cookieStore = cookies();
+	const token = (await cookieStore).get('token');
+	return token?.value;
 }
 
-export function removeToken() {
-  document.cookie = "token=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT";
+export async function removeToken() {
+	(await cookies()).delete('token');
 }
