@@ -22,7 +22,9 @@ export interface AuthResponse {
 	};
 }
 
-export default function isAuthResponse(response: unknown): response is AuthResponse {
+export default function isAuthResponse(
+	response: unknown,
+): response is AuthResponse {
 	return (response as AuthResponse).data !== undefined;
 }
 

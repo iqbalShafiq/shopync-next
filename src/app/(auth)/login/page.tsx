@@ -4,6 +4,7 @@ import { authService } from "@/app/lib/services/auth";
 import { redirect, RedirectType } from "next/navigation";
 import type React from "react";
 import { hasErrorResult } from "@/app/lib/utils";
+import {getCookie, removeCookie, setCookie} from "@/app/lib/cookies";
 
 async function loginAction(formData: FormData) {
 	"use server";
@@ -19,20 +20,19 @@ async function loginAction(formData: FormData) {
 	console.log({ response });
 	if (hasErrorResult(response.data)) {
 		console.log(`Login error: ${response.data.message}`);
-		redirect(
-			`/login?error=${encodeURIComponent(response.data.message)}`,
-			RedirectType.push,
-		);
+		await setCookie("error_message", response.data.message);
+		redirect("/login", RedirectType.push);
 	}
 
 	redirect("/products", RedirectType.push);
 }
 
-const Login = async ({
-	searchParams,
-}: { searchParams: Promise<{ error?: string }> }) => {
-	const params = await searchParams;
-	const errorMessage = params.error;
+const Login = async () => {
+	const errorMessage = await getCookie("error_message");
+
+	if (errorMessage) {
+		// await removeCookie("error_message");
+	}
 
 	return (
 		<div

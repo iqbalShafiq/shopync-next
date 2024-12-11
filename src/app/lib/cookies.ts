@@ -1,9 +1,9 @@
 import { cookies } from "next/headers";
 
-export async function setToken(token: string) {
+export async function setCookie(name: string, value: string) {
 	(await cookies()).set({
-		name: "token",
-		value: token,
+		name,
+		value,
 		httpOnly: true,
 		secure: process.env.NODE_ENV === "production",
 		sameSite: "strict",
@@ -12,12 +12,12 @@ export async function setToken(token: string) {
 	});
 }
 
-export async function getToken() {
+export async function getCookie(name: string) {
 	const cookieStore = cookies();
-	const token = (await cookieStore).get("token");
+	const token = (await cookieStore).get(name);
 	return token?.value;
 }
 
-export async function removeToken() {
+export async function removeCookie(name: string) {
 	(await cookies()).delete("token");
 }

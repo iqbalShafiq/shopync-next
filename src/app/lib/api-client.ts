@@ -1,4 +1,4 @@
-import {getToken, removeToken} from "@/app/lib/auth";
+import { getToken, removeToken } from "@/app/lib/auth";
 
 const baseURL = "http://localhost:8000";
 
