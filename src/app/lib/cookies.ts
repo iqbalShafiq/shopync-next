@@ -4,7 +4,7 @@ export async function setCookie(name: string, value: string) {
 	(await cookies()).set({
 		name,
 		value,
-		httpOnly: true,
+		httpOnly: false,
 		secure: process.env.NODE_ENV === "production",
 		sameSite: "strict",
 		path: "/",
@@ -19,5 +19,6 @@ export async function getCookie(name: string) {
 }
 
 export async function removeCookie(name: string) {
-	(await cookies()).delete("token");
+	const cookieStore = await cookies();
+	cookieStore.delete(name);
 }
