@@ -1,6 +1,6 @@
 import type { ButtonHTMLAttributes } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
-import {cn} from "@/app/lib/utils";
+import { cn } from "@/app/lib/utils";
 
 const buttonVariants = cva(
 	"w-full font-semibold py-2 rounded-md transition duration-300 ease-in-out transform focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-900",

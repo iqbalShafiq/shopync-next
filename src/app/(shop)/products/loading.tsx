@@ -1,9 +1,5 @@
 const LoadingProducts = () => {
-  return (
-    <div className="loading">
-      loading...
-    </div>
-  );
-}
+	return <div className="loading">loading...</div>;
+};
 
 export default LoadingProducts;
