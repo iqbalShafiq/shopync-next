@@ -1,5 +1,26 @@
 import { Button } from "@/app/components/shared/Button";
 import InputText from "@/app/components/shared/InputText";
+import { authService } from "@/app/lib/services/auth";
+
+async function loginAction(formData: FormData) {
+	"use server";
+
+	try {
+		const email = formData.get("email") as string;
+		const password = formData.get("password") as string;
+
+		console.log({ email, password });
+
+		const response = await authService.login({
+			email,
+			password,
+		});
+
+		console.log({ response });
+	} catch (error) {
+		console.error("Login error:", error);
+	}
+}
 
 const Login = () => {
 	return (
@@ -12,7 +33,7 @@ const Login = () => {
 				<h1 className={"text-2xl font-semibold text-center mb-6"}>
 					Login into your account
 				</h1>
-				<form>
+				<form action={loginAction}>
 					<InputText
 						label={"Email"}
 						type={"email"}

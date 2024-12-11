@@ -1,5 +1,5 @@
-// lib/services/auth.ts
-import { axiosInstance } from "../axios";
+import { api } from "@/app/lib/api-client";
+import { setToken } from "@/app/lib/auth";
 
 export interface RegisterCredentials {
 	name: string;
@@ -14,7 +14,6 @@ export interface LoginCredentials {
 
 export interface AuthResponse {
 	token: string;
-	refreshToken: string;
 	user: {
 		id: string;
 		email: string;
@@ -24,29 +23,13 @@ export interface AuthResponse {
 
 export const authService = {
 	register: async (credentials: RegisterCredentials) => {
-		const { data } = await axiosInstance.post<AuthResponse>(
-			"/auth/register",
-			credentials,
-		);
-
-		return data;
+		return await api.post<AuthResponse>("/auth/register", credentials);
 	},
 
 	login: async (credentials: LoginCredentials) => {
-		const { data } = await axiosInstance.post<AuthResponse>(
-			"/auth/login",
-			credentials,
-		);
+		const data = await api.post<AuthResponse>("/auth/login", credentials);
 
-		localStorage.setItem("token", data.token);
+		setToken(data.token);
 		return data;
-	},
-
-	logout: async () => {
-		try {
-			await axiosInstance.post("/auth/logout");
-		} finally {
-			localStorage.removeItem("token");
-		}
 	},
 };
