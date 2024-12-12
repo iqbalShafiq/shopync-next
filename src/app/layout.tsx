@@ -1,6 +1,6 @@
 import type React from "react";
-import { AuthProvider } from "@/app/lib/contexts/AuthContext";
 import "./globals.css";
+import { AuthProvider } from "@/app/lib/context/AuthContext";
 
 export default function RootLayout({
 	children,
@@ -9,7 +9,7 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang="en">
-			<body className={"h-screen"}>
+			<body>
 				<AuthProvider>{children}</AuthProvider>
 			</body>
 		</html>
