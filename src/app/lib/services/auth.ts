@@ -30,7 +30,10 @@ export default function isAuthResponse(
 
 export const authService = {
 	register: async (credentials: RegisterCredentials) => {
-		return await api.post<AuthResponse | Failure>("/auth/register", credentials);
+		return await api.post<AuthResponse | Failure>(
+			"/auth/register",
+			credentials,
+		);
 	},
 
 	login: async (credentials: LoginCredentials) => {

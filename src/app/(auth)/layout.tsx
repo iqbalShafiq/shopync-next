@@ -13,9 +13,7 @@ export default function AuthLayout({
 					"p-8 text-slate-900 bg-white/30 rounded-2xl flex justify-center items-center backdrop-blur-sm shadow-lg"
 				}
 			>
-				<div className={"md:w-96"}>
-					{children}
-				</div>
+				<div className={"md:w-96"}>{children}</div>
 			</div>
 		</div>
 	);
