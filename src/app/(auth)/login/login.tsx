@@ -18,21 +18,26 @@ const Login = () => {
 				Login into your account
 			</h1>
 			<form action={formAction}>
-				<InputText
-					placeholder={"Email"}
-					label={"Email"}
-					type={"email"}
-					id={"email"}
-					name={"email"}
-				/>
-				<InputText
-					placeholder={"Password"}
-					className={"mb-4"}
-					label={"Password"}
-					type={"password"}
-					id={"password"}
-					name={"password"}
-				/>
+				<div className={"mb-4"}>
+					<InputText
+						className={"mt-1"}
+						placeholder={"Email"}
+						label={"Email"}
+						type={"email"}
+						id={"email"}
+						name={"email"}
+					/>
+				</div>
+				<div className={"mb-4"}>
+					<InputText
+						placeholder={"Password"}
+						className={"mt-1"}
+						label={"Password"}
+						type={"password"}
+						id={"password"}
+						name={"password"}
+					/>
+				</div>
 				{formState?.message && (
 					<p className={"text-red-500 text-sm mt-2 mb-4"}>
 						{formState.message}

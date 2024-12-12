@@ -22,44 +22,54 @@ const Register = () => {
 				Register for an account
 			</h1>
 			<form action={formAction}>
-				<InputText
-					defaultValue={formState.name}
-					required={true}
-					placeholder={"Name"}
-					label={"Name"}
-					type={"text"}
-					id={"name"}
-					name={"name"}
-				/>
-				<InputText
-					defaultValue={formState.email}
-					required={true}
-					placeholder={"Email"}
-					label={"Email"}
-					type={"email"}
-					id={"email"}
-					name={"email"}
-				/>
-				<InputText
-					defaultValue={formState.password}
-					required={true}
-					placeholder={"Password"}
-					className={"mb-4"}
-					label={"Password"}
-					type={"password"}
-					id={"password"}
-					name={"password"}
-				/>
-				<InputText
-					defaultValue={formState.password_confirmation}
-					required={true}
-					placeholder={"Password Confirmation"}
-					className={"mb-4"}
-					label={"Password Confirmation"}
-					type={"password"}
-					id={"password-confirmation"}
-					name={"password-confirmation"}
-				/>
+				<div className={"mb-4"}>
+					<InputText
+						defaultValue={formState.name}
+						required={true}
+						className={"mt-1"}
+						placeholder={"Name"}
+						label={"Name"}
+						type={"text"}
+						id={"name"}
+						name={"name"}
+					/>
+				</div>
+				<div className={"mb-4"}>
+					<InputText
+						defaultValue={formState.email}
+						required={true}
+						className={"mt-1"}
+						placeholder={"Email"}
+						label={"Email"}
+						type={"email"}
+						id={"email"}
+						name={"email"}
+					/>
+				</div>
+				<div className={"mb-4"}>
+					<InputText
+						defaultValue={formState.password}
+						required={true}
+						placeholder={"Password"}
+						className={"mt-1"}
+						label={"Password"}
+						type={"password"}
+						id={"password"}
+						name={"password"}
+					/>
+				</div>
+				<div className={"mb-4"}>
+					<InputText
+						defaultValue={formState.password_confirmation}
+						required={true}
+						placeholder={"Password Confirmation"}
+						className={"mt-1"}
+						label={"Password Confirmation"}
+						type={"password"}
+						id={"password-confirmation"}
+						name={"password-confirmation"}
+					/>
+				</div>
 				{formState?.message && (
 					<p className={"text-red-500 text-sm mt-2 mb-4"}>
 						{formState.message}
