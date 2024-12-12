@@ -5,6 +5,6 @@ export interface User {
 }
 
 export interface Failure {
-	errorCode: string;
+	errorCode: number;
 	message: string;
 }

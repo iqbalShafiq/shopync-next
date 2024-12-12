@@ -31,7 +31,7 @@ export async function registerAction(
 	if (hasErrorResult(response)) {
 		return {
 			message: response.message,
-			email,
+			email: response.errorCode === 409 ? "" : email,
 			name,
 			password,
 			password_confirmation: passwordConfirmation,

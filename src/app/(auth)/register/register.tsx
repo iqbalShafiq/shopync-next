@@ -3,8 +3,8 @@
 import React, { useActionState } from "react";
 import { registerAction } from "@/app/lib/actions/registerAction";
 import InputText from "@/app/components/shared/InputText";
-import { Button } from "@/app/components/shared/Button";
 import Link from "next/link";
+import SubmitButton from "@/app/components/shared/SubmitButton";
 
 const Register = () => {
 	const initialState = {
@@ -65,25 +65,23 @@ const Register = () => {
 						{formState.message}
 					</p>
 				)}
-				<Button
+				<SubmitButton
 					className={`${!formState?.message && "mt-2"}`}
-					type={"submit"}
-					variant={"primary"}
-				>
-					Register
-				</Button>
-
-				<Link href={"/login"}>
-					<p
-						className={
-							"text-slate-500 hover:text-slate-900 transition-all duration-300 text-sm block mt-5 text-center"
-						}
-					>
-						Already have an account?{" "}
-						<span className={"font-semibold"}>Sign In</span>
-					</p>
-				</Link>
+					text={"Register"}
+					loadingText={"Registering ..."}
+				/>
 			</form>
+
+			<Link href={"/login"}>
+				<p
+					className={
+						"text-slate-500 hover:text-slate-900 transition-all duration-300 text-sm block mt-5 text-center"
+					}
+				>
+					Already have an account?{" "}
+					<span className={"font-semibold"}>Sign In</span>
+				</p>
+			</Link>
 		</>
 	);
 };
