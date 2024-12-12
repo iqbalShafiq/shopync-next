@@ -9,11 +9,7 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 	startIcon?: React.ReactNode;
 }
 
-const InputText = ({
-	startIcon,
-	className,
-	...props
-}: InputProps) => {
+const InputText = ({ startIcon, className, ...props }: InputProps) => {
 	return (
 		<div className={"relative"}>
 			{props.label && (
