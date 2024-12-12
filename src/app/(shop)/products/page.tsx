@@ -1,4 +1,5 @@
 import ProductItem from "@/app/(shop)/products/_component/ProductItem";
+import Pagination from "@/app/(shop)/_component/Pagination";
 
 export default async function Products() {
 	return (
@@ -15,6 +16,12 @@ export default async function Products() {
 					}
 				/>
 			</div>
+			<Pagination
+				currentPage={1}
+				totalPages={10}
+				limit={10}
+				endpoint={"/products"}
+			/>
 		</div>
 	);
 }

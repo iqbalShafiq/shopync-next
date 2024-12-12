@@ -12,7 +12,7 @@ interface ProductProps {
 
 const ProductItem = ({ id, name, description, price, image }: ProductProps) => {
 	return (
-		<div className="shadow-md hover:shadow-lg transition-all duration-300">
+		<div className="rounded-b-xl shadow-md hover:shadow-lg transition-all duration-300">
 			<Link href={`/products/${id}`}>
 				<img
 					src={image}
