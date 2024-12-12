@@ -11,7 +11,7 @@ export default function ShopLayout({ children, topBar }: ShopLayoutProps) {
 			{topBar}
 			<div
 				className={
-					"h-screen mt-6 mx-8 p-8 text-slate-900 bg-white/30 rounded-xl backdrop-blur-sm shadow-sm"
+					"mt-6 mx-8 p-8 text-slate-900 bg-white/30 rounded-xl backdrop-blur-sm shadow-sm"
 				}
 			>
 				{children}
