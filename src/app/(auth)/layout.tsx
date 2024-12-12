@@ -8,7 +8,15 @@ export default function AuthLayout({
 }) {
 	return (
 		<div className={"h-screen justify-center flex items-center bg-blue-100"}>
-			{children}
+			<div
+				className={
+					"p-8 text-slate-900 bg-white/30 rounded-2xl flex justify-center items-center backdrop-blur-sm shadow-lg"
+				}
+			>
+				<div className={"md:w-96"}>
+					{children}
+				</div>
+			</div>
 		</div>
 	);
 }

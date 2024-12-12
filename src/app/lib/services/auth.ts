@@ -30,7 +30,7 @@ export default function isAuthResponse(
 
 export const authService = {
 	register: async (credentials: RegisterCredentials) => {
-		return await api.post<AuthResponse>("/auth/register", credentials);
+		return await api.post<AuthResponse | Failure>("/auth/register", credentials);
 	},
 
 	login: async (credentials: LoginCredentials) => {
@@ -42,6 +42,6 @@ export const authService = {
 			await setToken(data.data.token);
 		}
 		console.log(`data: ${isAuthResponse(data)}`);
-		return { data };
+		return data;
 	},
 };

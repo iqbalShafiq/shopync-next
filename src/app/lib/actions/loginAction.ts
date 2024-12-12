@@ -15,10 +15,8 @@ export async function loginAction(
 		password,
 	});
 
-	console.log({ response });
-	if (hasErrorResult(response.data)) {
-		console.log(`Login error: ${response.data.message}`);
-		return { message: response.data.message };
+	if (hasErrorResult(response)) {
+		return { message: response.message };
 	}
 
 	redirect("/products", RedirectType.push);

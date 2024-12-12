@@ -13,56 +13,51 @@ const Login = () => {
 	const [formState, formAction] = useActionState(loginAction, initialState);
 
 	return (
-		<div
-			className={
-				"p-8 text-slate-900 bg-white/30 rounded-2xl flex justify-center items-center backdrop-blur-sm shadow-lg"
-			}
-		>
-			<div className={"md:w-96"}>
-				<h1 className={"text-2xl font-semibold text-center mb-6"}>
-					Login into your account
-				</h1>
-				<form action={formAction}>
-					<InputText
-						placeholder={"Email"}
-						label={"Email"}
-						type={"email"}
-						id={"email"}
-						name={"email"}
-					/>
-					<InputText
-						placeholder={"Password"}
-						className={"mb-4"}
-						label={"Password"}
-						type={"password"}
-						id={"password"}
-						name={"password"}
-					/>
-					{formState?.message && (
-						<p className={"text-red-500 text-sm mt-2 mb-4"}>
-							{formState.message}
-						</p>
-					)}
-					<Button
-						className={`${!formState?.message && "mt-2"}`}
-						type={"submit"}
-						variant={"primary"}
-					>
-						Sign In
-					</Button>
+		<>
+			<h1 className={"text-2xl font-semibold text-center mb-6"}>
+				Login into your account
+			</h1>
+			<form action={formAction}>
+				<InputText
+					placeholder={"Email"}
+					label={"Email"}
+					type={"email"}
+					id={"email"}
+					name={"email"}
+				/>
+				<InputText
+					placeholder={"Password"}
+					className={"mb-4"}
+					label={"Password"}
+					type={"password"}
+					id={"password"}
+					name={"password"}
+				/>
+				{formState?.message && (
+					<p className={"text-red-500 text-sm mt-2 mb-4"}>
+						{formState.message}
+					</p>
+				)}
+				<Button
+					className={`${!formState?.message && "mt-2"}`}
+					type={"submit"}
+					variant={"primary"}
+				>
+					Sign In
+				</Button>
 
-					<Link href={"/register"}>
-						<p
-							className={
-								"text-slate-500 hover:text-slate-900 transition-all duration-300 text-sm block mt-5 text-center"
-							}
-						>
-							Don't have an account? Register
-						</p>
-					</Link>
-				</form>
-			</div>
-		</div>
+				<Link href={"/register"}>
+					<p
+						className={
+							"text-slate-500 hover:text-slate-900 transition-all duration-300 text-sm block mt-5 text-center"
+						}
+					>
+						Don't have an account?{" "}
+						<span className={"font-semibold"}>Register</span>
+					</p>
+				</Link>
+			</form>
+		</>
 	);
 };
 
