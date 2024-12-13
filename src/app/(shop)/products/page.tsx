@@ -1,5 +1,13 @@
 import ProductItem from "@/app/(shop)/products/_component/ProductItem";
-import Pagination from "@/app/(shop)/_component/Pagination";
+import {
+	Pagination,
+	PaginationContent,
+	PaginationEllipsis,
+	PaginationItem,
+	PaginationLink,
+	PaginationNext,
+	PaginationPrevious,
+} from "@/components/ui/pagination";
 
 export default async function Products() {
 	return (
@@ -10,18 +18,28 @@ export default async function Products() {
 					id={"asd"}
 					name={"Laptop"}
 					description={"lore ipsum"}
-					price={1500000}
+					price={1_500_000}
 					image={
 						"https://images.unsplash.com/photo-1719937206158-cad5e6775044?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 					}
 				/>
 			</div>
-			<Pagination
-				currentPage={1}
-				totalPages={10}
-				limit={10}
-				endpoint={"/products"}
-			/>
+			<Pagination className={"mt-8"}>
+				<PaginationContent>
+					<PaginationItem>
+						<PaginationPrevious href="#" />
+					</PaginationItem>
+					<PaginationItem>
+						<PaginationLink href="#">1</PaginationLink>
+					</PaginationItem>
+					<PaginationItem>
+						<PaginationEllipsis />
+					</PaginationItem>
+					<PaginationItem>
+						<PaginationNext href="#" />
+					</PaginationItem>
+				</PaginationContent>
+			</Pagination>
 		</div>
 	);
 }

@@ -1,9 +1,7 @@
+import Cart from "@/app/(shop)/cart/cart";
+
 const CartPage = () => {
-	return (
-		<div>
-			<h1>Cart Page</h1>
-		</div>
-	);
+	return <Cart />;
 };
 
 export default CartPage;

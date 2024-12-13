@@ -2,6 +2,7 @@ import type React from "react";
 import Link from "next/link";
 import TopBarLink from "@/app/(shop)/@topBar/_component/TopBarLink";
 import {
+	ArrowRightStartOnRectangleIcon,
 	MagnifyingGlassIcon,
 	ShoppingCartIcon,
 } from "@heroicons/react/16/solid";
@@ -33,24 +34,29 @@ const DefaultTopBar = () => {
 			</form>
 			<div className={"flex space-x-6"}>
 				<TopBarLink
-					to={"/cart"}
-					className={
-						"px-4 py-3 flex-col content-center text-slate-900 hover:text-slate-700 transition-all duration-300"
-					}
-				>
-					<ShoppingCartIcon width={20} />
-				</TopBarLink>
-				<TopBarLink
 					to={"/logout"}
 					className={
-						"flex-col content-center bg-slate-900 text-slate-200 hover:bg-slate-200 hover:text-slate-900"
+						"flex-col content-center bg-slate-900 text-white hover:bg-slate-200 hover:text-slate-900"
 					}
 				>
 					Add Product
 				</TopBarLink>
-				<TopBarLink to={"/logout"} className={"flex-col content-center"}>
-					Logout
-				</TopBarLink>
+				<Link
+					href={"/cart"}
+					className={
+						"flex-col content-center text-slate-900 hover:text-slate-700 transition-all duration-300"
+					}
+				>
+					<ShoppingCartIcon width={20} />
+				</Link>
+				<Link
+					href={"/logout"}
+					className={
+						"flex-col content-center text-slate-900 hover:text-slate-700 transition-all duration-300"
+					}
+				>
+					<ArrowRightStartOnRectangleIcon width={20} />
+				</Link>
 			</div>
 		</div>
 	);
