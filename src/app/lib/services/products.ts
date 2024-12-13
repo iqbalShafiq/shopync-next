@@ -1,4 +1,5 @@
 import { api } from "@/app/lib/api-client";
+import { getToken } from "@/app/lib/auth";
 
 export interface ProductQueryParams {
 	search?: string;
@@ -27,10 +28,11 @@ export interface ProductResponse {
 
 export const productService = {
 	getAll: async (params: ProductQueryParams): Promise<ProductResponse[]> => {
+		const token = await getToken();
 		return await api.get<ProductResponse | Failure>("/products", {
 			params,
 			headers: {
-				Authorization: `Bearer ${localStorage.getItem("token")}`, // TODO
+				Authorization: `Bearer ${token}`,
 			},
 		});
 	},
