@@ -1,18 +1,33 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
-import { Button } from "@/app/components/shared/Button";
+import { Button } from "@/components/ui/button";
 
-interface ProductProps {
+export interface ProductProps {
 	id: string;
 	name: string;
 	description: string;
+	quantity: number;
 	price: number;
 	image: string;
+	onActionClick: () => void;
+	className?: string;
 }
 
-const ProductItem = ({ id, name, description, price, image }: ProductProps) => {
+const ProductItem = ({
+	id,
+	name,
+	description,
+	price,
+	image,
+	className,
+	onActionClick,
+}: ProductProps) => {
 	return (
-		<div className="rounded-b-xl shadow-md hover:shadow-lg transition-all duration-300">
+		<div
+			className={`rounded-b-xl shadow-md hover:shadow-lg transition-all duration-300 ${className}`}
+		>
 			<Link href={`/products/${id}`}>
 				<img
 					src={image}
@@ -28,7 +43,7 @@ const ProductItem = ({ id, name, description, price, image }: ProductProps) => {
 				</div>
 			</Link>
 			<Button
-				variant="primary"
+				onClick={onActionClick}
 				className="w-full py-3 rounded-t-none rounded-b-xl"
 			>
 				Add to Cart

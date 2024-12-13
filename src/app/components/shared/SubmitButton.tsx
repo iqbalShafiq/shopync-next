@@ -1,7 +1,7 @@
 "use client";
-import { Button } from "@/app/components/shared/Button";
 import { useFormStatus } from "react-dom";
 import type React from "react";
+import { Button } from "@/components/ui/button";
 
 interface SubmitButtonProps
 	extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -14,12 +14,7 @@ function SubmitButton({ className, text, loadingText }: SubmitButtonProps) {
 	const { pending } = useFormStatus();
 
 	return (
-		<Button
-			className={className}
-			type="submit"
-			variant="primary"
-			disabled={pending}
-		>
+		<Button className={className} type="submit" disabled={pending}>
 			{pending ? loadingText : text}
 		</Button>
 	);

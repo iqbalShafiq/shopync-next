@@ -44,7 +44,7 @@ const Login = () => {
 					</p>
 				)}
 				<SubmitButton
-					className={`${!formState?.message && "mt-2"}`}
+					className={`w-full ${!formState?.message && "mt-2"}`}
 					text={"Sign In"}
 					loadingText={"Signing In ..."}
 				/>

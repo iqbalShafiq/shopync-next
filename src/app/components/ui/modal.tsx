@@ -10,10 +10,18 @@ import type React from "react";
 import { useRouter } from "next/navigation";
 
 interface ModalProps {
+	defaultOpen?: boolean;
+	open?: boolean;
+	title: string;
 	children: React.ReactNode;
 }
 
-const Modal = ({ children }: ModalProps) => {
+const Modal = ({
+	title,
+	defaultOpen = true,
+	open = true,
+	children,
+}: ModalProps) => {
 	const router = useRouter();
 
 	const handleOpenChange = () => {
@@ -21,10 +29,14 @@ const Modal = ({ children }: ModalProps) => {
 	};
 
 	return (
-		<Dialog defaultOpen={true} open={true} onOpenChange={handleOpenChange}>
+		<Dialog
+			defaultOpen={defaultOpen}
+			open={open}
+			onOpenChange={handleOpenChange}
+		>
 			<DialogOverlay>
 				<DialogContent className={"overflow-y-hidden"}>
-					<DialogTitle className={"text-center"}>Cart</DialogTitle>
+					<DialogTitle className={"text-center"}>{title}</DialogTitle>
 					{children}
 				</DialogContent>
 			</DialogOverlay>

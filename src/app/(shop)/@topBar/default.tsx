@@ -7,6 +7,7 @@ import {
 	ShoppingCartIcon,
 } from "@heroicons/react/16/solid";
 import InputText from "@/app/components/shared/InputText";
+import { Button } from "@/components/ui/button";
 
 const DefaultTopBar = () => {
 	return (
@@ -33,14 +34,9 @@ const DefaultTopBar = () => {
 				/>
 			</form>
 			<div className={"flex space-x-6"}>
-				<TopBarLink
-					to={"/logout"}
-					className={
-						"flex-col content-center bg-slate-900 text-white hover:bg-slate-200 hover:text-slate-900"
-					}
-				>
-					Add Product
-				</TopBarLink>
+				<Button>
+					<Link href={"/products/create"}>Add Product</Link>
+				</Button>
 				<Link
 					href={"/cart"}
 					className={

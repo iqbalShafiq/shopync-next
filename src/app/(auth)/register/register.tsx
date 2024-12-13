@@ -76,7 +76,7 @@ const Register = () => {
 					</p>
 				)}
 				<SubmitButton
-					className={`${!formState?.message && "mt-2"}`}
+					className={`w-full ${!formState?.message && "mt-2"}`}
 					text={"Register"}
 					loadingText={"Registering ..."}
 				/>
