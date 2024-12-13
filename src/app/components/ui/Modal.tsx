@@ -1,6 +1,11 @@
 "use client";
 
-import {Dialog, DialogContent, DialogOverlay, DialogTitle} from "@/components/ui/dialog";
+import {
+	Dialog,
+	DialogContent,
+	DialogOverlay,
+	DialogTitle,
+} from "@/components/ui/dialog";
 import type React from "react";
 import { useRouter } from "next/navigation";
 

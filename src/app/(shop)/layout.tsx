@@ -6,7 +6,11 @@ interface ShopLayoutProps {
 	modal: React.ReactNode;
 }
 
-export default function ShopLayout({ children, topBar, modal }: ShopLayoutProps) {
+export default function ShopLayout({
+	children,
+	topBar,
+	modal,
+}: ShopLayoutProps) {
 	return (
 		<div className={"py-8 bg-blue-100"}>
 			{modal}
