@@ -37,6 +37,18 @@ export default async function Products(props: {
 		);
 	}
 
+	if (
+		products?.data?.length === 0 ||
+		products?.pagination?.totalPages === undefined
+	) {
+		return (
+			<div>
+				<h1 className={"text-xl font-semibold text-slate-900"}>Products</h1>
+				<p className={"text-red-500 mt-4"}>No products found</p>
+			</div>
+		);
+	}
+
 	return (
 		<div>
 			<h1 className={"text-xl font-semibold text-slate-900"}>Products</h1>
@@ -68,7 +80,7 @@ export default async function Products(props: {
 						/>
 					</PaginationItem>
 					{Array.from(
-						{ length: products.pagination.totalPages },
+						{ length: products?.pagination?.totalPages },
 						(_, index) => (
 							<PaginationItem key={Math.random()}>
 								<PaginationLink href={`?page=${index + 1}`}>

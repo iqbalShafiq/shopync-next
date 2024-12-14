@@ -2,11 +2,10 @@ import type React from "react";
 import Link from "next/link";
 import {
 	ArrowRightStartOnRectangleIcon,
-	MagnifyingGlassIcon,
 	ShoppingCartIcon,
 } from "@heroicons/react/16/solid";
-import InputText from "@/app/components/shared/InputText";
 import { Button } from "@/components/ui/button";
+import SearchBar from "@/app/(shop)/@topBar/_component/SearchBar";
 
 const DefaultTopBar = () => {
 	return (
@@ -18,21 +17,8 @@ const DefaultTopBar = () => {
 			<Link href={"/"} className={"font-semibold text-slate-900 text-2xl"}>
 				Shopync
 			</Link>
-			<form className={"w-1/2 flex-col content-center"}>
-				<InputText
-					placeholder={"Search Products"}
-					name={"search"}
-					className={"rounded-3xl bg-white/30"}
-					startIcon={
-						<MagnifyingGlassIcon
-							width={20}
-							height={20}
-							className="text-slate-900"
-						/>
-					}
-				/>
-			</form>
-			<div className={"flex space-x-6"}>
+			<div className={"flex space-x-3 items-center"}>
+				<SearchBar />
 				<Button>
 					<Link href={"/products/create"}>Add Product</Link>
 				</Button>
@@ -42,16 +28,15 @@ const DefaultTopBar = () => {
 						"flex-col content-center text-slate-900 hover:text-slate-700 transition-all duration-300"
 					}
 				>
-					<ShoppingCartIcon width={20} />
+					<Button variant={"ghost"} size={"icon"} className={"rounded-full"}>
+						<ShoppingCartIcon width={20} />
+					</Button>
 				</Link>
-				<Link
-					href={"/logout"}
-					className={
-						"flex-col content-center text-slate-900 hover:text-slate-700 transition-all duration-300"
-					}
-				>
-					<ArrowRightStartOnRectangleIcon width={20} />
-				</Link>
+				<Button variant={"ghost"} size={"icon"} className={"rounded-full"}>
+					<Link href={"/logout"}>
+						<ArrowRightStartOnRectangleIcon />
+					</Link>
+				</Button>
 			</div>
 		</div>
 	);
