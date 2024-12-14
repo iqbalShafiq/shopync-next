@@ -1,11 +1,10 @@
-import { api } from "@/app/lib/api-client";
-import { getToken } from "@/app/lib/auth";
-import type { Failure } from "@/app/lib/types";
+import { api, setEndpoint } from "@/app/lib/api-client";
+import type { Failure, PaginatedResult } from "@/app/lib/types";
 
 export interface ProductQueryParams {
-	search?: string;
 	limit?: number;
 	page?: number;
+	search?: string;
 }
 
 export interface UpsertProduct {
@@ -17,7 +16,7 @@ export interface UpsertProduct {
 	imageUrl: string | null;
 }
 
-export interface ProductResponse {
+export interface Product {
 	id: string;
 	name: string;
 	description: string;
@@ -29,9 +28,8 @@ export interface ProductResponse {
 
 export const productService = {
 	getAll: async (params: ProductQueryParams) => {
-		const data = await api.get<ProductResponse[] | Failure>("/products");
-		console.log(data);
-
-		return data;
+		const searchParams = new URLSearchParams(params as Record<string, string>);
+		const endpoint = setEndpoint("/products", searchParams);
+		return await api.get<PaginatedResult<Product> | Failure>(endpoint);
 	},
 };

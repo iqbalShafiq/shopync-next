@@ -60,6 +60,12 @@ async function fetchWithInterceptor<T>(
 	}
 }
 
+// Helper method to set the base URL with query parameters
+export function setEndpoint(url: string, params: URLSearchParams) {
+	const queryString = params.toString();
+	return `${url}?${queryString}`;
+}
+
 // Helper methods for common HTTP methods
 export const api: ApiClient = {
 	get: <T>(url: string, options: RequestOptions = {}) => {
