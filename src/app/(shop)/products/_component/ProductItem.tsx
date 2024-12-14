@@ -11,7 +11,6 @@ export interface ProductProps {
 	quantity: number;
 	price: number;
 	image: string;
-	onActionClick: () => void;
 	className?: string;
 }
 
@@ -22,7 +21,6 @@ const ProductItem = ({
 	price,
 	image,
 	className,
-	onActionClick,
 }: ProductProps) => {
 	return (
 		<div
@@ -42,10 +40,7 @@ const ProductItem = ({
 					</p>
 				</div>
 			</Link>
-			<Button
-				onClick={onActionClick}
-				className="w-full py-3 rounded-t-none rounded-b-xl"
-			>
+			<Button className="w-full py-3 rounded-t-none rounded-b-xl">
 				Add to Cart
 			</Button>
 		</div>

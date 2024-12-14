@@ -4,7 +4,7 @@ import { SessionProvider } from "@/app/components/providers/session-provider";
 
 async function getUser() {
 	const cookieStore = await cookies();
-	const token = cookieStore.get("token");
+	const token = cookieStore.get("auth");
 
 	if (!token) return null;
 

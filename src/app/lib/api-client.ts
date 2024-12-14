@@ -36,10 +36,11 @@ async function fetchWithInterceptor<T>(
 	};
 
 	// Add token if exists
-	const token = getToken();
+	const token = await getToken();
 	if (token) {
 		headers.Authorization = `Bearer ${token}`;
 	}
+	console.log(headers);
 
 	// Merge all options
 	const requestOptions: RequestOptions = {
@@ -49,11 +50,6 @@ async function fetchWithInterceptor<T>(
 
 	try {
 		const response = await fetch(`${baseURL}${url}`, requestOptions);
-
-		// Handle 401 Unauthorized
-		if (response.status === 401) {
-			await removeToken();
-		}
 
 		return response.json();
 	} catch (error) {

@@ -5,7 +5,7 @@ const protectedRoutes = ["/products", "/cart", "/orders"];
 const authRoutes = ["/login", "/register"];
 
 export function middleware(request: NextRequest) {
-	const token = request.cookies.get("token");
+	const token = request.cookies.get("auth");
 	const { pathname } = request.nextUrl;
 
 	if (pathname === "/") {

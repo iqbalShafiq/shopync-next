@@ -1,5 +1,6 @@
 import { api } from "@/app/lib/api-client";
 import { getToken } from "@/app/lib/auth";
+import type { Failure } from "@/app/lib/types";
 
 export interface ProductQueryParams {
 	search?: string;
@@ -27,13 +28,10 @@ export interface ProductResponse {
 }
 
 export const productService = {
-	getAll: async (params: ProductQueryParams): Promise<ProductResponse[]> => {
-		const token = await getToken();
-		return await api.get<ProductResponse | Failure>("/products", {
-			params,
-			headers: {
-				Authorization: `Bearer ${token}`,
-			},
-		});
+	getAll: async (params: ProductQueryParams) => {
+		const data = await api.get<ProductResponse[] | Failure>("/products");
+		console.log(data);
+
+		return data;
 	},
 };

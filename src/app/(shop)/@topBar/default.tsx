@@ -1,6 +1,5 @@
 import type React from "react";
 import Link from "next/link";
-import TopBarLink from "@/app/(shop)/@topBar/_component/TopBarLink";
 import {
 	ArrowRightStartOnRectangleIcon,
 	MagnifyingGlassIcon,

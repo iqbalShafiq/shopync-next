@@ -3,7 +3,7 @@
 const ErrorProduct = () => {
 	return (
 		<div>
-			<h1>Product not found</h1>
+			<h1>Error!</h1>
 		</div>
 	);
 };
