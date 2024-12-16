@@ -19,8 +19,8 @@ export default async function Products(props: {
 }) {
 	const searchParams = await props.searchParams;
 	const search = searchParams?.search || "";
-	const page = Number(searchParams?.page) || 0;
-	const limit = Number(searchParams?.limit) || 1;
+	const page = Number(searchParams?.page) || 1;
+	const limit = Number(searchParams?.limit) || 10;
 
 	const products = await productService.getAll({
 		search,
@@ -71,7 +71,7 @@ export default async function Products(props: {
 				<PaginationContent>
 					<PaginationItem>
 						<PaginationPrevious
-							href={`?page=${page}`}
+							href={`?page=${page - 1}`}
 							aria-disabled={page === 1}
 							tabIndex={page <= 1 ? -1 : undefined}
 							className={
@@ -91,13 +91,13 @@ export default async function Products(props: {
 					)}
 					<PaginationItem>
 						<PaginationNext
-							href={`?page=${page}`}
-							aria-disabled={page === products.pagination.totalPages - 1}
+							href={`?page=${page + 1}`}
+							aria-disabled={page === products.pagination.totalPages}
 							tabIndex={
-								page >= products.pagination.totalPages - 1 ? -1 : undefined
+								page >= products.pagination.totalPages ? -1 : undefined
 							}
 							className={
-								page >= products.pagination.totalPages - 1
+								page >= products.pagination.totalPages
 									? "pointer-events-none opacity-50"
 									: undefined
 							}
