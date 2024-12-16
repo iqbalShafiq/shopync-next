@@ -93,9 +93,7 @@ export default async function Products(props: {
 						<PaginationNext
 							href={`?page=${page + 1}`}
 							aria-disabled={page === products.pagination.totalPages}
-							tabIndex={
-								page >= products.pagination.totalPages ? -1 : undefined
-							}
+							tabIndex={page >= products.pagination.totalPages ? -1 : undefined}
 							className={
 								page >= products.pagination.totalPages
 									? "pointer-events-none opacity-50"
