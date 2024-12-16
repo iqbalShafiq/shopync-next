@@ -1,28 +1,11 @@
-import { cookies } from "next/headers";
 import type React from "react";
 import { SessionProvider } from "@/app/components/providers/session-provider";
+import { type AuthResponse, authService } from "@/app/lib/services/auth";
+import type { Failure, User } from "@/app/lib/types";
+import { hasErrorResult } from "@/app/lib/utils";
 
-async function getUser() {
-	const cookieStore = await cookies();
-	const token = cookieStore.get("auth");
-
-	if (!token) return null;
-
-	try {
-		const response = await fetch(`${process.env.BASE_URL}/auth/me`, {
-			headers: {
-				Authorization: `Bearer ${token.value}`,
-			},
-		});
-
-		if (!response.ok) {
-			return null;
-		}
-
-		return response.json();
-	} catch (error) {
-		return null;
-	}
+export async function getUser(): Promise<AuthResponse | Failure> {
+	return await authService.me();
 }
 
 export async function AuthProvider({
@@ -30,6 +13,15 @@ export async function AuthProvider({
 }: {
 	children: React.ReactNode;
 }) {
-	const user = await getUser();
+	let user: AuthResponse | User | Failure | null = await getUser();
+	if (hasErrorResult(user)) {
+		user = null;
+	} else {
+		user = {
+			id: user.data.id,
+			email: user.data.email,
+			name: user.data.name,
+		};
+	}
 	return <SessionProvider initialUser={user}>{children}</SessionProvider>;
 }

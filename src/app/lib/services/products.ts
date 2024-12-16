@@ -1,10 +1,13 @@
 import { api, setEndpoint } from "@/app/lib/api-client";
 import type { Failure, PaginatedResult } from "@/app/lib/types";
+import { hasErrorResult } from "@/app/lib/utils";
+import { authService } from "@/app/lib/services/auth";
 
 export interface ProductQueryParams {
 	limit?: number;
 	page?: number;
 	search?: string;
+	userId?: string;
 }
 
 export interface UpsertProduct {
@@ -27,7 +30,7 @@ export interface Product {
 }
 
 export const productService = {
-	getAll: async (params: ProductQueryParams) => {
+	get: async (params: ProductQueryParams) => {
 		const searchParams = new URLSearchParams(params as Record<string, string>);
 		const endpoint = setEndpoint("/products", searchParams);
 		return await api.get<PaginatedResult<Product> | Failure>(endpoint);

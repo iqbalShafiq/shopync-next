@@ -29,6 +29,10 @@ export default function isAuthResponse(
 }
 
 export const authService = {
+	me: async () => {
+		return await api.get<AuthResponse | Failure>("/auth/me");
+	},
+
 	register: async (credentials: RegisterCredentials) => {
 		return await api.post<AuthResponse | Failure>(
 			"/auth/register",
