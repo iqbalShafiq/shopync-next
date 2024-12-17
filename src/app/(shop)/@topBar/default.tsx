@@ -31,9 +31,7 @@ const DefaultTopBar = async () => {
 				</Link>
 				<div className={"flex justify-start items-center space-x-1"}>
 					<TopBarLink href={"/products"}>Explore</TopBarLink>
-					<TopBarLink href={`/products?userId=${user.data.id}`}>
-						My Products
-					</TopBarLink>
+					<TopBarLink href={"/products/mine"}>My Products</TopBarLink>
 					<TopBarLink href={"/products/mine/create"}>Add Product</TopBarLink>
 				</div>
 			</div>
