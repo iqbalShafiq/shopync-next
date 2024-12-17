@@ -40,7 +40,9 @@ async function fetchWithInterceptor<T>(
 	if (token) {
 		headers.Authorization = `Bearer ${token}`;
 	}
-	console.log(headers);
+
+	console.log(`url: ${url}`);
+	console.log(`headers: ${JSON.stringify(headers)}`);
 
 	// Merge all options
 	const requestOptions: RequestOptions = {

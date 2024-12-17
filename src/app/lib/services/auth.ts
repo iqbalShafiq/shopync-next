@@ -48,7 +48,6 @@ export const authService = {
 		if (isAuthResponse(data)) {
 			await setToken(data.data.token);
 		}
-		console.log(`data: ${isAuthResponse(data)}`);
 		return data;
 	},
 };

@@ -13,6 +13,8 @@ import { hasErrorResult } from "@/app/lib/utils";
 const DefaultTopBar = async () => {
 	const user = await authService.me();
 
+	console.log(`user: ${JSON.stringify(user)}`);
+
 	if (hasErrorResult(user)) {
 		throw new Error("User not found");
 	}
