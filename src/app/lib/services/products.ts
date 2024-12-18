@@ -9,7 +9,7 @@ export interface ProductQueryParams {
 	userId?: string;
 }
 
-export interface UpsertProduct {
+export interface AddProduct {
 	name: string;
 	price: number;
 	quantity: number;
@@ -36,5 +36,8 @@ export const productService = {
 		);
 		const endpoint = setEndpoint("/products", searchParams);
 		return await api.get<PaginatedResult<Product> | Failure>(endpoint);
+	},
+	addProduct: async (product: AddProduct) => {
+		return await api.post<Product | Failure>("/products", product);
 	},
 };

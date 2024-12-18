@@ -16,6 +16,7 @@ export default async function Products(props: {
 		page?: string;
 		limit?: string;
 	}>;
+	mine?: boolean;
 	userId?: string;
 }) {
 	const searchParams = await props.searchParams;
@@ -23,6 +24,9 @@ export default async function Products(props: {
 	const page = Number(searchParams?.page) || 1;
 	const limit = Number(searchParams?.limit) || 10;
 	const userId = props.userId || undefined;
+	const title = props.mine ? "My Products" : "Products";
+
+	console.log(`mine: ${props.mine}`);
 
 	const products = await productService.get({
 		search,
@@ -34,7 +38,7 @@ export default async function Products(props: {
 	if (hasErrorResult(products)) {
 		return (
 			<div>
-				<h1 className={"text-xl font-semibold text-slate-900"}>Products</h1>
+				<h1 className={"text-xl font-semibold text-slate-900"}>{title}</h1>
 				<p>{products.message}</p>
 			</div>
 		);
@@ -48,7 +52,7 @@ export default async function Products(props: {
 	) {
 		return (
 			<div>
-				<h1 className={"text-xl font-semibold text-slate-900"}>Products</h1>
+				<h1 className={"text-xl font-semibold text-slate-900"}>{title}</h1>
 				<p className={"text-red-500 mt-4"}>No products found</p>
 			</div>
 		);
@@ -56,7 +60,7 @@ export default async function Products(props: {
 
 	return (
 		<div>
-			<h1 className={"text-xl font-semibold text-slate-900"}>Products</h1>
+			<h1 className={"text-xl font-semibold text-slate-900"}>{title}</h1>
 			<div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
 				{products.data.map(({ id, name, price, description, quantity }) => (
 					<ProductItem

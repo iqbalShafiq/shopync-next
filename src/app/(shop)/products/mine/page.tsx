@@ -16,7 +16,13 @@ const Page = async (props: {
 		throw Error("User not found");
 	}
 
-	return <Products searchParams={props.searchParams} userId={user.data.id} />;
+	return (
+		<Products
+			searchParams={props.searchParams}
+			userId={user.data.id}
+			mine={true}
+		/>
+	);
 };
 
 export default Page;
