@@ -51,13 +51,15 @@ const ProductDetail = ({ product }: ProductDetailProps) => {
 						'https://images.unsplash.com/photo-1719937206158-cad5e6775044?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"'
 					}
 					alt={product.name}
-					className={"w-full h-full object-cover object-center"}
+					className={"rounded-xl w-full h-full object-cover object-center"}
 				/>
 			</div>
 			<div className={"col-span-1"}>
 				<h1 className={"text-2xl font-semibold"}>{product.name}</h1>
 				<p className={"text-lg text-slate-500"}>{product.description}</p>
-				<p className={"text-xl font-semibold mt-4"}>{product.price}</p>
+				<p className={"text-xl font-semibold mt-4"}>
+					Rp{product.price.toLocaleString("id-ID")}
+				</p>
 			</div>
 			<AddToCart product={product} className={"col-span-1"} />
 		</div>

@@ -31,7 +31,7 @@ const Create = () => {
 						defaultValue={formState.name}
 						required={true}
 						className={
-							"font-semibold text-slate-800 text-xl md:text-2xl placeholder:text-xl md:placeholder:text-2xl"
+							"font-medium text-slate-800 text-xl md:text-2xl placeholder:text-xl md:placeholder:text-2xl"
 						}
 						placeholder={"Product Name"}
 						type={"text"}

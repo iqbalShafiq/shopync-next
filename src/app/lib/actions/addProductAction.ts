@@ -38,5 +38,7 @@ export async function addProductAction(
 		};
 	}
 
-	redirect(`/products/${response.id}`, RedirectType.push);
+	console.log(`Product added: ${JSON.stringify(response)}`);
+
+	redirect(`/products/${response.data.id}`, RedirectType.push);
 }

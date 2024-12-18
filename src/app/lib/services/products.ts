@@ -45,6 +45,6 @@ export const productService = {
 		return await api.get<ProductData | Failure>(`/products/${id}`);
 	},
 	addProduct: async (product: AddProduct) => {
-		return await api.post<Product | Failure>("/products", product);
+		return await api.post<ProductData | Failure>("/products", product);
 	},
 };

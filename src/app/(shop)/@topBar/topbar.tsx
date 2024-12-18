@@ -18,17 +18,19 @@ const TopBar = () => {
 		<nav className="mx-8 px-8 py-5 text-slate-900 bg-white/30 rounded-xl backdrop-blur-sm shadow-sm">
 			{/* Main Navigation Container */}
 			<div className="flex justify-between items-center">
-				{/* Logo */}
-				<Link href={"/"} className="text-slate-900">
-					<h1 className="text-2xl font-semibold">~</h1>
-				</Link>
+				<div className={"block md:flex justify-start space-x-6 items-center"}>
+					{/* Logo */}
+					<Link href={"/"} className="text-slate-900">
+						<h1 className="text-2xl font-semibold">Shopync</h1>
+					</Link>
 
-				{/* Desktop Navigation Links */}
-				<div className="hidden md:flex items-center space-x-6">
-					<div className="flex items-center space-x-1">
-						<TopBarLink href={"/products"}>Explore</TopBarLink>
-						<TopBarLink href={"/products/mine"}>My Products</TopBarLink>
-						<TopBarLink href={"/products/create"}>Add Product</TopBarLink>
+					{/* Desktop Navigation Links */}
+					<div className="hidden md:flex items-center space-x-6">
+						<div className="flex items-center space-x-1">
+							<TopBarLink href={"/products"}>Explore</TopBarLink>
+							<TopBarLink href={"/products/mine"}>My Products</TopBarLink>
+							<TopBarLink href={"/products/create"}>Add Product</TopBarLink>
+						</div>
 					</div>
 				</div>
 
