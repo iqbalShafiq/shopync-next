@@ -28,6 +28,10 @@ export interface Product {
 	imageUrl: string | null;
 }
 
+export interface ProductData {
+	data: Product;
+}
+
 export const productService = {
 	get: async (params: ProductQueryParams) => {
 		const validParams = getValidParams(params);
@@ -36,6 +40,9 @@ export const productService = {
 		);
 		const endpoint = setEndpoint("/products", searchParams);
 		return await api.get<PaginatedResult<Product> | Failure>(endpoint);
+	},
+	getById: async (id: string) => {
+		return await api.get<ProductData | Failure>(`/products/${id}`);
 	},
 	addProduct: async (product: AddProduct) => {
 		return await api.post<Product | Failure>("/products", product);
