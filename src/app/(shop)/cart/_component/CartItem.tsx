@@ -17,7 +17,6 @@ const CartItem = ({
 	image,
 	quantityOnCart,
 	quantity,
-	onActionClick,
 }: CartItemProps) => {
 	const [itemQuantity, setItemQuantity] = React.useState(quantityOnCart);
 
@@ -75,9 +74,7 @@ const CartItem = ({
 						<PlusIcon />
 					</Button>
 				</div>
-				<Button onClick={onActionClick} className={"px-4"}>
-					Remove
-				</Button>
+				<Button className={"px-4"}>Remove</Button>
 			</div>
 		</Card>
 	);

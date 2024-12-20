@@ -28,6 +28,13 @@ export interface Product {
 	imageUrl: string | null;
 }
 
+export interface Seller {
+	id: string;
+	name: string;
+	email: string;
+	productCount: number;
+}
+
 export interface ProductData {
 	data: Product;
 }

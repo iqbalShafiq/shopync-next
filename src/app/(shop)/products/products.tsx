@@ -61,7 +61,7 @@ export default async function Products(props: {
 	return (
 		<div>
 			<h1 className={"text-xl font-semibold text-slate-900"}>{title}</h1>
-			<div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+			<div className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
 				{products.data.map(({ id, name, price, description, quantity }) => (
 					<ProductItem
 						key={id}
