@@ -1,6 +1,6 @@
 "use client";
 
-import InputText from "@/app/components/shared/InputText";
+import InputText from "@/app/components/shared/inputText";
 import { MagnifyingGlassIcon } from "@heroicons/react/16/solid";
 import type React from "react";
 import { usePathname } from "next/navigation";

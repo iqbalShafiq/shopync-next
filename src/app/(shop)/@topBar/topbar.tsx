@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import TopBarLink from "@/app/(shop)/@topBar/_component/TopBarLink";
-import SearchBar from "@/app/(shop)/@topBar/_component/SearchBar";
+import TopBarLink from "@/app/(shop)/@topBar/_component/topBarLink";
+import SearchBar from "@/app/(shop)/@topBar/_component/searchBar";
 import { Button } from "@/components/ui/button";
 import {
 	ArrowRightStartOnRectangleIcon,
@@ -21,7 +21,7 @@ const TopBar = () => {
 				<div className={"block md:flex justify-start space-x-6 items-center"}>
 					{/* Logo */}
 					<Link href={"/"} className="text-slate-900">
-						<h1 className="text-2xl font-semibold">Shopync</h1>
+						<h1 className="text-2xl font-semibold">~</h1>
 					</Link>
 
 					{/* Desktop Navigation Links */}
@@ -37,19 +37,22 @@ const TopBar = () => {
 				{/* Desktop Right Section */}
 				<div className="hidden md:flex items-center space-x-3">
 					<SearchBar />
-					<Link
+					<TopBarLink
 						href={"/cart"}
-						className="flex-col content-center text-slate-900 hover:text-slate-700 transition-all duration-300"
+						variant={"ghost"}
+						size={"icon"}
+						className="rounded-full"
 					>
-						<Button variant={"ghost"} size={"icon"} className="rounded-full">
-							<ShoppingCartIcon width={20} />
-						</Button>
-					</Link>
-					<Button variant={"ghost"} size={"icon"} className="rounded-full">
-						<Link href={"/logout"}>
-							<ArrowRightStartOnRectangleIcon width={20} />
-						</Link>
-					</Button>
+						<ShoppingCartIcon />
+					</TopBarLink>
+					<TopBarLink
+						href={"/logout"}
+						variant={"ghost"}
+						size={"icon"}
+						className="rounded-full"
+					>
+						<ArrowRightStartOnRectangleIcon />
+					</TopBarLink>
 				</div>
 
 				{/* Mobile Menu Button */}
@@ -78,16 +81,22 @@ const TopBar = () => {
 						<SearchBar />
 					</div>
 					<div className="flex space-x-3">
-						<Link href={"/cart"}>
-							<Button variant={"ghost"} size={"icon"} className="rounded-full">
-								<ShoppingCartIcon width={20} />
-							</Button>
-						</Link>
-						<Button variant={"ghost"} size={"icon"} className="rounded-full">
-							<Link href={"/logout"}>
-								<ArrowRightStartOnRectangleIcon width={20} />
-							</Link>
-						</Button>
+						<TopBarLink
+							href={"/cart"}
+							variant={"ghost"}
+							size={"icon"}
+							className="rounded-full"
+						>
+							<ShoppingCartIcon />
+						</TopBarLink>
+						<TopBarLink
+							href={"/logout"}
+							variant={"ghost"}
+							size={"icon"}
+							className="rounded-full"
+						>
+							<ArrowRightStartOnRectangleIcon />
+						</TopBarLink>
 					</div>
 				</div>
 			)}

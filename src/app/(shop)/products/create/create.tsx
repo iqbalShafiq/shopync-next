@@ -2,11 +2,12 @@
 
 import React, { useActionState } from "react";
 import { addProductAction } from "@/app/lib/actions/addProductAction";
-import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { PlusIcon } from "lucide-react";
+import BorderlessInputText from "@/app/components/shared/borderlessInputText";
+import BorderlessTextArea from "@/app/components/shared/borderlessTextArea";
 
 const Create = () => {
 	const initialState = {
@@ -52,16 +53,11 @@ const Create = () => {
 
 				<div className={"col-span-1 lg:col-span-2 mt-4 lg:mt-0"}>
 					<div>
-						<Label htmlFor={"description"} className={"font-semibold"}>
-							Name
-						</Label>
-
-						<Input
+						<BorderlessInputText
+							label={"Product Name"}
+							labelFontWeight={"semibold"}
 							defaultValue={formState.name}
 							required={true}
-							className={
-								"-p-4 border-none font-medium text-slate-800 rounded-lg bg-transparent focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-ring focus-visible:ring-offset-0"
-							}
 							placeholder={"Product Name"}
 							type={"text"}
 							id={"name"}
@@ -69,53 +65,40 @@ const Create = () => {
 						/>
 					</div>
 
-					<div className={"mb-4 w-full md:mb-0 mr-0 md:mr-8"}>
-						<Label className={"font-semibold"} htmlFor={"price"}>
-							Price
-						</Label>
-						<Input
+					<div className={"mt-2 mb-4 w-full md:mb-0 mr-0 md:mr-8"}>
+						<BorderlessInputText
+							label={"Price"}
+							labelFontWeight={"semibold"}
 							type={"number"}
 							name={"price"}
 							id={"price"}
 							required={true}
 							placeholder={"Rp1.000.000"}
-							className={
-								"-p-4 w-full border-none rounded-lg bg-transparent focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-ring focus-visible:ring-offset-0"
-							}
 							prefix={"88"}
 						/>
 					</div>
 
-					<div className={"mb-4 w-full md:mb-0"}>
-						<Label className={"font-semibold"} htmlFor={"quantity"}>
-							Stock
-						</Label>
-						<Input
+					<div className={"mt-2 mb-4 w-full md:mb-0"}>
+						<BorderlessInputText
+							label={"Stock"}
+							labelFontWeight={"semibold"}
 							type={"number"}
 							name={"quantity"}
 							id={"quantity"}
 							required={true}
-							placeholder={"0"}
-							className={
-								"-p-4 w-full border-none rounded-lg bg-transparent focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-ring focus-visible:ring-offset-0"
-							}
+							placeholder={"100"}
 						/>
 					</div>
 
-					<div className={"mb-4"}>
-						<Label htmlFor={"description"} className={"font-semibold"}>
-							Description
-						</Label>
-
-						<Textarea
+					<div className={"mt-2 mb-4"}>
+						<BorderlessTextArea
+							label={"Product Description"}
+							labelFontWeight={"semibold"}
 							name={"description"}
 							id={"description"}
-							className={
-								"mt-1 -p-4 block w-full rounded-md border-gray-300 resize-none bg-transparent border-none focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-ring focus-visible:ring-offset-0"
-							}
 							required={true}
 							defaultValue={formState.description}
-							placeholder={"Product Description"}
+							placeholder={"Type here ..."}
 							rows={4}
 						/>
 					</div>

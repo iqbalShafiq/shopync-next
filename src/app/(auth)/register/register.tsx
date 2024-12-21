@@ -2,9 +2,9 @@
 
 import React, { useActionState } from "react";
 import { registerAction } from "@/app/lib/actions/registerAction";
-import InputText from "@/app/components/shared/InputText";
+import InputText from "@/app/components/shared/inputText";
 import Link from "next/link";
-import SubmitButton from "@/app/components/shared/SubmitButton";
+import SubmitButton from "@/app/components/shared/submitButton";
 
 const Register = () => {
 	const initialState = {
