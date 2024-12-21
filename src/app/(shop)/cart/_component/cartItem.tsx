@@ -1,6 +1,6 @@
 "use client";
 
-import type { ProductProps } from "../../products/_component/ProductItem";
+import type { ProductProps } from "../../products/_component/productItem";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { MinusIcon, PlusIcon } from "lucide-react";

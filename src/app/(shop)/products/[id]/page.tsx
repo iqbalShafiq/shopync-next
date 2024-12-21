@@ -1,6 +1,12 @@
 import ProductDetail from "@/app/(shop)/products/[id]/productDetail";
 import { productService } from "@/app/lib/services/products";
 import { hasErrorResult } from "@/app/lib/utils";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: "Product Detail",
+	description: "Product detail page for the shop",
+};
 
 interface PageProps {
 	params: Promise<{

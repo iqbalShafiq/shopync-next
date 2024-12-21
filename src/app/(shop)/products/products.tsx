@@ -1,6 +1,6 @@
 import { productService } from "@/app/lib/services/products";
 import { hasErrorResult } from "@/app/lib/utils";
-import ProductItem from "@/app/(shop)/products/_component/ProductItem";
+import ProductItem from "@/app/(shop)/products/_component/productItem";
 import {
 	Pagination,
 	PaginationContent,
