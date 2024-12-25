@@ -1,10 +1,10 @@
 "use client";
 
-import type { ProductProps } from "../../products/_component/productItem";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { MinusIcon, PlusIcon } from "lucide-react";
 import React from "react";
+import type { ProductProps } from "../../products/_component/productItem";
 
 interface CartItemProps extends ProductProps {
 	quantityOnCart: number;
@@ -39,16 +39,16 @@ const CartItem = ({
 	}
 
 	return (
-		<Card className="p-4 flex items-center justify-between space-x-4 mt-2">
+		<Card className="mt-2 flex items-center justify-between space-x-4 p-4">
 			<img
 				src={image}
 				alt={name}
-				className="w-24 h-24 object-cover rounded-md"
+				className="h-24 w-24 rounded-md object-cover"
 			/>
 			<div className="flex flex-col space-y-2">
-				<h2 className="text-xl font-semibold">{name}</h2>
+				<h2 className="font-semibold text-xl">{name}</h2>
 				<p className="text-gray-500">{description}</p>
-				<p className="text-lg font-semibold">
+				<p className="font-semibold text-lg">
 					Rp{price.toLocaleString("id-ID")}
 				</p>
 			</div>
@@ -63,7 +63,7 @@ const CartItem = ({
 					>
 						<MinusIcon />
 					</Button>
-					<p className="text-lg font-semibold select-none">{itemQuantity}</p>
+					<p className="select-none font-semibold text-lg">{itemQuantity}</p>
 					<Button
 						disabled={itemQuantity === quantity}
 						onClick={addQuantity}

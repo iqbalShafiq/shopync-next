@@ -1,8 +1,8 @@
 "use client";
 
-import React from "react";
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import React from "react";
 
 export interface ProductProps {
 	id: string;
@@ -12,6 +12,7 @@ export interface ProductProps {
 	price: number;
 	image: string;
 	className?: string;
+	mine: boolean;
 }
 
 const ProductItem = ({
@@ -21,32 +22,35 @@ const ProductItem = ({
 	price,
 	image,
 	className,
+	mine,
 }: ProductProps) => {
+	const link = mine ? `/products/editor/${id}` : `/products/${id}`;
+
 	return (
 		<div
-			className={`rounded-b-xl flex flex-col justify-between shadow-md hover:shadow-lg transition-all duration-300 ${className}`}
+			className={`flex flex-col justify-between rounded-b-xl shadow-md transition-all duration-300 hover:shadow-lg ${className}`}
 		>
-			<Link href={`/products/${id}`} className={"h-full flex flex-col"}>
+			<Link href={link} className={"flex h-full flex-col"}>
 				<img
 					src={image}
 					alt={name}
-					className="w-full h-48 object-cover rounded-t-xl"
+					className="h-48 w-full rounded-t-xl object-cover"
 				/>
-				<div className="p-6 flex-1 flex flex-col items-baseline justify-between">
+				<div className="flex flex-1 flex-col items-baseline justify-between p-6">
 					<div>
-						<h2 className="text-xl font-semibold">{name}</h2>
+						<h2 className="font-semibold text-xl">{name}</h2>
 						<p className="text-gray-500">
 							{description.length > 100
 								? `${description.substring(0, 100)}...`
 								: description}
 						</p>
 					</div>
-					<p className="text-lg font-semibold mt-2">
+					<p className="mt-2 font-semibold text-lg">
 						Rp{price.toLocaleString("id-ID")}
 					</p>
 				</div>
 			</Link>
-			<Button className="w-full py-3 rounded-t-none rounded-b-xl">
+			<Button className="w-full rounded-t-none rounded-b-xl py-3">
 				Add to Cart
 			</Button>
 		</div>

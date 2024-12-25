@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 
-interface TopBarLinkProps
+interface LinkButtonProps
 	extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
 	variant?:
 		| "link"
@@ -19,13 +19,13 @@ interface TopBarLinkProps
 	size?: "default" | "sm" | "lg" | "icon" | null | undefined;
 }
 
-const TopBarLink = ({
+const LinkButton = ({
 	variant = "link",
 	size = "default",
 	href,
 	children,
 	className,
-}: TopBarLinkProps) => {
+}: LinkButtonProps) => {
 	const pathName = usePathname();
 	if (!href) return null;
 
@@ -43,4 +43,4 @@ const TopBarLink = ({
 	);
 };
 
-export default TopBarLink;
+export default LinkButton;

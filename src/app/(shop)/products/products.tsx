@@ -1,6 +1,6 @@
+import ProductItem from "@/app/(shop)/products/_component/productItem";
 import { productService } from "@/app/lib/services/products";
 import { hasErrorResult } from "@/app/lib/utils";
-import ProductItem from "@/app/(shop)/products/_component/productItem";
 import {
 	Pagination,
 	PaginationContent,
@@ -26,8 +26,6 @@ export default async function Products(props: {
 	const userId = props.userId || undefined;
 	const title = props.mine ? "My Products" : "Products";
 
-	console.log(`mine: ${props.mine}`);
-
 	const products = await productService.get({
 		search,
 		limit,
@@ -38,7 +36,7 @@ export default async function Products(props: {
 	if (hasErrorResult(products)) {
 		return (
 			<div>
-				<h1 className={"text-xl font-semibold text-slate-900"}>{title}</h1>
+				<h1 className={"font-semibold text-slate-900 text-xl"}>{title}</h1>
 				<p>{products.message}</p>
 			</div>
 		);
@@ -52,15 +50,15 @@ export default async function Products(props: {
 	) {
 		return (
 			<div>
-				<h1 className={"text-xl font-semibold text-slate-900"}>{title}</h1>
-				<p className={"text-red-500 mt-4"}>No products found</p>
+				<h1 className={"font-semibold text-slate-900 text-xl"}>{title}</h1>
+				<p className={"mt-4 text-red-500"}>No products found</p>
 			</div>
 		);
 	}
 
 	return (
 		<div>
-			<h1 className={"text-xl font-semibold text-slate-900"}>{title}</h1>
+			<h1 className={"font-semibold text-slate-900 text-xl"}>{title}</h1>
 			<div className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
 				{products.data.map(({ id, name, price, description, quantity }) => (
 					<ProductItem
@@ -70,6 +68,7 @@ export default async function Products(props: {
 						description={description}
 						price={price}
 						quantity={quantity}
+						mine={props.mine || false}
 						image={
 							"https://images.unsplash.com/photo-1719937206158-cad5e6775044?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 						}

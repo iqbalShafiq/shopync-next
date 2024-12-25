@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useActionState } from "react";
-import { registerAction } from "@/app/lib/actions/registerAction";
 import InputText from "@/app/components/shared/inputText";
-import Link from "next/link";
 import SubmitButton from "@/app/components/shared/submitButton";
+import { registerAction } from "@/app/lib/actions/registerAction";
+import Link from "next/link";
+import React, { useActionState } from "react";
 
 const Register = () => {
 	const initialState = {
@@ -18,7 +18,7 @@ const Register = () => {
 
 	return (
 		<>
-			<h1 className={"text-2xl font-semibold text-center mb-6"}>
+			<h1 className={"mb-6 text-center font-semibold text-2xl"}>
 				Register for an account
 			</h1>
 			<form action={formAction}>
@@ -71,7 +71,7 @@ const Register = () => {
 					/>
 				</div>
 				{formState?.message && (
-					<p className={"text-red-500 text-sm mt-2 mb-4"}>
+					<p className={"mt-2 mb-4 text-red-500 text-sm"}>
 						{formState.message}
 					</p>
 				)}
@@ -85,7 +85,7 @@ const Register = () => {
 			<Link href={"/login"}>
 				<p
 					className={
-						"text-slate-500 hover:text-slate-900 transition-all duration-300 text-sm block mt-5 text-center"
+						"mt-5 block text-center text-slate-500 text-sm transition-all duration-300 hover:text-slate-900"
 					}
 				>
 					Already have an account?{" "}

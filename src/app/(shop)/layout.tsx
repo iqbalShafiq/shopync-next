@@ -12,12 +12,12 @@ export default function ShopLayout({
 	modal,
 }: ShopLayoutProps) {
 	return (
-		<div className={"py-8 bg-blue-100"}>
+		<div className={"bg-blue-100 py-8"}>
 			{modal}
 			{topBar}
 			<div
 				className={
-					"mt-6 mx-8 p-8 text-slate-900 bg-white/30 rounded-xl backdrop-blur-sm shadow-sm"
+					"mx-8 mt-6 rounded-xl bg-white/30 p-8 text-slate-900 shadow-sm backdrop-blur-sm"
 				}
 			>
 				{children}

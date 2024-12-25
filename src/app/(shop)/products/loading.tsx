@@ -2,7 +2,7 @@ import { LoadingSpinner } from "@/app/components/ui/loading-spinner";
 
 const LoadingProducts = () => {
 	return (
-		<div className={"w-full flex justify-center"}>
+		<div className={"flex w-full justify-center"}>
 			<LoadingSpinner />
 		</div>
 	);

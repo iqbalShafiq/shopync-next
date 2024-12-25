@@ -26,13 +26,17 @@ export interface Product {
 	quantity: number;
 	userId: string;
 	imageUrl: string | null;
+	user?: Seller | null | undefined;
 }
 
 export interface Seller {
 	id: string;
 	name: string;
 	email: string;
-	productCount: number;
+	count: {
+		products: number;
+		cart: number;
+	};
 }
 
 export interface ProductData {

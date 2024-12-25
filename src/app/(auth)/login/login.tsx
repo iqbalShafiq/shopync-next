@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useActionState } from "react";
-import { loginAction } from "@/app/lib/actions/loginAction";
 import InputText from "@/app/components/shared/inputText";
-import Link from "next/link";
 import SubmitButton from "@/app/components/shared/submitButton";
+import { loginAction } from "@/app/lib/actions/loginAction";
+import Link from "next/link";
+import React, { useActionState } from "react";
 
 const Login = () => {
 	const initialState = {
@@ -14,7 +14,7 @@ const Login = () => {
 
 	return (
 		<>
-			<h1 className={"text-2xl font-semibold text-center mb-6"}>
+			<h1 className={"mb-6 text-center font-semibold text-2xl"}>
 				Login into your account
 			</h1>
 			<form action={formAction}>
@@ -39,7 +39,7 @@ const Login = () => {
 					/>
 				</div>
 				{formState?.message && (
-					<p className={"text-red-500 text-sm mt-2 mb-4"}>
+					<p className={"mt-2 mb-4 text-red-500 text-sm"}>
 						{formState.message}
 					</p>
 				)}
@@ -53,7 +53,7 @@ const Login = () => {
 			<Link href={"/register"}>
 				<p
 					className={
-						"text-slate-500 hover:text-slate-900 transition-all duration-300 text-sm block mt-5 text-center"
+						"mt-5 block text-center text-slate-500 text-sm transition-all duration-300 hover:text-slate-900"
 					}
 				>
 					Don't have an account?{" "}

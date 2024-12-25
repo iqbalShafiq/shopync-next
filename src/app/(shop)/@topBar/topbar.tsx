@@ -1,58 +1,57 @@
 "use client";
 
-import Link from "next/link";
-import TopBarLink from "@/app/(shop)/@topBar/_component/topBarLink";
 import SearchBar from "@/app/(shop)/@topBar/_component/searchBar";
-import { Button } from "@/components/ui/button";
+import LinkButton from "@/app/components/shared/linkButton";
 import {
 	ArrowRightStartOnRectangleIcon,
 	Bars3Icon,
 	ShoppingCartIcon,
 	XMarkIcon,
 } from "@heroicons/react/16/solid";
+import Link from "next/link";
 import React from "react";
 
 const TopBar = () => {
 	const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
 	return (
-		<nav className="mx-8 px-8 py-5 text-slate-900 bg-white/30 rounded-xl backdrop-blur-sm shadow-sm">
+		<nav className="mx-8 rounded-xl bg-white/30 px-8 py-5 text-slate-900 shadow-sm backdrop-blur-sm">
 			{/* Main Navigation Container */}
-			<div className="flex justify-between items-center">
-				<div className={"block md:flex justify-start space-x-6 items-center"}>
+			<div className="flex items-center justify-between">
+				<div className={"block items-center justify-start space-x-6 md:flex"}>
 					{/* Logo */}
 					<Link href={"/"} className="text-slate-900">
-						<h1 className="text-2xl font-semibold">~</h1>
+						<h1 className="font-semibold text-2xl">Shopync</h1>
 					</Link>
 
 					{/* Desktop Navigation Links */}
-					<div className="hidden md:flex items-center space-x-6">
+					<div className="hidden items-center space-x-6 md:flex">
 						<div className="flex items-center space-x-1">
-							<TopBarLink href={"/products"}>Explore</TopBarLink>
-							<TopBarLink href={"/products/mine"}>My Products</TopBarLink>
-							<TopBarLink href={"/products/create"}>Add Product</TopBarLink>
+							<LinkButton href={"/products"}>Explore</LinkButton>
+							<LinkButton href={"/products/mine"}>My Products</LinkButton>
+							<LinkButton href={"/products/editor"}>Add Product</LinkButton>
 						</div>
 					</div>
 				</div>
 
 				{/* Desktop Right Section */}
-				<div className="hidden md:flex items-center space-x-3">
+				<div className="hidden items-center space-x-3 md:flex">
 					<SearchBar />
-					<TopBarLink
+					<LinkButton
 						href={"/cart"}
 						variant={"ghost"}
 						size={"icon"}
 						className="rounded-full"
 					>
 						<ShoppingCartIcon />
-					</TopBarLink>
-					<TopBarLink
+					</LinkButton>
+					<LinkButton
 						href={"/logout"}
 						variant={"ghost"}
 						size={"icon"}
 						className="rounded-full"
 					>
 						<ArrowRightStartOnRectangleIcon />
-					</TopBarLink>
+					</LinkButton>
 				</div>
 
 				{/* Mobile Menu Button */}
@@ -71,32 +70,32 @@ const TopBar = () => {
 
 			{/* Mobile Menu */}
 			{isMobileMenuOpen && (
-				<div className="md:hidden mt-4 space-y-4">
+				<div className="mt-4 space-y-4 md:hidden">
 					<div className="flex flex-col space-y-3">
-						<TopBarLink href={"/products"}>Explore</TopBarLink>
-						<TopBarLink href={"/products/mine"}>My Products</TopBarLink>
-						<TopBarLink href={"/products/create"}>Add Product</TopBarLink>
+						<LinkButton href={"/products"}>Explore</LinkButton>
+						<LinkButton href={"/products/mine"}>My Products</LinkButton>
+						<LinkButton href={"/products/editor"}>Add Product</LinkButton>
 					</div>
 					<div className="py-3">
 						<SearchBar />
 					</div>
 					<div className="flex space-x-3">
-						<TopBarLink
+						<LinkButton
 							href={"/cart"}
 							variant={"ghost"}
 							size={"icon"}
 							className="rounded-full"
 						>
 							<ShoppingCartIcon />
-						</TopBarLink>
-						<TopBarLink
+						</LinkButton>
+						<LinkButton
 							href={"/logout"}
 							variant={"ghost"}
 							size={"icon"}
 							className="rounded-full"
 						>
 							<ArrowRightStartOnRectangleIcon />
-						</TopBarLink>
+						</LinkButton>
 					</div>
 				</div>
 			)}

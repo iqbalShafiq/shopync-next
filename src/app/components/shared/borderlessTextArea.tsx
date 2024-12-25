@@ -1,6 +1,6 @@
-import type React from "react";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import type React from "react";
 
 export interface BorderlessTextAreaProps
 	extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
@@ -26,7 +26,7 @@ const BorderlessTextArea = ({
 				</Label>
 			)}
 			<Textarea
-				className={`mt-2 px-4 py-2 block transition-all duration-150 w-full rounded-lg border-2 border-slate-200 resize-none bg-transparent focus-visible:rounded-lg focus-visible:p-3 focus-visible:ring-2 focus-visible:my-2 ${className}`}
+				className={`mt-2 block w-full resize-none rounded-lg border-2 border-slate-200 bg-transparent px-4 py-3 transition-all duration-150 focus-visible:my-2 focus-visible:rounded-lg focus-visible:p-3 focus-visible:ring-2 ${className}`}
 				{...props}
 			/>
 		</div>

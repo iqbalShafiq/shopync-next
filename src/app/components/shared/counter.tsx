@@ -35,7 +35,7 @@ const Counter = ({
 	};
 
 	return (
-		<div className={`flex justify-start items-center space-x-4 ${className}`}>
+		<div className={`flex items-center justify-start space-x-4 ${className}`}>
 			<Button
 				type={"button"}
 				variant={"outline"}
@@ -46,7 +46,7 @@ const Counter = ({
 			>
 				<MinusIcon width={20} />
 			</Button>
-			<p className={"text-xl font-semibold text-slate-900 select-none"}>
+			<p className={"select-none font-semibold text-slate-900 text-xl"}>
 				{quantity}
 			</p>
 			<Button
