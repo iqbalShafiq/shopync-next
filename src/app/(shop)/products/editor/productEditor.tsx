@@ -33,7 +33,7 @@ const ProductEditor = ({ product }: ProductEditorProps) => {
 				action={formAction}
 				className={"grid grid-cols-1 lg:grid-cols-3 lg:space-x-6"}
 			>
-				<InputFile className={"col-span-1"} />
+				<InputFile name={"image"} id={"image"} className={"col-span-1"} />
 
 				<div className={"col-span-1 mt-4 lg:col-span-2 lg:mt-0"}>
 					<div>
