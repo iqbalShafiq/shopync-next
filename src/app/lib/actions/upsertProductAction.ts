@@ -5,7 +5,7 @@ import { redirect, RedirectType } from "next/navigation";
 import { productService } from "@/app/lib/services/products";
 import { authService } from "@/app/lib/services/auth";
 
-export async function addProductAction(
+export async function upsertProductAction(
 	_: { message: string },
 	formData: FormData,
 ) {
@@ -14,6 +14,7 @@ export async function addProductAction(
 		throw new Error("User not found");
 	}
 
+	const id = formData?.get("id") as string | undefined;
 	const name = formData.get("name") as string;
 	const description = formData.get("description") as string;
 	const price = Number(formData.get("price"));
@@ -28,7 +29,13 @@ export async function addProductAction(
 	payload.append("quantity", quantity.toString());
 	payload.append("image", image);
 
-	const response = await productService.addProduct(payload);
+	if (id) {
+		payload.append("id", id);
+	}
+
+	const response = id
+		? await productService.updateProduct(id, payload)
+		: await productService.addProduct(payload);
 
 	if (hasErrorResult(response)) {
 		return {

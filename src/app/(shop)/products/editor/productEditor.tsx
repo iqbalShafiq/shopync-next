@@ -3,12 +3,13 @@
 import BorderlessInputText from "@/app/components/shared/borderlessInputText";
 import BorderlessTextArea from "@/app/components/shared/borderlessTextArea";
 import InputFile from "@/app/components/shared/inputFile";
-import { addProductAction } from "@/app/lib/actions/addProductAction";
+import { upsertProductAction } from "@/app/lib/actions/upsertProductAction";
 import type { Product } from "@/app/lib/services/products";
 import { Button } from "@/components/ui/button";
 import React, { useActionState } from "react";
 import { LucideTrash } from "lucide-react";
 import Link from "next/link";
+import InputText from "@/app/components/shared/inputText";
 
 type ProductEditorProps = {
 	product?: Product;
@@ -25,7 +26,7 @@ const ProductEditor = ({ product }: ProductEditorProps) => {
 	};
 
 	const [formState, formAction] = useActionState(
-		addProductAction,
+		upsertProductAction,
 		initialState,
 	);
 
@@ -43,6 +44,14 @@ const ProductEditor = ({ product }: ProductEditorProps) => {
 				/>
 
 				<div className={"col-span-1 mt-4 lg:col-span-2 lg:mt-0"}>
+					{product?.id && (
+						<InputText
+							name={"id"}
+							id={"id"}
+							type={"hidden"}
+							defaultValue={product?.id}
+						/>
+					)}
 					<div>
 						<BorderlessInputText
 							label={"Product Name"}
@@ -107,7 +116,7 @@ const ProductEditor = ({ product }: ProductEditorProps) => {
 						)}
 
 						<Button type={"submit"} className={"w-full md:w-1/4"}>
-							Add Product
+							{product?.id ? "Update Product" : "Add Product"}
 						</Button>
 					</div>
 				</div>

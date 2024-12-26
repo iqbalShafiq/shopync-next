@@ -43,7 +43,9 @@ const CartItem = ({
 						directEditEnabled={true}
 					/>
 				</div>
-				<Button className={"px-4"}>Remove</Button>
+				<Button className={"px-4"} variant={"destructive"}>
+					Remove
+				</Button>
 			</div>
 		</Card>
 	);

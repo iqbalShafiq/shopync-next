@@ -8,7 +8,7 @@ type DeleteProductProps = {
 const DeleteProduct = ({ productId }: DeleteProductProps) => {
 	return (
 		<form className={"flex flex-col"}>
-			<h2 className={"font-medium text-lg text-slate-900"}>
+			<h2 className={"w-full text-center font-medium text-lg text-slate-900"}>
 				Are you sure to delete the product?
 			</h2>
 			<InputText

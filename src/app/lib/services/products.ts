@@ -58,6 +58,12 @@ export const productService = {
 	addProduct: async (product: FormData) => {
 		return await api.postFile<ProductData | Failure>("/products", product);
 	},
+	updateProduct: async (productId: string, product: FormData) => {
+		return await api.patchFile<ProductData | Failure>(
+			`/products/${productId}`,
+			product,
+		);
+	},
 	deleteProduct: async (productId: string) => {
 		return await api.delete<unknown | Failure>(`/products/${productId}`);
 	},

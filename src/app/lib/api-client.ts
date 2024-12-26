@@ -22,9 +22,14 @@ interface ApiClient {
 		data?: FormData,
 		options?: RequestOptions,
 	) => ApiResponse<T>;
-	put: <T>(
+	patch: <T>(
 		url: string,
 		data?: unknown,
+		options?: RequestOptions,
+	) => ApiResponse<T>;
+	patchFile: <T>(
+		url: string,
+		data?: FormData,
 		options?: RequestOptions,
 	) => ApiResponse<T>;
 	delete: <T>(url: string, options?: RequestOptions) => ApiResponse<T>;
@@ -106,12 +111,28 @@ export const api: ApiClient = {
 		);
 	},
 
-	put: <T>(url: string, data?: unknown, options: RequestOptions = {}) => {
+	patch: <T>(url: string, data?: unknown, options: RequestOptions = {}) => {
 		return fetchWithInterceptor<T>(url, {
 			...options,
-			method: "PUT",
+			method: "PATCH",
 			body: JSON.stringify(data),
 		});
+	},
+
+	patchFile: <T>(
+		url: string,
+		data?: FormData,
+		options: RequestOptions = {},
+	) => {
+		return fetchWithInterceptor<T>(
+			url,
+			{
+				...options,
+				method: "PATCH",
+				body: data,
+			},
+			null,
+		);
 	},
 
 	delete: <T>(url: string, options: RequestOptions = {}) => {
