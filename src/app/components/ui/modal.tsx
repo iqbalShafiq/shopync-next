@@ -24,7 +24,7 @@ const Modal = ({
 }: ModalProps) => {
 	const router = useRouter();
 
-	const handleOpenChange = () => {
+	const handleCloseDialog = () => {
 		router.back();
 	};
 
@@ -32,7 +32,7 @@ const Modal = ({
 		<Dialog
 			defaultOpen={defaultOpen}
 			open={open}
-			onOpenChange={handleOpenChange}
+			onOpenChange={handleCloseDialog}
 		>
 			<DialogOverlay>
 				<DialogContent className={"overflow-y-hidden"}>

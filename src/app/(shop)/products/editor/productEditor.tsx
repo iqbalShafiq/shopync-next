@@ -7,6 +7,8 @@ import { addProductAction } from "@/app/lib/actions/addProductAction";
 import type { Product } from "@/app/lib/services/products";
 import { Button } from "@/components/ui/button";
 import React, { useActionState } from "react";
+import { LucideTrash } from "lucide-react";
+import Link from "next/link";
 
 type ProductEditorProps = {
 	product?: Product;
@@ -93,7 +95,17 @@ const ProductEditor = ({ product }: ProductEditorProps) => {
 							rows={4}
 						/>
 					</div>
-					<div className={"mt-8 w-full text-right"}>
+					<div
+						className={"mt-8 flex w-full items-center justify-end space-x-3"}
+					>
+						{product?.id && (
+							<Link href={`/products/delete/${product?.id}`}>
+								<Button type={"button"} variant={"destructive"} size={"icon"}>
+									<LucideTrash />
+								</Button>
+							</Link>
+						)}
+
 						<Button type={"submit"} className={"w-full md:w-1/4"}>
 							Add Product
 						</Button>

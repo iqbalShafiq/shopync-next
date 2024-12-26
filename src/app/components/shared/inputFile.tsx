@@ -58,7 +58,7 @@ const InputFile = ({ imageUrl, className, ...props }: InputFileProps) => {
 				<ImageViewer
 					src={`http://localhost:8000${imageUrl}`}
 					alt="Selected image"
-					className="absolute top-0 right-0 bottom-0 left-0 h-full w-full rounded-lg object-cover"
+					className="absolute top-0 right-0 bottom-0 left-0 h-full w-full overflow-hidden object-cover"
 				/>
 			) : (
 				imageSrc && (

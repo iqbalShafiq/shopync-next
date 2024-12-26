@@ -2,7 +2,6 @@
 
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { MinusIcon, PlusIcon } from "lucide-react";
 import React from "react";
 import type { ProductProps } from "../../products/_component/productItem";
 import Counter from "@/app/components/shared/counter";
@@ -17,28 +16,8 @@ const CartItem = ({
 	price,
 	image,
 	quantityOnCart,
-	quantity,
+	quantity: stock,
 }: CartItemProps) => {
-	const [itemQuantity, setItemQuantity] = React.useState(quantityOnCart);
-
-	React.useEffect(() => {
-		const handler = setTimeout(() => {
-			console.log("Debounced Quantity:", itemQuantity);
-		}, 1_000);
-
-		return () => {
-			clearTimeout(handler);
-		};
-	}, [itemQuantity]);
-
-	function addQuantity() {
-		setItemQuantity(itemQuantity + 1);
-	}
-
-	function subtractQuantity() {
-		setItemQuantity(itemQuantity - 1);
-	}
-
 	return (
 		<Card className="mt-2 flex items-center justify-between space-x-4 p-4">
 			<img
@@ -57,8 +36,8 @@ const CartItem = ({
 				<div className="flex items-center space-x-2">
 					<Counter
 						start={0}
-						min={0}
-						max={quantity}
+						min={quantityOnCart}
+						max={stock}
 						increment={1}
 						enabled={false}
 						directEditEnabled={true}
