@@ -9,6 +9,7 @@ import {
 	PaginationNext,
 	PaginationPrevious,
 } from "@/components/ui/pagination";
+import { getUser } from "@/app/lib/context/AuthContext";
 
 export default async function Products(props: {
 	searchParams?: Promise<{
@@ -26,12 +27,23 @@ export default async function Products(props: {
 	const userId = props.userId || undefined;
 	const title = props.mine ? "My Products" : "Products";
 
+	const user = await getUser();
+
 	const products = await productService.get({
 		search,
 		limit,
 		page: page - 1,
 		userId,
 	});
+
+	if (hasErrorResult(user)) {
+		return (
+			<div>
+				<h1 className={"font-semibold text-slate-900 text-xl"}>{title}</h1>
+				<p>{user.message}</p>
+			</div>
+		);
+	}
 
 	if (hasErrorResult(products)) {
 		return (
@@ -60,20 +72,22 @@ export default async function Products(props: {
 		<div>
 			<h1 className={"font-semibold text-slate-900 text-xl"}>{title}</h1>
 			<div className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-				{products.data.map(({ id, name, price, description, quantity }) => (
-					<ProductItem
-						key={id}
-						id={id}
-						name={name}
-						description={description}
-						price={price}
-						quantity={quantity}
-						mine={props.mine || false}
-						image={
-							"https://images.unsplash.com/photo-1719937206158-cad5e6775044?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-						}
-					/>
-				))}
+				{products.data.map(
+					({ id, name, price, description, quantity, userId }) => (
+						<ProductItem
+							key={id}
+							id={id}
+							name={name}
+							description={description}
+							price={price}
+							quantity={quantity}
+							mine={userId === user?.data.id}
+							image={
+								"https://images.unsplash.com/photo-1719937206158-cad5e6775044?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+							}
+						/>
+					),
+				)}
 			</div>
 			<Pagination className={"mt-8"}>
 				<PaginationContent>
