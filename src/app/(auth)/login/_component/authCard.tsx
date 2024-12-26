@@ -8,7 +8,7 @@ const AuthCard = ({ children }: AuthCardProps) => {
 	return (
 		<div
 			className={
-				"flex·items-center·justify-center·rounded-2xl·bg-white/30·p-8·text-slate-900·shadow-lg·backdrop-blur-sm"
+				"flex items-center justify-center rounded-2xl bg-white/30 p-8 text-slate-900 shadow-lg backdrop-blur-sm"
 			}
 		>
 			{children}

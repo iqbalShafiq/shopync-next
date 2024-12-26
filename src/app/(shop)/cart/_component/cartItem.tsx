@@ -5,6 +5,7 @@ import { Card } from "@/components/ui/card";
 import { MinusIcon, PlusIcon } from "lucide-react";
 import React from "react";
 import type { ProductProps } from "../../products/_component/productItem";
+import Counter from "@/app/components/shared/counter";
 
 interface CartItemProps extends ProductProps {
 	quantityOnCart: number;
@@ -54,25 +55,14 @@ const CartItem = ({
 			</div>
 			<div className="flex flex-col space-y-2">
 				<div className="flex items-center space-x-2">
-					<Button
-						disabled={itemQuantity === 1}
-						onClick={subtractQuantity}
-						variant={"outline"}
-						className={"px-2"}
-						size={"icon"}
-					>
-						<MinusIcon />
-					</Button>
-					<p className="select-none font-semibold text-lg">{itemQuantity}</p>
-					<Button
-						disabled={itemQuantity === quantity}
-						onClick={addQuantity}
-						variant={"outline"}
-						className={"px-2"}
-						size={"icon"}
-					>
-						<PlusIcon />
-					</Button>
+					<Counter
+						start={0}
+						min={0}
+						max={quantity}
+						increment={1}
+						enabled={false}
+						directEditEnabled={true}
+					/>
 				</div>
 				<Button className={"px-4"}>Remove</Button>
 			</div>
