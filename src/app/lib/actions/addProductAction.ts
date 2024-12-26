@@ -18,15 +18,17 @@ export async function addProductAction(
 	const description = formData.get("description") as string;
 	const price = Number(formData.get("price"));
 	const quantity = Number(formData.get("quantity"));
+	const image = formData.get("image") as File;
 
-	const response = await productService.addProduct({
-		userId: user.data.id,
-		name,
-		description,
-		price: price,
-		quantity: quantity,
-		imageUrl: "",
-	});
+	const payload = new FormData();
+	formData.append("userId", user.data.id);
+	payload.append("name", name);
+	payload.append("description", description);
+	payload.append("price", price.toString());
+	payload.append("quantity", quantity.toString());
+	payload.append("image", image);
+
+	const response = await productService.addProduct(payload);
 
 	if (hasErrorResult(response)) {
 		return {

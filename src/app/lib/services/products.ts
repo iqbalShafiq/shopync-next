@@ -55,7 +55,7 @@ export const productService = {
 	getById: async (id: string) => {
 		return await api.get<ProductData | Failure>(`/products/${id}`);
 	},
-	addProduct: async (product: AddProduct) => {
-		return await api.post<ProductData | Failure>("/products", product);
+	addProduct: async (product: FormData) => {
+		return await api.postFile<ProductData | Failure>("/products", product);
 	},
 };

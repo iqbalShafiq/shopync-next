@@ -73,7 +73,7 @@ export default async function Products(props: {
 			<h1 className={"font-semibold text-slate-900 text-xl"}>{title}</h1>
 			<div className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
 				{products.data.map(
-					({ id, name, price, description, quantity, userId }) => (
+					({ id, name, price, description, quantity, userId, imageUrl }) => (
 						<ProductItem
 							key={id}
 							id={id}
@@ -82,9 +82,7 @@ export default async function Products(props: {
 							price={price}
 							quantity={quantity}
 							mine={userId === user?.data.id}
-							image={
-								"https://images.unsplash.com/photo-1719937206158-cad5e6775044?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-							}
+							image={`http://localhost:8000${imageUrl}`}
 						/>
 					),
 				)}

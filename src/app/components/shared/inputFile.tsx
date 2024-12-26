@@ -7,10 +7,11 @@ import { cn } from "@/lib/utils";
 import { PlusIcon } from "lucide-react";
 import React from "react";
 
-const InputFile = ({
-	className,
-	...props
-}: React.InputHTMLAttributes<HTMLInputElement>) => {
+interface InputFileProps extends React.InputHTMLAttributes<HTMLInputElement> {
+	imageUrl?: string | null;
+}
+
+const InputFile = ({ imageUrl, className, ...props }: InputFileProps) => {
 	const { toast } = useToast();
 	const [imageSrc, setImageSrc] = React.useState<string | null>(null);
 
@@ -53,12 +54,20 @@ const InputFile = ({
 				className,
 			)}
 		>
-			{imageSrc && (
+			{imageUrl ? (
 				<ImageViewer
-					src={imageSrc}
+					src={`http://localhost:8000${imageUrl}`}
 					alt="Selected image"
 					className="absolute top-0 right-0 bottom-0 left-0 h-full w-full rounded-lg object-cover"
 				/>
+			) : (
+				imageSrc && (
+					<ImageViewer
+						src={imageSrc}
+						alt="Selected image"
+						className="absolute top-0 right-0 bottom-0 left-0 h-full w-full rounded-lg object-cover"
+					/>
+				)
 			)}
 			<Input
 				type={"file"}

@@ -1,4 +1,4 @@
-import { getToken, removeToken } from "@/app/lib/auth";
+import { getToken } from "@/app/lib/auth";
 
 const baseURL = "http://localhost:8000";
 
@@ -17,6 +17,11 @@ interface ApiClient {
 		data?: unknown,
 		options?: RequestOptions,
 	) => ApiResponse<T>;
+	postFile: <T>(
+		url: string,
+		data?: FormData,
+		options?: RequestOptions,
+	) => ApiResponse<T>;
 	put: <T>(
 		url: string,
 		data?: unknown,
@@ -28,12 +33,16 @@ interface ApiClient {
 async function fetchWithInterceptor<T>(
 	url: string,
 	options: RequestOptions = {},
+	contentType: string | null = "application/json",
 ): ApiResponse<T> {
 	// Prepare headers
 	const headers: Record<string, string> = {
-		"Content-Type": "application/json",
 		...options.headers,
 	};
+
+	if (contentType) {
+		headers["Content-Type"] = contentType;
+	}
 
 	// Add token if exists
 	const token = await getToken();
@@ -83,6 +92,18 @@ export const api: ApiClient = {
 			method: "POST",
 			body: JSON.stringify(data),
 		});
+	},
+
+	postFile: <T>(url: string, data?: FormData, options: RequestOptions = {}) => {
+		return fetchWithInterceptor<T>(
+			url,
+			{
+				...options,
+				method: "POST",
+				body: data,
+			},
+			null,
+		);
 	},
 
 	put: <T>(url: string, data?: unknown, options: RequestOptions = {}) => {
