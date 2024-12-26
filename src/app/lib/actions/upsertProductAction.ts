@@ -1,9 +1,9 @@
 "use server";
 
-import { hasErrorResult } from "@/app/lib/utils";
-import { redirect, RedirectType } from "next/navigation";
-import { productService } from "@/app/lib/services/products";
 import { authService } from "@/app/lib/services/auth";
+import { productService } from "@/app/lib/services/products";
+import { hasErrorResult } from "@/app/lib/utils";
+import { RedirectType, redirect } from "next/navigation";
 
 export async function upsertProductAction(
 	_: { message: string },
@@ -20,6 +20,8 @@ export async function upsertProductAction(
 	const price = Number(formData.get("price"));
 	const quantity = Number(formData.get("quantity"));
 	const image = formData.get("image") as File;
+
+	console.log(`Image: ${JSON.stringify(image)}`);
 
 	const payload = new FormData();
 	formData.append("userId", user.data.id);
@@ -49,5 +51,9 @@ export async function upsertProductAction(
 
 	console.log(`Product added: ${JSON.stringify(response)}`);
 
-	redirect(`/products/${response.data.id}`, RedirectType.push);
+	if (id) {
+		redirect(`/products/editor/${response.data.id}`, RedirectType.push);
+	} else {
+		redirect(`/products/${response.data.id}`, RedirectType.push);
+	}
 }

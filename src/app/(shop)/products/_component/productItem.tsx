@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import LinkButton from "@/app/components/shared/linkButton";
 import Link from "next/link";
 import React from "react";
 
@@ -50,9 +50,13 @@ const ProductItem = ({
 					</p>
 				</div>
 			</Link>
-			<Button className="w-full rounded-t-none rounded-b-xl py-3">
-				Add to Cart
-			</Button>
+			<LinkButton
+				href={mine ? `/products/editor/${id}` : `/products/${id}`}
+				className="w-full rounded-t-none rounded-b-xl py-3"
+				variant={"default"}
+			>
+				{mine ? "Edit" : "Add to cart"}
+			</LinkButton>
 		</div>
 	);
 };

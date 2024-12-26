@@ -54,16 +54,16 @@ const InputFile = ({ imageUrl, className, ...props }: InputFileProps) => {
 				className,
 			)}
 		>
-			{imageUrl ? (
+			{imageSrc ? (
 				<ImageViewer
-					src={`http://localhost:8000${imageUrl}`}
+					src={imageSrc}
 					alt="Selected image"
 					className="absolute top-0 right-0 bottom-0 left-0 h-full w-full overflow-hidden object-cover"
 				/>
 			) : (
-				imageSrc && (
+				imageUrl && (
 					<ImageViewer
-						src={imageSrc}
+						src={`http://localhost:8000${imageUrl}`}
 						alt="Selected image"
 						className="absolute top-0 right-0 bottom-0 left-0 h-full w-full rounded-lg object-cover"
 					/>

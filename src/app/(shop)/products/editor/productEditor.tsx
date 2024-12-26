@@ -3,13 +3,13 @@
 import BorderlessInputText from "@/app/components/shared/borderlessInputText";
 import BorderlessTextArea from "@/app/components/shared/borderlessTextArea";
 import InputFile from "@/app/components/shared/inputFile";
+import InputText from "@/app/components/shared/inputText";
 import { upsertProductAction } from "@/app/lib/actions/upsertProductAction";
 import type { Product } from "@/app/lib/services/products";
 import { Button } from "@/components/ui/button";
-import React, { useActionState } from "react";
 import { LucideTrash } from "lucide-react";
 import Link from "next/link";
-import InputText from "@/app/components/shared/inputText";
+import React, { useActionState } from "react";
 
 type ProductEditorProps = {
 	product?: Product;
@@ -108,7 +108,7 @@ const ProductEditor = ({ product }: ProductEditorProps) => {
 						className={"mt-8 flex w-full items-center justify-end space-x-3"}
 					>
 						{product?.id && (
-							<Link href={`/products/delete/${product?.id}`}>
+							<Link href={`/products/delete/${product?.id}`} tabIndex={-1}>
 								<Button type={"button"} variant={"destructive"} size={"icon"}>
 									<LucideTrash />
 								</Button>
