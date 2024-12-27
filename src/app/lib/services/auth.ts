@@ -1,5 +1,5 @@
 import { api } from "@/app/lib/api-client";
-import { setToken } from "@/app/lib/auth";
+import { removeToken, setToken } from "@/app/lib/auth";
 import type { Failure } from "@/app/lib/types";
 
 export interface RegisterCredentials {
@@ -49,5 +49,10 @@ export const authService = {
 			await setToken(data.data.token);
 		}
 		return data;
+	},
+
+	logout: async () => {
+		await removeToken();
+		return;
 	},
 };
