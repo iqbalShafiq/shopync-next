@@ -6,8 +6,8 @@ import {
 	DialogOverlay,
 	DialogTitle,
 } from "@/components/ui/dialog";
-import type React from "react";
-import { useRouter } from "next/navigation";
+import React from "react";
+import { usePathname, useRouter } from "next/navigation";
 
 interface ModalProps {
 	defaultOpen?: boolean;
@@ -22,7 +22,14 @@ const Modal = ({
 	open = true,
 	children,
 }: ModalProps) => {
+	const pathName = usePathname();
 	const router = useRouter();
+
+	React.useEffect(() => {
+		if (pathName === "/") {
+			router.back();
+		}
+	}, [pathName, router]);
 
 	const handleCloseDialog = () => {
 		router.back();

@@ -1,5 +1,6 @@
 import DeleteProduct from "@/app/(shop)/products/delete/[id]/deleteProduct";
 import Modal from "@/app/components/ui/modal";
+import ModalWrapper from "@/app/components/ui/modalWrapper";
 
 interface PageProps {
 	params: Promise<{
@@ -10,9 +11,11 @@ interface PageProps {
 const Page = async ({ params }: PageProps) => {
 	const { id: productId } = await params;
 	return (
-		<Modal title={"Delete Product"}>
-			<DeleteProduct productId={productId} />
-		</Modal>
+		<ModalWrapper expectedPath={`/products/delete/${productId}`}>
+			<Modal title={"Delete Product"}>
+				<DeleteProduct productId={productId} />
+			</Modal>
+		</ModalWrapper>
 	);
 };
 

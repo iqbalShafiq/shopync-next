@@ -1,17 +1,21 @@
 "use server";
 
 import { hasErrorResult } from "@/app/lib/utils";
-import { redirect, RedirectType } from "next/navigation";
 import { productService } from "@/app/lib/services/products";
 import { authService } from "@/app/lib/services/auth";
 
+export type DeleteProductState = {
+	success: boolean;
+	message: string;
+};
+
 export async function deleteProductAction(
-	_: { message: string },
+	_: DeleteProductState,
 	formData: FormData,
-) {
+): Promise<DeleteProductState> {
 	const user = await authService.me();
 	if (hasErrorResult(user)) {
-		throw new Error("User not found");
+		throw new Error("User not authenticated");
 	}
 
 	const productId = formData.get("productId") as string;
@@ -19,11 +23,13 @@ export async function deleteProductAction(
 
 	if (hasErrorResult(response)) {
 		return {
+			success: false,
 			message: response.message,
 		};
 	}
 
-	console.log(`Product deleted: ${JSON.stringify(response)}`);
-
-	redirect("/products/mine", RedirectType.push);
+	return {
+		success: true,
+		message: "Product deleted successfully",
+	};
 }
