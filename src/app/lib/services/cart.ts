@@ -1,4 +1,4 @@
-import { api } from "../api-client";
+import { api } from "@/app/lib/api-client";
 import type { Failure } from "../types";
 import type { Product } from "@/app/lib/services/products";
 
@@ -12,14 +12,18 @@ export interface ProductInCart {
 	product: Product;
 }
 
+export interface ProductInCartData {
+	data: ProductInCart[];
+}
+
 export const cartService = {
 	getByUserId: async () => {
-		return await api.get<ProductInCart[] | Failure>("/carts");
+		return await api.get<ProductInCartData | Failure>("/carts");
 	},
 	addItem: async (data: UpsertCart) => {
-		return await api.post<ProductInCart | Failure>("/carts", data);
+		return await api.post<unknown | Failure>("/carts", data);
 	},
 	updateItem: async (data: UpsertCart) => {
-		return await api.patch<ProductInCart | Failure>("/carts", data);
+		return await api.patch<unknown | Failure>("/carts", data);
 	},
 };

@@ -1,5 +1,3 @@
-"use client";
-
 import Modal from "@/app/components/ui/modal";
 import Cart from "@/app/(shop)/cart/cart";
 

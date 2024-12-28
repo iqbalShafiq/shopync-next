@@ -3,25 +3,21 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import React from "react";
-import type { ProductProps } from "../../products/_component/productItem";
 import Counter from "@/app/components/shared/counter";
+import type { Product } from "@/app/lib/services/products";
 
-interface CartItemProps extends ProductProps {
-	quantityOnCart: number;
+interface CartItemProps {
+	quantity: number;
+	product: Product;
 }
 
-const CartItem = ({
-	name,
-	description,
-	price,
-	image,
-	quantityOnCart,
-	quantity: stock,
-}: CartItemProps) => {
+const CartItem = ({ quantity, product }: CartItemProps) => {
+	const { name, description, price, imageUrl, quantity: stock } = product;
+
 	return (
 		<Card className="flex items-center justify-between space-x-4 p-4">
 			<img
-				src={image}
+				src={`http://localhost:8000${imageUrl}`}
 				alt={name}
 				className="h-24 w-24 rounded-md object-cover"
 			/>
@@ -36,7 +32,7 @@ const CartItem = ({
 				<div className="flex items-center space-x-2">
 					<Counter
 						start={0}
-						min={quantityOnCart}
+						min={quantity}
 						max={stock}
 						increment={1}
 						enabled={false}
