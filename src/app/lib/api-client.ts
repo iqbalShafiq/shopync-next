@@ -35,12 +35,18 @@ interface ApiClient {
 	delete: <T>(url: string, options?: RequestOptions) => ApiResponse<T>;
 }
 
+function getClientToken() {
+	return document.cookie
+		.split("; ")
+		.find((row) => row.startsWith("auth="))
+		?.split("=")[1];
+}
+
 async function fetchWithInterceptor<T>(
 	url: string,
 	options: RequestOptions = {},
 	contentType: string | null = "application/json",
 ): ApiResponse<T> {
-	// Prepare headers
 	const headers: Record<string, string> = {
 		...options.headers,
 	};
@@ -49,16 +55,15 @@ async function fetchWithInterceptor<T>(
 		headers["Content-Type"] = contentType;
 	}
 
-	// Add token if exists
-	const token = await getToken();
+	// Use client-side token retrieval
+	const isServer = typeof window === "undefined";
+	console.log(`isServer: ${isServer}`);
+	const token = isServer ? await getToken() : getClientToken();
+
 	if (token) {
 		headers.Authorization = `Bearer ${token}`;
 	}
 
-	console.log(`url: ${url}`);
-	console.log(`headers: ${JSON.stringify(headers)}`);
-
-	// Merge all options
 	const requestOptions: RequestOptions = {
 		...options,
 		headers,
@@ -66,7 +71,6 @@ async function fetchWithInterceptor<T>(
 
 	try {
 		const response = await fetch(`${baseURL}${url}`, requestOptions);
-
 		return response.json();
 	} catch (error) {
 		if (error instanceof Error) {

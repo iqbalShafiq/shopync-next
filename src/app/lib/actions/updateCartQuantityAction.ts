@@ -1,3 +1,5 @@
+"use server";
+
 import { cartService } from "@/app/lib/services/cart";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
