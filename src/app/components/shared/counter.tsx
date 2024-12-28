@@ -5,43 +5,34 @@ import { MinusIcon, PlusIcon } from "lucide-react";
 import React from "react";
 
 export type CounterProps = {
-	start: number;
-	min: number;
-	max: number;
+	quantity: number;
+	stock: number;
 	increment: number;
 	enabled: boolean;
-	directEditEnabled: boolean;
+	handleIncrement: () => void;
+	handleDecrement: () => void;
+	isPending: boolean;
 	className?: string;
 };
 
 const Counter = ({
-	start = 0,
-	min = 0,
-	max,
+	quantity = 0,
+	stock,
+	handleIncrement,
+	handleDecrement,
+	isPending,
 	className,
-	increment = 1,
-	directEditEnabled = true,
 }: CounterProps) => {
-	const [quantity, setQuantity] = React.useState(1);
-
-	const handleIncrement = () => {
-		setQuantity(quantity + increment);
-	};
-
-	const handleDecrement = () => {
-		if (quantity > start) {
-			setQuantity(quantity - increment);
-		}
-	};
-
 	return (
 		<div className={`flex items-center justify-start space-x-4 ${className}`}>
 			<Button
 				type={"button"}
 				variant={"outline"}
 				size={"icon"}
-				className={"bg-transparent"}
-				disabled={quantity === 1}
+				className={`bg-transparent ${
+					isPending ? "cursor-not-allowed opacity-50" : ""
+				}`}
+				disabled={quantity === 1 || isPending}
 				onClick={handleDecrement}
 			>
 				<MinusIcon width={20} />
@@ -53,8 +44,9 @@ const Counter = ({
 				type={"button"}
 				variant={"default"}
 				size={"icon"}
-				disabled={quantity === max}
+				disabled={quantity === stock}
 				onClick={handleIncrement}
+				className={isPending ? "cursor-not-allowed opacity-50" : ""}
 			>
 				<PlusIcon width={20} />
 			</Button>
