@@ -19,7 +19,7 @@ const CartItem = ({
 	quantity: stock,
 }: CartItemProps) => {
 	return (
-		<Card className="mt-2 flex items-center justify-between space-x-4 p-4">
+		<Card className="flex items-center justify-between space-x-4 p-4">
 			<img
 				src={image}
 				alt={name}
