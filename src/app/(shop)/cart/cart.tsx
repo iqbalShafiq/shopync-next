@@ -1,8 +1,8 @@
 import CartItem from "@/app/(shop)/cart/_component/cartItem";
-import React from "react";
 import { cartService } from "@/app/lib/services/cart";
 import { hasErrorResult } from "@/app/lib/utils";
 import { LucideShoppingCart } from "lucide-react";
+import React from "react";
 
 const Cart = async () => {
 	const result = await cartService.getByUserId();
@@ -21,7 +21,7 @@ const Cart = async () => {
 	}
 
 	return (
-		<div>
+		<div className={"flex flex-col items-start justify-start space-y-4 p-4"}>
 			{result.data.map((item) => (
 				<CartItem
 					key={item.product.id}

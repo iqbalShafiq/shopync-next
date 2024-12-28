@@ -1,6 +1,6 @@
 import { api } from "@/app/lib/api-client";
-import type { Failure } from "../types";
 import type { Product } from "@/app/lib/services/products";
+import type { Failure } from "../types";
 
 export interface UpsertCart {
 	productId: string;
@@ -21,6 +21,7 @@ export const cartService = {
 		return await api.get<ProductInCartData | Failure>("/carts");
 	},
 	addItem: async (data: UpsertCart) => {
+		console.log("addItem", data);
 		return await api.post<unknown | Failure>("/carts", data);
 	},
 	updateItem: async (data: UpsertCart) => {

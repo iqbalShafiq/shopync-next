@@ -6,9 +6,9 @@ import {
 	DialogOverlay,
 	DialogTitle,
 } from "@/components/ui/dialog";
-import React from "react";
-import { usePathname, useRouter } from "next/navigation";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { usePathname, useRouter } from "next/navigation";
+import React from "react";
 
 interface ModalProps {
 	defaultOpen?: boolean;
@@ -43,7 +43,9 @@ const Modal = ({
 			onOpenChange={handleCloseDialog}
 		>
 			<DialogOverlay>
-				<DialogContent className={"h-3/4 overflow-y-auto"}>
+				<DialogContent
+					className={"h-fit max-h-screen max-w-2xl overflow-y-auto"}
+				>
 					<DialogTitle className={"text-center"}>{title}</DialogTitle>
 					<ScrollArea className="rounded-md">{children}</ScrollArea>
 				</DialogContent>

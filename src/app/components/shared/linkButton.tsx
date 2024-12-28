@@ -1,9 +1,9 @@
 "use client";
 
-import type React from "react";
+import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Button } from "@/components/ui/button";
+import type React from "react";
 
 interface LinkButtonProps
 	extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
@@ -17,11 +17,13 @@ interface LinkButtonProps
 		| null
 		| undefined;
 	size?: "default" | "sm" | "lg" | "icon" | null | undefined;
+	disabled?: boolean;
 }
 
 const LinkButton = ({
 	variant = "link",
 	size = "default",
+	disabled = false,
 	href,
 	children,
 	className,
@@ -36,6 +38,7 @@ const LinkButton = ({
 				className={`${pathName === href && "font-semibold"} ${className}`}
 				tabIndex={-1}
 				size={size}
+				disabled={disabled}
 			>
 				{children}
 			</Button>

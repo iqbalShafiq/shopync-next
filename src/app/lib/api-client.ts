@@ -71,6 +71,11 @@ async function fetchWithInterceptor<T>(
 
 	try {
 		const response = await fetch(`${baseURL}${url}`, requestOptions);
+
+		if (response.ok && response.status === 204) {
+			return {} as T;
+		}
+
 		return response.json();
 	} catch (error) {
 		if (error instanceof Error) {

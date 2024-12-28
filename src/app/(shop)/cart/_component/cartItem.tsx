@@ -62,38 +62,45 @@ const CartItem = ({ quantity, product }: CartItemProps) => {
 	}, [debouncedUpdateQuantity]);
 
 	const handleQuantityChange = (amount: number) => {
-		const newQuantity = Math.max(1, optimisticQuantity + amount);
-		addOptimisticQuantity(amount);
-		debouncedUpdateQuantity(product.id, newQuantity);
+		startTransition(() => {
+			const newQuantity = optimisticQuantity + amount;
+			addOptimisticQuantity(amount);
+			debouncedUpdateQuantity(product.id, newQuantity);
+		});
 	};
 
 	return (
-		<Card className="flex items-center justify-between space-x-4 p-4">
+		<Card className="flex w-full flex-col items-start justify-between space-y-4 p-4 md:flex-row md:items-center md:space-x-8 md:space-y-0">
 			<img
 				src={`http://localhost:8000${imageUrl}`}
 				alt={name}
-				className="h-24 w-24 rounded-md object-cover"
+				className="hidden h-24 w-24 rounded-md object-cover md:block"
 			/>
-			<div className="flex flex-col space-y-2">
+			<div className="flex flex-1 flex-col space-y-2">
 				<h2 className="font-semibold text-xl">{name}</h2>
-				<p className="text-gray-500">{description}</p>
+				<p className="text-gray-500">
+					{description.substring(0, Math.min(description.length, 50))}
+				</p>
 				<p className="font-semibold text-lg">
 					Rp{price.toLocaleString("id-ID")}
 				</p>
 			</div>
-			<div className="flex flex-col space-y-2">
-				<div className="flex items-center space-x-2">
-					<Counter
-						quantity={optimisticQuantity}
-						stock={stock}
-						increment={1}
-						enabled={false}
-						handleDecrement={() => handleQuantityChange(-1)}
-						handleIncrement={() => handleQuantityChange(1)}
-						isPending={isPending}
-					/>
-				</div>
-				<Button className={"px-4"} variant={"destructive"} disabled={isPending}>
+			<div className="flex w-full flex-col items-center space-y-4 md:w-fit md:space-y-2">
+				<Counter
+					quantity={optimisticQuantity}
+					stock={stock}
+					increment={1}
+					enabled={false}
+					handleDecrement={() => handleQuantityChange(-1)}
+					handleIncrement={() => handleQuantityChange(1)}
+					isPending={isPending}
+				/>
+				<Button
+					className={"w-full"}
+					variant={"destructive"}
+					disabled={isPending}
+					onClick={() => handleQuantityChange(-quantity)}
+				>
 					{isPending ? "Updating..." : "Remove"}
 				</Button>
 			</div>

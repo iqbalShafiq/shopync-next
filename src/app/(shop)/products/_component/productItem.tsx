@@ -1,6 +1,9 @@
 "use client";
 
 import LinkButton from "@/app/components/shared/linkButton";
+import addCartQuantityAction from "@/app/lib/actions/addCartQuantityAction";
+import { Button } from "@/components/ui/button";
+import { toast } from "@/hooks/use-toast";
 import Link from "next/link";
 import React from "react";
 
@@ -24,7 +27,36 @@ const ProductItem = ({
 	className,
 	mine,
 }: ProductProps) => {
+	const [isPending, startTransition] = React.useTransition();
 	const link = mine ? `/products/editor/${id}` : `/products/${id}`;
+
+	const handleAddToCart = () => {
+		startTransition(async () => {
+			try {
+				console.log("Adding to cart...");
+				const result = await addCartQuantityAction(id);
+
+				if ("error" in result) {
+					toast({
+						variant: "destructive",
+						title: "Error",
+						description: "Failed to add item to cart",
+					});
+				} else {
+					toast({
+						title: "Success",
+						description: "Item added to cart successfully",
+					});
+				}
+			} catch (error) {
+				toast({
+					variant: "destructive",
+					title: "Error",
+					description: "Failed to add item to cart",
+				});
+			}
+		});
+	};
 
 	return (
 		<div
@@ -50,13 +82,29 @@ const ProductItem = ({
 					</p>
 				</div>
 			</Link>
-			<LinkButton
-				href={mine ? `/products/editor/${id}` : `/products/${id}`}
-				className="w-full rounded-t-none rounded-b-xl py-3"
-				variant={"default"}
-			>
-				{mine ? "Edit" : "Add to cart"}
-			</LinkButton>
+			{mine ? (
+				<LinkButton
+					href={`/products/editor/${id}`}
+					className="w-full rounded-t-none rounded-b-xl py-3"
+					variant={"default"}
+				>
+					Edit
+				</LinkButton>
+			) : (
+				<Button
+					className="w-full rounded-t-none rounded-b-xl py-3"
+					variant={"default"}
+					onClick={(e) => {
+						console.log("Adding to cart before");
+						e.preventDefault();
+						console.log("Adding to cart after");
+						handleAddToCart();
+					}}
+					disabled={isPending}
+				>
+					{isPending ? "Adding to cart..." : "Add to cart"}
+				</Button>
+			)}
 		</div>
 	);
 };

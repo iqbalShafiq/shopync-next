@@ -6,7 +6,7 @@ import { z } from "zod";
 
 const updateQuantitySchema = z.object({
 	productId: z.string(),
-	quantity: z.number().min(0),
+	quantity: z.number(),
 });
 
 const updateCartQuantityAction = async (

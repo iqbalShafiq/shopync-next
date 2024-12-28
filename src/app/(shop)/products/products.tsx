@@ -1,4 +1,5 @@
 import ProductItem from "@/app/(shop)/products/_component/productItem";
+import { getUser } from "@/app/lib/context/AuthContext";
 import { productService } from "@/app/lib/services/products";
 import { hasErrorResult } from "@/app/lib/utils";
 import {
@@ -9,7 +10,6 @@ import {
 	PaginationNext,
 	PaginationPrevious,
 } from "@/components/ui/pagination";
-import { getUser } from "@/app/lib/context/AuthContext";
 
 export default async function Products(props: {
 	searchParams?: Promise<{
@@ -53,8 +53,6 @@ export default async function Products(props: {
 			</div>
 		);
 	}
-
-	console.log(`products: ${JSON.stringify(products)}`);
 
 	if (
 		products?.data?.length === 0 ||
