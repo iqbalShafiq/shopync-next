@@ -1,6 +1,7 @@
 "use server";
 
 import { cartService } from "@/app/lib/services/cart";
+import { hasErrorResult } from "@/app/lib/utils";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 
@@ -15,7 +16,10 @@ const addCartQuantityAction = async (productId: string) => {
 		const validated = addQuantitySchema.parse({ productId, quantity: 1 });
 
 		// Add cart quantity
-		await cartService.addItem(validated);
+		const result = await cartService.addItem(validated);
+		if (hasErrorResult(result)) {
+			return { success: false, error: result.message };
+		}
 
 		// Revalidate cart path
 		revalidatePath("/products");

@@ -17,11 +17,8 @@ interface CartItemProps {
 const CartItem = ({ quantity, product }: CartItemProps) => {
 	const { name, description, price, imageUrl, quantity: stock } = product;
 
+	const [localQuantity, setLocalQuantity] = React.useState(quantity);
 	const [isPending, startTransition] = React.useTransition();
-	const [optimisticQuantity, addOptimisticQuantity] = React.useOptimistic(
-		quantity,
-		(state, amount: number) => Math.max(1, state + amount),
-	);
 	const lastSavedQuantity = React.useRef(quantity);
 
 	const debouncedUpdateQuantity = React.useCallback(
@@ -36,11 +33,9 @@ const CartItem = ({ quantity, product }: CartItemProps) => {
 						toast({
 							variant: "destructive",
 							title: "Error",
-							description: "Failed to update quantity",
+							description: result.error,
 						});
-						addOptimisticQuantity(
-							lastSavedQuantity.current - optimisticQuantity,
-						);
+						setLocalQuantity(lastSavedQuantity.current);
 					}
 				} catch (error) {
 					toast({
@@ -48,7 +43,7 @@ const CartItem = ({ quantity, product }: CartItemProps) => {
 						title: "Error",
 						description: "Failed to update quantity",
 					});
-					addOptimisticQuantity(lastSavedQuantity.current - optimisticQuantity);
+					setLocalQuantity(lastSavedQuantity.current);
 				}
 			});
 		}, 800),
@@ -62,11 +57,14 @@ const CartItem = ({ quantity, product }: CartItemProps) => {
 	}, [debouncedUpdateQuantity]);
 
 	const handleQuantityChange = (amount: number) => {
-		startTransition(() => {
-			const newQuantity = optimisticQuantity + amount;
-			addOptimisticQuantity(amount);
-			debouncedUpdateQuantity(product.id, newQuantity);
-		});
+		const newQuantity = Math.max(1, Math.min(stock, localQuantity + amount));
+		setLocalQuantity(newQuantity);
+		debouncedUpdateQuantity(product.id, newQuantity);
+	};
+
+	const handleRemove = () => {
+		setLocalQuantity(0);
+		debouncedUpdateQuantity(product.id, 0);
 	};
 
 	return (
@@ -82,15 +80,15 @@ const CartItem = ({ quantity, product }: CartItemProps) => {
 					{description.substring(0, Math.min(description.length, 50))}
 				</p>
 				<p className="font-semibold text-lg">
-					Rp{price.toLocaleString("id-ID")}
+					Rp{(price * localQuantity).toLocaleString("id-ID")}
 				</p>
 			</div>
 			<div className="flex w-full flex-col items-center space-y-4 md:w-fit md:space-y-2">
 				<Counter
-					quantity={optimisticQuantity}
+					quantity={localQuantity}
 					stock={stock}
 					increment={1}
-					enabled={false}
+					enabled={isPending}
 					handleDecrement={() => handleQuantityChange(-1)}
 					handleIncrement={() => handleQuantityChange(1)}
 					isPending={isPending}
@@ -99,7 +97,7 @@ const CartItem = ({ quantity, product }: CartItemProps) => {
 					className={"w-full"}
 					variant={"destructive"}
 					disabled={isPending}
-					onClick={() => handleQuantityChange(-quantity)}
+					onClick={handleRemove}
 				>
 					{isPending ? "Updating..." : "Remove"}
 				</Button>

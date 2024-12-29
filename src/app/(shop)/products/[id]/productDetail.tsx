@@ -1,7 +1,9 @@
 import AddToCart from "@/app/(shop)/products/[id]/_component/addToCart";
 import SellerCard from "@/app/(shop)/products/[id]/_component/sellerCard";
 import ImageViewer from "@/app/components/shared/imageViewer";
+import { cartService } from "@/app/lib/services/cart";
 import type { Product } from "@/app/lib/services/products";
+import { hasErrorResult } from "@/app/lib/utils";
 import React from "react";
 
 interface ProductDetailProps {
@@ -9,6 +11,14 @@ interface ProductDetailProps {
 }
 
 const ProductDetail = async ({ product }: ProductDetailProps) => {
+	const productInCart = await cartService.getItems({
+		productId: product.id,
+	});
+
+	if (hasErrorResult(productInCart)) {
+		throw new Error(productInCart.message);
+	}
+
 	return (
 		<div className={"grid w-full grid-cols-1 gap-6 lg:grid-cols-6 lg:gap-8"}>
 			<aside className={"cols-span-1 w-full lg:col-span-2"}>
@@ -47,7 +57,10 @@ const ProductDetail = async ({ product }: ProductDetailProps) => {
 
 			{/* Cart section */}
 			<aside className={"col-span-1 w-full lg:col-span-2"}>
-				<AddToCart product={product} />
+				<AddToCart
+					quantityInCart={productInCart.data[0]?.quantity}
+					product={product}
+				/>
 			</aside>
 		</div>
 	);

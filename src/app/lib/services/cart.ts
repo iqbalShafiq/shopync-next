@@ -1,5 +1,6 @@
-import { api } from "@/app/lib/api-client";
+import { api, setEndpoint } from "@/app/lib/api-client";
 import type { Product } from "@/app/lib/services/products";
+import { getValidParams } from "@/app/lib/utils";
 import type { Failure } from "../types";
 
 export interface UpsertCart {
@@ -16,12 +17,21 @@ export interface ProductInCartData {
 	data: ProductInCart[];
 }
 
+export interface CartItemParams {
+	productId?: string;
+}
+
 export const cartService = {
-	getByUserId: async () => {
-		return await api.get<ProductInCartData | Failure>("/carts");
+	getItems: async (params: CartItemParams = {}) => {
+		const validParams = getValidParams(params);
+		const searchParams = new URLSearchParams(
+			validParams as Record<string, string>,
+		);
+		const endpoint = setEndpoint("/carts", searchParams);
+
+		return await api.get<ProductInCartData | Failure>(endpoint);
 	},
 	addItem: async (data: UpsertCart) => {
-		console.log("addItem", data);
 		return await api.post<unknown | Failure>("/carts", data);
 	},
 	updateItem: async (data: UpsertCart) => {

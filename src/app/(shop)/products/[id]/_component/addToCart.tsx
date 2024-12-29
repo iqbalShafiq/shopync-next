@@ -1,28 +1,69 @@
 "use client";
 
+import Counter from "@/app/components/shared/counter";
+import updateCartQuantityAction from "@/app/lib/actions/updateCartQuantityAction";
 import type { Product } from "@/app/lib/services/products";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { toast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
-import { MinusIcon, PlusIcon } from "lucide-react";
 import React from "react";
 
 interface AddToCartProps {
+	quantityInCart?: number;
 	product: Product;
 	className?: string;
 }
 
-const AddToCart = ({ product, className }: AddToCartProps) => {
-	const [quantity, setQuantity] = React.useState(1);
+const AddToCart = ({
+	quantityInCart = 1,
+	product,
+	className,
+}: AddToCartProps) => {
+	const [quantity, setQuantity] = React.useState(quantityInCart);
+	const [isPending, startTransition] = React.useTransition();
+	const lastSavedQuantity = React.useRef(quantity);
 
-	const handleAdd = () => {
+	const handleOnItemAddedToCart = React.useCallback(() => {
+		startTransition(async () => {
+			try {
+				const result = await updateCartQuantityAction(product.id, quantity);
+
+				if (result.success) {
+					lastSavedQuantity.current = quantity;
+				} else {
+					toast({
+						variant: "destructive",
+						title: "Error",
+						description: result.error,
+					});
+					setQuantity(lastSavedQuantity.current);
+				}
+			} catch (error) {
+				toast({
+					variant: "destructive",
+					title: "Error",
+					description: "Failed to update quantity",
+				});
+				setQuantity(lastSavedQuantity.current);
+			}
+		});
+	}, [product, quantity]);
+
+	const handleIncrement = () => {
+		if (quantity === product.quantity) {
+			return;
+		}
+
 		setQuantity(quantity + 1);
 	};
 
-	const handleSubtract = () => {
-		if (quantity > 1) {
-			setQuantity(quantity - 1);
+	const handleDecrement = () => {
+		if (quantity === 1) {
+			return;
 		}
+
+		setQuantity(quantity - 1);
 	};
 
 	return (
@@ -36,28 +77,15 @@ const AddToCart = ({ product, className }: AddToCartProps) => {
 			>
 				<div className={"flex items-center justify-start space-x-4"}>
 					<div className={"flex items-center justify-start space-x-4"}>
-						<Button
-							type={"button"}
-							variant={"outline"}
-							size={"icon"}
-							className={"bg-transparent"}
-							disabled={quantity === 1}
-							onClick={handleSubtract}
-						>
-							<MinusIcon width={20} />
-						</Button>
-						<p className={"select-none font-semibold text-slate-900 text-xl"}>
-							{quantity}
-						</p>
-						<Button
-							type={"button"}
-							variant={"default"}
-							size={"icon"}
-							disabled={quantity === product.quantity}
-							onClick={handleAdd}
-						>
-							<PlusIcon width={20} />
-						</Button>
+						<Counter
+							quantity={quantity}
+							stock={product.quantity}
+							increment={1}
+							enabled={isPending}
+							handleIncrement={handleIncrement}
+							handleDecrement={handleDecrement}
+							isPending={isPending}
+						/>
 					</div>
 
 					<div className={"flex items-center justify-start space-x-2"}>
@@ -75,8 +103,10 @@ const AddToCart = ({ product, className }: AddToCartProps) => {
 					className={
 						"mt-4 w-full rounded-md bg-slate-900 px-4 py-2 font-semibold text-white"
 					}
+					disabled={isPending}
+					onClick={handleOnItemAddedToCart}
 				>
-					Add to Cart
+					{isPending ? "Adding to cart..." : "Add to Cart"}
 				</Button>
 			</Card>
 		</aside>

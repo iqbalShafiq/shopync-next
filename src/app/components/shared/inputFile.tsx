@@ -18,7 +18,6 @@ const InputFile = ({ imageUrl, className, ...props }: InputFileProps) => {
 	const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const file = event.target.files?.[0];
 		if (file) {
-			console.log(file);
 			// Check if the file is an image
 			if (!file.type.startsWith("image/")) {
 				toast({

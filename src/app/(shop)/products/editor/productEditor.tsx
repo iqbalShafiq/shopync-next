@@ -31,19 +31,23 @@ const ProductEditor = ({ product }: ProductEditorProps) => {
 	);
 
 	return (
-		<main>
+		<main className={"flex flex-1 flex-col"}>
 			<form
 				action={formAction}
-				className={"grid grid-cols-1 lg:grid-cols-3 lg:space-x-6"}
+				className={"grid flex-1 grid-cols-1 lg:grid-cols-3 lg:space-x-6"}
 			>
 				<InputFile
 					name={"image"}
 					id={"image"}
-					className={"col-span-1"}
+					className={"col-span-1 lg:h-1/2"}
 					imageUrl={product?.imageUrl}
 				/>
 
-				<div className={"col-span-1 mt-4 lg:col-span-2 lg:mt-0"}>
+				<div
+					className={
+						"col-span-1 mt-4 flex flex-1 flex-col lg:col-span-2 lg:mt-0"
+					}
+				>
 					{product?.id && (
 						<InputText
 							name={"id"}
@@ -92,7 +96,7 @@ const ProductEditor = ({ product }: ProductEditorProps) => {
 						/>
 					</div>
 
-					<div className={"mt-3 mb-4"}>
+					<div className={"mt-3 mb-4 flex-1"}>
 						<BorderlessTextArea
 							label={"Product Description"}
 							labelFontWeight={"semibold"}

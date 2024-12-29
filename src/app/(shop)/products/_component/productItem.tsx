@@ -33,14 +33,13 @@ const ProductItem = ({
 	const handleAddToCart = () => {
 		startTransition(async () => {
 			try {
-				console.log("Adding to cart...");
 				const result = await addCartQuantityAction(id);
 
 				if ("error" in result) {
 					toast({
 						variant: "destructive",
 						title: "Error",
-						description: "Failed to add item to cart",
+						description: result.error,
 					});
 				} else {
 					toast({
@@ -95,9 +94,7 @@ const ProductItem = ({
 					className="w-full rounded-t-none rounded-b-xl py-3"
 					variant={"default"}
 					onClick={(e) => {
-						console.log("Adding to cart before");
 						e.preventDefault();
-						console.log("Adding to cart after");
 						handleAddToCart();
 					}}
 					disabled={isPending}

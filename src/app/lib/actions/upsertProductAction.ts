@@ -21,8 +21,6 @@ export async function upsertProductAction(
 	const quantity = Number(formData.get("quantity"));
 	const image = formData.get("image") as File;
 
-	console.log(`Image: ${JSON.stringify(image)}`);
-
 	const payload = new FormData();
 	formData.append("userId", user.data.id);
 	payload.append("name", name);
@@ -48,8 +46,6 @@ export async function upsertProductAction(
 			quantity: quantity,
 		};
 	}
-
-	console.log(`Product added: ${JSON.stringify(response)}`);
 
 	if (id) {
 		redirect(`/products/editor/${response.data.id}`, RedirectType.push);

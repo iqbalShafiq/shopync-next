@@ -5,7 +5,7 @@ import { LucideShoppingCart } from "lucide-react";
 import React from "react";
 
 const Cart = async () => {
-	const result = await cartService.getByUserId();
+	const result = await cartService.getItems();
 
 	if (hasErrorResult(result)) {
 		throw new Error(result.message);

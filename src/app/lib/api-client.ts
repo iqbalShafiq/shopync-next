@@ -57,7 +57,6 @@ async function fetchWithInterceptor<T>(
 
 	// Use client-side token retrieval
 	const isServer = typeof window === "undefined";
-	console.log(`isServer: ${isServer}`);
 	const token = isServer ? await getToken() : getClientToken();
 
 	if (token) {
