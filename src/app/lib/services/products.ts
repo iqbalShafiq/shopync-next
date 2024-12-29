@@ -7,6 +7,7 @@ export interface ProductQueryParams {
 	page?: number;
 	search?: string;
 	userId?: string;
+	excludedProductId?: string;
 }
 
 export interface AddProduct {

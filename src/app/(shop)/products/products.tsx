@@ -17,15 +17,26 @@ export default async function Products(props: {
 		page?: string;
 		limit?: string;
 	}>;
+	pagination?: boolean;
+	title?: string;
 	mine?: boolean;
 	userId?: string;
+	excludedProductId?: string;
 }) {
 	const searchParams = await props.searchParams;
 	const search = searchParams?.search || "";
 	const page = Number(searchParams?.page) || 1;
 	const limit = Number(searchParams?.limit) || 10;
 	const userId = props.userId || undefined;
-	const title = props.mine ? "My Products" : "Products";
+	const excludedProductId = props.excludedProductId || undefined;
+	const title = props.title
+		? props.title
+		: props.mine
+			? "My Products"
+			: "Products";
+	const pagination = props.pagination !== undefined ? props.pagination : true;
+
+	console.log(`userId: ${userId} | excludedProductId: ${excludedProductId}`);
 
 	const user = await getUser();
 
@@ -34,6 +45,7 @@ export default async function Products(props: {
 		limit,
 		page: page - 1,
 		userId,
+		excludedProductId,
 	});
 
 	if (hasErrorResult(user)) {
@@ -100,44 +112,48 @@ export default async function Products(props: {
 					),
 				)}
 			</div>
-			<Pagination
-				className={"mt-8 flex flex-1 flex-col items-center justify-end"}
-			>
-				<PaginationContent>
-					<PaginationItem>
-						<PaginationPrevious
-							href={`?page=${page - 1}`}
-							aria-disabled={page === 1}
-							tabIndex={page <= 1 ? -1 : undefined}
-							className={
-								page <= 1 ? "pointer-events-none opacity-50" : undefined
-							}
-						/>
-					</PaginationItem>
-					{Array.from(
-						{ length: products?.pagination?.totalPages },
-						(_, index) => (
-							<PaginationItem key={Math.random()}>
-								<PaginationLink href={`?page=${index + 1}`}>
-									{index + 1}
-								</PaginationLink>
-							</PaginationItem>
-						),
-					)}
-					<PaginationItem>
-						<PaginationNext
-							href={`?page=${page + 1}`}
-							aria-disabled={page === products.pagination.totalPages}
-							tabIndex={page >= products.pagination.totalPages ? -1 : undefined}
-							className={
-								page >= products.pagination.totalPages
-									? "pointer-events-none opacity-50"
-									: undefined
-							}
-						/>
-					</PaginationItem>
-				</PaginationContent>
-			</Pagination>
+			{pagination && (
+				<Pagination
+					className={"mt-8 flex flex-1 flex-col items-center justify-end"}
+				>
+					<PaginationContent>
+						<PaginationItem>
+							<PaginationPrevious
+								href={`?page=${page - 1}`}
+								aria-disabled={page === 1}
+								tabIndex={page <= 1 ? -1 : undefined}
+								className={
+									page <= 1 ? "pointer-events-none opacity-50" : undefined
+								}
+							/>
+						</PaginationItem>
+						{Array.from(
+							{ length: products?.pagination?.totalPages },
+							(_, index) => (
+								<PaginationItem key={Math.random()}>
+									<PaginationLink href={`?page=${index + 1}`}>
+										{index + 1}
+									</PaginationLink>
+								</PaginationItem>
+							),
+						)}
+						<PaginationItem>
+							<PaginationNext
+								href={`?page=${page + 1}`}
+								aria-disabled={page === products.pagination.totalPages}
+								tabIndex={
+									page >= products.pagination.totalPages ? -1 : undefined
+								}
+								className={
+									page >= products.pagination.totalPages
+										? "pointer-events-none opacity-50"
+										: undefined
+								}
+							/>
+						</PaginationItem>
+					</PaginationContent>
+				</Pagination>
+			)}
 		</div>
 	);
 }
