@@ -1,4 +1,10 @@
 import Products from "@/app/(shop)/products/products";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: "Products",
+	description: "Product list page",
+};
 
 const Page = async (props: {
 	searchParams?: Promise<{

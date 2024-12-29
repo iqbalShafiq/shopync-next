@@ -2,6 +2,12 @@ import ProductEditor from "@/app/(shop)/products/editor/productEditor";
 import { getUser } from "@/app/lib/context/AuthContext";
 import { productService } from "@/app/lib/services/products";
 import { hasErrorResult } from "@/app/lib/utils";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: "Product Editor",
+	description: "Product Editor",
+};
 
 interface PageProps {
 	params: Promise<{

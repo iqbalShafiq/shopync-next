@@ -1,5 +1,6 @@
 import AddToCart from "@/app/(shop)/products/[id]/_component/addToCart";
 import SellerCard from "@/app/(shop)/products/[id]/_component/sellerCard";
+import HtmlContent from "@/app/components/shared/htmlContent";
 import ImageViewer from "@/app/components/shared/imageViewer";
 import { cartService } from "@/app/lib/services/cart";
 import type { Product } from "@/app/lib/services/products";
@@ -25,6 +26,7 @@ const ProductDetail = async ({ product }: ProductDetailProps) => {
 				<ImageViewer
 					src={`http://localhost:8000${product.imageUrl}`}
 					alt={product.name}
+					className={"lg:h-1/2"}
 				/>
 
 				{product.user && (
@@ -50,9 +52,11 @@ const ProductDetail = async ({ product }: ProductDetailProps) => {
 				<p className={"mt-3 font-semibold text-md text-slate-900"}>
 					Description
 				</p>
-				<p className={"mt-1 font-light text-md text-slate-500"}>
-					{product.description}
-				</p>
+				<HtmlContent
+					showAsHtml={true}
+					content={product.description}
+					className="mt-1 max-w-none font-light text-md text-slate-500"
+				/>
 			</main>
 
 			{/* Cart section */}

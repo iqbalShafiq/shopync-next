@@ -49,6 +49,11 @@ export default async function Products(props: {
 		return (
 			<div>
 				<h1 className={"font-semibold text-slate-900 text-xl"}>{title}</h1>
+				{search && (
+					<p className={"font-medium text-md text-slate-900"}>
+						Search results for: {search}
+					</p>
+				)}
 				<p>{products.message}</p>
 			</div>
 		);
@@ -61,14 +66,24 @@ export default async function Products(props: {
 		return (
 			<div>
 				<h1 className={"font-semibold text-slate-900 text-xl"}>{title}</h1>
+				{search && (
+					<p className={"font-medium text-md text-slate-900"}>
+						Search results for: {search}
+					</p>
+				)}
 				<p className={"mt-4 text-red-500"}>No products found</p>
 			</div>
 		);
 	}
 
 	return (
-		<div>
+		<div className={"flex flex-1 flex-col"}>
 			<h1 className={"font-semibold text-slate-900 text-xl"}>{title}</h1>
+			{search && (
+				<p className={"font-medium text-md text-slate-900"}>
+					Search results for: {search}
+				</p>
+			)}
 			<div className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
 				{products.data.map(
 					({ id, name, price, description, quantity, userId, imageUrl }) => (
@@ -85,7 +100,9 @@ export default async function Products(props: {
 					),
 				)}
 			</div>
-			<Pagination className={"mt-8"}>
+			<Pagination
+				className={"mt-8 flex flex-1 flex-col items-center justify-end"}
+			>
 				<PaginationContent>
 					<PaginationItem>
 						<PaginationPrevious

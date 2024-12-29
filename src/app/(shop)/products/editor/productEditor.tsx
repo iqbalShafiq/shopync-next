@@ -1,12 +1,12 @@
 "use client";
 
 import BorderlessInputText from "@/app/components/shared/borderlessInputText";
-import BorderlessTextArea from "@/app/components/shared/borderlessTextArea";
 import InputFile from "@/app/components/shared/inputFile";
 import InputText from "@/app/components/shared/inputText";
 import { upsertProductAction } from "@/app/lib/actions/upsertProductAction";
 import type { Product } from "@/app/lib/services/products";
 import { Button } from "@/components/ui/button";
+import { RichTextEditor } from "@/components/ui/rich-text-editor";
 import { LucideTrash } from "lucide-react";
 import Link from "next/link";
 import React, { useActionState } from "react";
@@ -96,8 +96,8 @@ const ProductEditor = ({ product }: ProductEditorProps) => {
 						/>
 					</div>
 
-					<div className={"mt-3 mb-4 flex-1"}>
-						<BorderlessTextArea
+					<div className={"mt-3 mb-4 flex flex-1 flex-col"}>
+						<RichTextEditor
 							label={"Product Description"}
 							labelFontWeight={"semibold"}
 							defaultValue={formState.description || product?.description}
@@ -105,7 +105,6 @@ const ProductEditor = ({ product }: ProductEditorProps) => {
 							id={"description"}
 							required={true}
 							placeholder={"Type here ..."}
-							rows={4}
 						/>
 					</div>
 					<div

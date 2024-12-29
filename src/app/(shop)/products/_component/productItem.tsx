@@ -1,5 +1,6 @@
 "use client";
 
+import HtmlContent from "@/app/components/shared/htmlContent";
 import LinkButton from "@/app/components/shared/linkButton";
 import addCartQuantityAction from "@/app/lib/actions/addCartQuantityAction";
 import { Button } from "@/components/ui/button";
@@ -70,11 +71,12 @@ const ProductItem = ({
 				<div className="flex flex-1 flex-col items-baseline justify-between p-6">
 					<div>
 						<h2 className="font-semibold text-xl">{name}</h2>
-						<p className="text-gray-500">
-							{description.length > 100
-								? `${description.substring(0, 100)}...`
-								: description}
-						</p>
+						<HtmlContent
+							className={"text-slate-500"}
+							showAsHtml={false}
+							content={description}
+							limitCharacter={100}
+						/>
 					</div>
 					<p className="mt-2 font-semibold text-lg">
 						Rp{price.toLocaleString("id-ID")}

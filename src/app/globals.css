@@ -44,3 +44,42 @@ body {
 		@apply bg-background text-foreground;
 	}
 }
+
+.rich-text-editor .quill {
+	@apply border-none rounded-lg bg-transparent transition-all duration-150;
+	height: 400px;
+}
+
+.rich-text-editor .ql-toolbar {
+	@apply border-b border-slate-200 rounded-t-lg bg-slate-100 backdrop-blur-md;
+}
+
+.rich-text-editor .ql-container {
+	@apply text-base bg-transparent;
+	height: calc(100% - 42px) !important;
+}
+
+@media screen and (max-width: 450px) {
+	.rich-text-editor .ql-container {
+		height: calc(100% - 64px) !important;
+	}
+}
+
+.rich-text-editor .ql-editor {
+	@apply w-full px-4 py-3;
+	height: 100% !important;
+	resize: none !important;
+}
+
+.rich-text-editor .ql-editor.ql-blank::before {
+	@apply text-slate-400;
+	font-style: normal !important;
+}
+
+.rich-text-editor .quill:focus-within {
+	@apply my-2 ring-2 ring-ring ring-offset-2;
+}
+
+.html-content .ql-editor {
+	@apply px-0 py-0 w-full;
+}
