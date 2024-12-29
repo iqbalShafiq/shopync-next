@@ -1,6 +1,7 @@
 "use client";
 
 import Counter from "@/app/components/shared/counter";
+import HtmlContent from "@/app/components/shared/htmlContent";
 import updateCartQuantityAction from "@/app/lib/actions/updateCartQuantityAction";
 import type { Product } from "@/app/lib/services/products";
 import { Button } from "@/components/ui/button";
@@ -29,6 +30,13 @@ const CartItem = ({ quantity, product }: CartItemProps) => {
 
 					if (result.success) {
 						lastSavedQuantity.current = newQuantity;
+						toast({
+							title: "Success",
+							description:
+								newQuantity === 0
+									? "Item removed from cart successfully"
+									: "Item updated from cart successfully",
+						});
 					} else {
 						toast({
 							variant: "destructive",
@@ -76,9 +84,12 @@ const CartItem = ({ quantity, product }: CartItemProps) => {
 			/>
 			<div className="flex flex-1 flex-col space-y-2">
 				<h2 className="font-semibold text-xl">{name}</h2>
-				<p className="text-gray-500">
-					{description.substring(0, Math.min(description.length, 50))}
-				</p>
+				<HtmlContent
+					className={"text-slate-500"}
+					showAsHtml={false}
+					content={description}
+					limitCharacter={100}
+				/>
 				<p className="font-semibold text-lg">
 					Rp{(price * localQuantity).toLocaleString("id-ID")}
 				</p>

@@ -17,7 +17,7 @@ export default function ShopLayout({
 			{topBar}
 			<div
 				className={
-					"relative mx-8 mt-28 flex flex-1 flex-col rounded-lg bg-white/30 p-8 text-slate-900 shadow-sm backdrop-blur-sm"
+					"relative mx-8 mt-8 flex flex-1 flex-col rounded-lg bg-white/30 p-8 text-slate-900 shadow-sm backdrop-blur-sm md:mt-28"
 				}
 			>
 				{children}
