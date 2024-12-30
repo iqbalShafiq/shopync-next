@@ -16,15 +16,10 @@ interface AddToCartProps {
 	className?: string;
 }
 
-const AddToCart = ({
-	quantityInCart = 1,
-	product,
-	className,
-}: AddToCartProps) => {
+const AddToCart = ({ quantityInCart, product, className }: AddToCartProps) => {
 	const router = useRouter();
-	const [quantity, setQuantity] = React.useState(quantityInCart);
+	const [quantity, setQuantity] = React.useState(1);
 	const [isPending, startTransition] = React.useTransition();
-	const lastSavedQuantity = React.useRef(quantity);
 
 	const handleOnItemAddedToCart = React.useCallback(() => {
 		startTransition(async () => {
@@ -36,11 +31,11 @@ const AddToCart = ({
 				);
 
 				if (result.success) {
-					lastSavedQuantity.current = quantity;
 					toast({
 						title: "Success",
 						description: "Item added to cart successfully",
 					});
+					setQuantity(1);
 					router.push("/cart");
 				} else {
 					toast({
@@ -48,7 +43,6 @@ const AddToCart = ({
 						title: "Error",
 						description: result.error,
 					});
-					setQuantity(lastSavedQuantity.current);
 				}
 			} catch (error) {
 				toast({
@@ -56,7 +50,6 @@ const AddToCart = ({
 					title: "Error",
 					description: "Failed to update quantity",
 				});
-				setQuantity(lastSavedQuantity.current);
 			}
 		});
 	}, [quantity, router, product.id]);
