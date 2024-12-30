@@ -6,6 +6,7 @@ import type { Failure } from "../types";
 export interface UpsertCart {
 	productId: string;
 	quantity: number;
+	increment?: boolean;
 }
 
 export interface ProductInCart {
@@ -31,10 +32,7 @@ export const cartService = {
 
 		return await api.get<ProductInCartData | Failure>(endpoint);
 	},
-	addItem: async (data: UpsertCart) => {
+	upsertItem: async (data: UpsertCart) => {
 		return await api.post<unknown | Failure>("/carts", data);
-	},
-	updateItem: async (data: UpsertCart) => {
-		return await api.patch<unknown | Failure>("/carts", data);
 	},
 };

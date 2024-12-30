@@ -8,18 +8,24 @@ import { z } from "zod";
 const updateQuantitySchema = z.object({
 	productId: z.string(),
 	quantity: z.number(),
+	increment: z.boolean().optional(),
 });
 
-const updateCartQuantityAction = async (
+const upsertCartQuantityAction = async (
 	productId: string,
 	quantity: number,
+	increment?: boolean,
 ) => {
 	try {
 		// Validate input
-		const validated = updateQuantitySchema.parse({ productId, quantity });
+		const validated = updateQuantitySchema.parse({
+			productId,
+			quantity,
+			increment,
+		});
 
 		// Update cart quantity
-		const result = await cartService.updateItem(validated);
+		const result = await cartService.upsertItem(validated);
 		if (hasErrorResult(result)) {
 			return { success: false, error: result.message };
 		}
@@ -34,4 +40,4 @@ const updateCartQuantityAction = async (
 	}
 };
 
-export default updateCartQuantityAction;
+export default upsertCartQuantityAction;

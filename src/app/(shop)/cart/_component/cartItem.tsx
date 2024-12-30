@@ -2,7 +2,7 @@
 
 import Counter from "@/app/components/shared/counter";
 import HtmlContent from "@/app/components/shared/htmlContent";
-import updateCartQuantityAction from "@/app/lib/actions/updateCartQuantityAction";
+import upsertCartQuantityAction from "@/app/lib/actions/upsertCartQuantityAction";
 import type { Product } from "@/app/lib/services/products";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -26,7 +26,11 @@ const CartItem = ({ quantity, product }: CartItemProps) => {
 		debounce((itemId: string, newQuantity: number) => {
 			startTransition(async () => {
 				try {
-					const result = await updateCartQuantityAction(itemId, newQuantity);
+					const result = await upsertCartQuantityAction(
+						itemId,
+						newQuantity,
+						false,
+					);
 
 					if (result.success) {
 						lastSavedQuantity.current = newQuantity;

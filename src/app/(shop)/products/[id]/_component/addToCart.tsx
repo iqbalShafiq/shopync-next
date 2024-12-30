@@ -1,13 +1,14 @@
 "use client";
 
 import Counter from "@/app/components/shared/counter";
-import updateCartQuantityAction from "@/app/lib/actions/updateCartQuantityAction";
 import type { Product } from "@/app/lib/services/products";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { toast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 import React from "react";
+import { useRouter } from "next/navigation";
+import upsertCartQuantityAction from "@/app/lib/actions/upsertCartQuantityAction";
 
 interface AddToCartProps {
 	quantityInCart?: number;
@@ -20,6 +21,7 @@ const AddToCart = ({
 	product,
 	className,
 }: AddToCartProps) => {
+	const router = useRouter();
 	const [quantity, setQuantity] = React.useState(quantityInCart);
 	const [isPending, startTransition] = React.useTransition();
 	const lastSavedQuantity = React.useRef(quantity);
@@ -27,10 +29,19 @@ const AddToCart = ({
 	const handleOnItemAddedToCart = React.useCallback(() => {
 		startTransition(async () => {
 			try {
-				const result = await updateCartQuantityAction(product.id, quantity);
+				const result = await upsertCartQuantityAction(
+					product.id,
+					quantity,
+					true,
+				);
 
 				if (result.success) {
 					lastSavedQuantity.current = quantity;
+					toast({
+						title: "Success",
+						description: "Item added to cart successfully",
+					});
+					router.push("/cart");
 				} else {
 					toast({
 						variant: "destructive",
@@ -48,7 +59,7 @@ const AddToCart = ({
 				setQuantity(lastSavedQuantity.current);
 			}
 		});
-	}, [product, quantity]);
+	}, [quantity, router, product.id]);
 
 	const handleIncrement = () => {
 		if (quantity === product.quantity) {
@@ -94,6 +105,11 @@ const AddToCart = ({
 					</div>
 				</div>
 				<div className={"mt-4"}>
+					{quantityInCart && (
+						<p className={"mb-2 text-start font-light text-slate-500 text-sm"}>
+							{quantityInCart} items in your cart
+						</p>
+					)}
 					<h3 className={"font-medium text-sm"}>Subtotal</h3>
 					<p className={"mt-1 font-semibold text-xl"}>
 						Rp{(product.price * quantity).toLocaleString("id-ID")}

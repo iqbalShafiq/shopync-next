@@ -2,7 +2,7 @@
 
 import HtmlContent from "@/app/components/shared/htmlContent";
 import LinkButton from "@/app/components/shared/linkButton";
-import addCartQuantityAction from "@/app/lib/actions/addCartQuantityAction";
+import upsertCartQuantityAction from "@/app/lib/actions/upsertCartQuantityAction";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/hooks/use-toast";
 import Link from "next/link";
@@ -34,7 +34,7 @@ const ProductItem = ({
 	const handleAddToCart = () => {
 		startTransition(async () => {
 			try {
-				const result = await addCartQuantityAction(id);
+				const result = await upsertCartQuantityAction(id, 1, true);
 
 				if ("error" in result) {
 					toast({
