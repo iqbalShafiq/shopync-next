@@ -20,7 +20,7 @@ const RelatedProducts = async ({ product }: RelatedProductsProps) => {
 
 	return (
 		<div className={result.data.length === 0 ? "hidden" : "block"}>
-			<div className={"-mx-8 mt-8 mb-7 h-0.5 bg-gray-200 drop-shadow-sm"} />
+			<div className={"mt-9 mb-7 h-0.5 border-t bg-gray-50"} />
 			<div>
 				<Products
 					pagination={false}

@@ -10,6 +10,7 @@ import {
 	PaginationNext,
 	PaginationPrevious,
 } from "@/components/ui/pagination";
+import { LucideSearchX, XCircleIcon } from "lucide-react";
 
 export default async function Products(props: {
 	searchParams?: Promise<{
@@ -62,7 +63,7 @@ export default async function Products(props: {
 			<div>
 				<h1 className={"font-semibold text-slate-900 text-xl"}>{title}</h1>
 				{search && (
-					<p className={"font-medium text-md text-slate-900"}>
+					<p className={"mt-1 font-light text-slate-500 text-sm"}>
 						Search results for: {search}
 					</p>
 				)}
@@ -76,14 +77,21 @@ export default async function Products(props: {
 		products?.pagination?.totalPages === undefined
 	) {
 		return (
-			<div>
+			<div className={"flex flex-1 flex-col"}>
 				<h1 className={"font-semibold text-slate-900 text-xl"}>{title}</h1>
 				{search && (
-					<p className={"font-medium text-md text-slate-900"}>
+					<p className={"mt-1 font-light text-slate-500 text-sm"}>
 						Search results for: {search}
 					</p>
 				)}
-				<p className={"mt-4 text-red-500"}>No products found</p>
+				<div
+					className={
+						"mt-4 flex flex-1 flex-col items-center justify-center text-red-500"
+					}
+				>
+					<LucideSearchX size={32} />
+					<p className={"mt-3 font-semibold"}>No products found</p>
+				</div>
 			</div>
 		);
 	}
@@ -92,7 +100,7 @@ export default async function Products(props: {
 		<div className={"flex flex-1 flex-col"}>
 			<h1 className={"font-semibold text-slate-900 text-xl"}>{title}</h1>
 			{search && (
-				<p className={"font-medium text-md text-slate-900"}>
+				<p className={"mt-1 font-light text-slate-500 text-sm"}>
 					Search results for: {search}
 				</p>
 			)}

@@ -2,9 +2,9 @@ import type React from "react";
 import "./globals.css";
 import { AuthProvider } from "@/app/lib/context/AuthContext";
 import { Toaster } from "@/components/ui/toaster";
-import { Geist } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
 
-const plusJakartaSans = Geist({
+const plusJakartaSans = Plus_Jakarta_Sans({
 	subsets: ["latin"],
 	display: "swap",
 	variable: "--font-plus-jakarta-sans",

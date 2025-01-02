@@ -75,7 +75,7 @@ const AddToCart = ({ quantityInCart, product, className }: AddToCartProps) => {
 			<h3 className={"font-semibold text-md"}>Add to Cart</h3>
 			<Card
 				className={cn(
-					"mt-3 rounded-xl border-slate-900 border-none bg-transparent shadow-none lg:border-1 lg:px-6 lg:py-5 lg:shadow",
+					"mt-3 rounded-md border-slate-900 border-none bg-transparent shadow-none lg:border-1 lg:px-6 lg:py-5 lg:shadow",
 					className,
 				)}
 			>
@@ -110,7 +110,7 @@ const AddToCart = ({ quantityInCart, product, className }: AddToCartProps) => {
 				</div>
 				<Button
 					className={
-						"mt-4 w-full rounded-md bg-slate-900 px-4 py-2 font-semibold text-white"
+						"mt-4 w-full rounded-sm bg-slate-900 px-4 py-2 font-semibold text-white"
 					}
 					disabled={isPending}
 					onClick={handleOnItemAddedToCart}

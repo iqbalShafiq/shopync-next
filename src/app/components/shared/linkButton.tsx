@@ -37,6 +37,7 @@ const LinkButton = ({
 			<Button
 				variant={variant}
 				className={cn(
+					"rounded-sm",
 					`${pathName === href ? "font-medium" : "font-light"}`,
 					className,
 				)}

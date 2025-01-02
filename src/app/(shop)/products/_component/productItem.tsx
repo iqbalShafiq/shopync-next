@@ -87,27 +87,29 @@ const ProductItem = ({
 					</p>
 				</div>
 			</Link>
-			{mine ? (
-				<LinkButton
-					href={`/products/editor/${id}`}
-					className="w-full rounded-t-none rounded-b-md py-3"
-					variant={"default"}
-				>
-					Edit
-				</LinkButton>
-			) : (
-				<Button
-					className="w-full rounded-t-none rounded-b-md py-3"
-					variant={"default"}
-					onClick={(e) => {
-						e.preventDefault();
-						handleAddToCart();
-					}}
-					disabled={isPending}
-				>
-					{isPending ? "Adding to cart..." : "Add to cart"}
-				</Button>
-			)}
+			<div className={"px-4 pb-4"}>
+				{mine ? (
+					<LinkButton
+						href={`/products/editor/${id}`}
+						className="w-full rounded-sm"
+						variant={"default"}
+					>
+						Edit
+					</LinkButton>
+				) : (
+					<Button
+						className="w-full rounded-sm"
+						variant={"default"}
+						onClick={(e) => {
+							e.preventDefault();
+							handleAddToCart();
+						}}
+						disabled={isPending}
+					>
+						{isPending ? "Adding to cart..." : "Add to cart"}
+					</Button>
+				)}
+			</div>
 		</div>
 	);
 };

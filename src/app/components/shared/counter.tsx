@@ -30,7 +30,7 @@ const Counter = ({
 				type={"button"}
 				variant={"outline"}
 				size={"icon"}
-				className={`bg-transparent ${
+				className={`rounded-sm bg-transparent ${
 					isPending ? "cursor-not-allowed opacity-50" : ""
 				}`}
 				disabled={quantity === 1 || isPending}
@@ -47,7 +47,7 @@ const Counter = ({
 				size={"icon"}
 				disabled={quantity === stock}
 				onClick={handleIncrement}
-				className={isPending ? "cursor-not-allowed opacity-50" : ""}
+				className={`rounded-sm ${isPending ? "cursor-not-allowed opacity-50" : ""}`}
 			>
 				<PlusIcon width={20} />
 			</Button>
