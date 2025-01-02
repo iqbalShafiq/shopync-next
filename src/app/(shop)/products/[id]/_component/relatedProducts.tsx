@@ -15,7 +15,7 @@ const RelatedProducts = async ({ product }: RelatedProductsProps) => {
 	});
 
 	if (hasErrorResult(result)) {
-		return <div />;
+		throw new Error(result.message);
 	}
 
 	return (

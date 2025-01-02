@@ -21,15 +21,11 @@ const Page = async ({ params }: PageProps) => {
 	const user = await getUser();
 
 	if (hasErrorResult(product)) {
-		return {
-			message: "Product not found",
-		};
+		throw new Error(product.message);
 	}
 
 	if (hasErrorResult(user)) {
-		return {
-			message: "User not found",
-		};
+		throw new Error(user.message);
 	}
 
 	if (product.data.userId !== user.data.id) {

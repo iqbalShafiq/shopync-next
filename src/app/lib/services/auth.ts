@@ -50,9 +50,4 @@ export const authService = {
 		}
 		return data;
 	},
-
-	logout: async () => {
-		await removeToken();
-		return;
-	},
 };

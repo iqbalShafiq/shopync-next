@@ -1,6 +1,6 @@
 import DeleteProduct from "@/app/(shop)/products/delete/[id]/deleteProduct";
 import Modal from "@/app/components/ui/modal";
-import ModalWrapper from "@/app/components/ui/modalWrapper";
+import ModalWrapper from "@/app/components/ui/modal-wrapper";
 
 interface PageProps {
 	params: Promise<{

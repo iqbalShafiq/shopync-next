@@ -52,26 +52,11 @@ export default async function Products(props: {
 	});
 
 	if (hasErrorResult(user)) {
-		return (
-			<div>
-				<h1 className={"font-semibold text-slate-900 text-xl"}>{title}</h1>
-				<p>{user.message}</p>
-			</div>
-		);
+		throw new Error(user.message);
 	}
 
 	if (hasErrorResult(products)) {
-		return (
-			<div>
-				<h1 className={"font-semibold text-slate-900 text-xl"}>{title}</h1>
-				{search && (
-					<p className={"mt-1 font-light text-slate-500 text-sm"}>
-						Search results for: {search}
-					</p>
-				)}
-				<p>{products.message}</p>
-			</div>
-		);
+		throw new Error(products.message);
 	}
 
 	if (
