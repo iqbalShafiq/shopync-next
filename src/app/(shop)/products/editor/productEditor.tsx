@@ -172,12 +172,9 @@ const ProductEditor = ({ product }: ProductEditorProps) => {
 					>
 						{product?.id && (
 							<Link href={`/products/delete/${product?.id}`} tabIndex={-1}>
-								<motion.div
-									variants={buttonVariants}
-									whileHover="hover"
-								>
+								<motion.div variants={buttonVariants} whileHover="hover">
 									<Button type={"button"} variant={"destructive"} size={"icon"}>
-										<LucideTrash/>
+										<LucideTrash />
 									</Button>
 								</motion.div>
 							</Link>
