@@ -1,6 +1,7 @@
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import type React from "react";
+import { cn } from "@/lib/utils";
 
 interface BorderlessInputProps
 	extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -26,7 +27,10 @@ const BorderlessInputText = ({
 				</Label>
 			)}
 			<Input
-				className={`-p-4 rounded-none border-slate-200 border-x-0 border-t-0 border-b-2 bg-transparent font-medium text-slate-800 transition-all duration-150 focus-visible:my-2 focus-visible:rounded-lg focus-visible:p-3 focus-visible:ring-2 ${className}`}
+				className={cn(
+					"-p-4 rounded-none border-slate-200 border-x-0 border-t-0 border-b-2 bg-transparent font-medium text-slate-800 transition-all duration-150 focus-visible:my-2 focus-visible:rounded-lg focus-visible:p-3 focus-visible:ring-2",
+					className,
+				)}
 				{...props}
 			/>
 		</div>

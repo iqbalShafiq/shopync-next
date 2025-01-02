@@ -14,7 +14,7 @@ const ImageViewer = ({
 			src={src}
 			alt={alt}
 			className={cn(
-				"w-full rounded-xl border-slate-900 object-cover object-center drop-shadow-lg focus-visible:rounded-lg",
+				"w-full rounded-md border-slate-900 object-cover object-center drop-shadow-sm focus-visible:rounded-lg",
 				className,
 			)}
 			{...props}

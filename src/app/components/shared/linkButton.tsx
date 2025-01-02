@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type React from "react";
+import { cn } from "@/lib/utils";
 
 interface LinkButtonProps
 	extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
@@ -35,7 +36,10 @@ const LinkButton = ({
 		<Link href={href}>
 			<Button
 				variant={variant}
-				className={`${pathName === href && "font-semibold"} ${className}`}
+				className={cn(
+					`${pathName === href ? "font-medium" : "font-light"}`,
+					className,
+				)}
 				tabIndex={-1}
 				size={size}
 				disabled={disabled}

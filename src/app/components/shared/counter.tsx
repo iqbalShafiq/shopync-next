@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { MinusIcon, PlusIcon } from "lucide-react";
 import React from "react";
+import { cn } from "@/lib/utils";
 
 export type CounterProps = {
 	quantity: number;
@@ -24,7 +25,7 @@ const Counter = ({
 	className,
 }: CounterProps) => {
 	return (
-		<div className={`flex items-center justify-start space-x-4 ${className}`}>
+		<div className={cn("flex items-center justify-start space-x-4", className)}>
 			<Button
 				type={"button"}
 				variant={"outline"}

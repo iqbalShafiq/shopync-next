@@ -96,7 +96,7 @@ export default async function Products(props: {
 					Search results for: {search}
 				</p>
 			)}
-			<div className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+			<div className="mt-6 grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
 				{products.data.map(
 					({ id, name, price, description, quantity, userId, imageUrl }) => (
 						<ProductItem

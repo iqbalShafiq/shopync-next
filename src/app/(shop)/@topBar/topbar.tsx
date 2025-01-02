@@ -14,7 +14,7 @@ import React from "react";
 const TopBar = () => {
 	const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
 	return (
-		<nav className="z-50 w-full bg-white/40 px-8 py-5 text-slate-900 shadow-sm backdrop-blur-sm md:fixed md:top-0">
+		<nav className="z-50 w-full bg-white px-8 py-3 text-slate-900 shadow-sm md:fixed md:top-0">
 			{/* Main Navigation Container */}
 			<div className="flex items-center justify-between">
 				<div className={"block items-center justify-start space-x-6 md:flex"}>

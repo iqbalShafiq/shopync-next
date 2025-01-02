@@ -1,6 +1,7 @@
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import type React from "react";
+import { cn } from "@/lib/utils";
 
 const defaultClass =
 	"block w-full px-3 py-2 border border-slate-300 rounded-md shadow-sm focus:outline-none focus:ring-slate-500 focus:border-slate-500";
@@ -28,7 +29,7 @@ const InputText = ({ startIcon, className, ...props }: InputProps) => {
 				</div>
 			)}
 			<Input
-				className={`${defaultClass} ${startIcon && "pl-10"} ${className}`}
+				className={cn(`${defaultClass} ${startIcon && "pl-10"}`, className)}
 				{...props}
 			/>
 		</div>

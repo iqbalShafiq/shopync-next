@@ -4,24 +4,27 @@ interface ShopLayoutProps {
 	children: React.ReactNode;
 	topBar: React.ReactNode;
 	modal: React.ReactNode;
+	footer: React.ReactNode;
 }
 
 export default function ShopLayout({
 	children,
 	topBar,
 	modal,
+	footer,
 }: ShopLayoutProps) {
 	return (
-		<div className={"relative flex min-h-screen flex-col bg-blue-100 pb-8"}>
+		<div className={"relative flex min-h-screen flex-col bg-white"}>
 			{modal}
 			{topBar}
 			<div
 				className={
-					"relative mx-8 mt-8 flex flex-1 flex-col rounded-lg bg-white/30 p-8 text-slate-900 shadow-sm backdrop-blur-sm md:mt-28"
+					"relative m-8 flex flex-1 flex-col rounded-lg text-slate-900 md:mt-24"
 				}
 			>
 				{children}
 			</div>
+			{footer}
 		</div>
 	);
 }

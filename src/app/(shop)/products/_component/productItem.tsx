@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { toast } from "@/hooks/use-toast";
 import Link from "next/link";
 import React from "react";
+import { cn } from "@/lib/utils";
 
 export interface ProductProps {
 	id: string;
@@ -60,19 +61,22 @@ const ProductItem = ({
 
 	return (
 		<div
-			className={`flex flex-col justify-between rounded-b-xl shadow-md transition-all duration-300 hover:shadow-lg ${className}`}
+			className={cn(
+				"flex flex-col justify-between rounded-b-md shadow-md transition-all duration-300 hover:scale-105 hover:shadow-lg",
+				className,
+			)}
 		>
 			<Link href={link} className={"flex h-full flex-col"}>
 				<img
 					src={image}
 					alt={name}
-					className="h-48 w-full rounded-t-xl object-cover"
+					className="h-48 w-full rounded-t-md object-cover drop-shadow-md"
 				/>
-				<div className="flex flex-1 flex-col items-baseline justify-between p-6">
+				<div className="flex flex-1 flex-col items-baseline justify-between px-4 py-6">
 					<div>
-						<h2 className="font-semibold text-xl">{name}</h2>
+						<h2 className="font-medium text-lg">{name}</h2>
 						<HtmlContent
-							className={"text-slate-500"}
+							className={"font-light text-slate-500"}
 							showAsHtml={false}
 							content={description}
 							limitCharacter={100}
@@ -86,14 +90,14 @@ const ProductItem = ({
 			{mine ? (
 				<LinkButton
 					href={`/products/editor/${id}`}
-					className="w-full rounded-t-none rounded-b-xl py-3"
+					className="w-full rounded-t-none rounded-b-md py-3"
 					variant={"default"}
 				>
 					Edit
 				</LinkButton>
 			) : (
 				<Button
-					className="w-full rounded-t-none rounded-b-xl py-3"
+					className="w-full rounded-t-none rounded-b-md py-3"
 					variant={"default"}
 					onClick={(e) => {
 						e.preventDefault();
