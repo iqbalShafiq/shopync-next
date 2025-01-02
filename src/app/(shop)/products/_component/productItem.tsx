@@ -3,11 +3,12 @@
 import HtmlContent from "@/app/components/shared/htmlContent";
 import LinkButton from "@/app/components/shared/linkButton";
 import upsertCartQuantityAction from "@/app/lib/actions/upsertCartQuantityAction";
-import { Button } from "@/components/ui/button";
-import { toast } from "@/hooks/use-toast";
+import {Button} from "@/components/ui/button";
+import {toast} from "@/hooks/use-toast";
 import Link from "next/link";
 import React from "react";
-import { cn } from "@/lib/utils";
+import {cn} from "@/lib/utils";
+import {motion} from "motion/react";
 
 export interface ProductProps {
 	id: string;
@@ -59,10 +60,33 @@ const ProductItem = ({
 		});
 	};
 
+	const childVariants = {
+		hidden: {
+			opacity: 0,
+			scale: 0
+		},
+		show: {
+			opacity: 1,
+			scale: 1,
+			transition: {
+				type: "spring",
+				duration: 0.1
+			}
+		}
+	};
+
 	return (
-		<div
+		<motion.div
+			variants={childVariants}
+			whileHover={{
+				scale: 1.05,
+				transition: {
+					type: "spring",
+					duration: 0.01
+				}
+			}}
 			className={cn(
-				"flex flex-col justify-between rounded-b-md shadow-md transition-all duration-300 hover:scale-105 hover:shadow-lg",
+				"flex flex-col justify-between rounded-b-md shadow-md transition-all duration-300 hover:shadow-lg",
 				className,
 			)}
 		>
@@ -110,7 +134,7 @@ const ProductItem = ({
 					</Button>
 				)}
 			</div>
-		</div>
+		</motion.div>
 	);
 };
 

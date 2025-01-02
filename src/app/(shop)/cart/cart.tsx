@@ -13,7 +13,7 @@ const Cart = async () => {
 
 	if (!result.data.length) {
 		return (
-			<div className="flex flex-col items-center justify-center font-semibold text-slate-400">
+			<div className="flex flex-col items-center justify-center py-8 font-semibold text-slate-400">
 				<LucideShoppingCart size={24} />
 				<h1 className="mt-3 text-md">Cart is empty</h1>
 			</div>

@@ -9,7 +9,7 @@ import "react-quill-new/dist/quill.snow.css";
 const ReactQuill = dynamic(() => import("react-quill-new"), {
 	ssr: false,
 	loading: () => (
-		<div className="min-h-[120px] rounded-lg border-2 border-slate-200 p-4">
+		<div className="min-h-[600px] rounded-lg border-2 border-slate-200 p-4">
 			Loading editor...
 		</div>
 	),

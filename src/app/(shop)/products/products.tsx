@@ -10,7 +10,9 @@ import {
 	PaginationNext,
 	PaginationPrevious,
 } from "@/components/ui/pagination";
-import { LucideSearchX, XCircleIcon } from "lucide-react";
+import { LucideSearchX } from "lucide-react";
+import { motion } from "motion/react";
+import ProductGrid from "@/app/(shop)/products/_component/productGrid";
 
 export default async function Products(props: {
 	searchParams?: Promise<{
@@ -89,7 +91,10 @@ export default async function Products(props: {
 						"mt-4 flex flex-1 flex-col items-center justify-center text-red-500"
 					}
 				>
-					<LucideSearchX size={32} />
+					<motion.div animate={{ scale: 2 }} />
+					<div>
+						<LucideSearchX size={32} />
+					</div>
 					<p className={"mt-3 font-semibold"}>No products found</p>
 				</div>
 			</div>
@@ -104,7 +109,7 @@ export default async function Products(props: {
 					Search results for: {search}
 				</p>
 			)}
-			<div className="mt-6 grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
+			<ProductGrid>
 				{products.data.map(
 					({ id, name, price, description, quantity, userId, imageUrl }) => (
 						<ProductItem
@@ -119,7 +124,7 @@ export default async function Products(props: {
 						/>
 					),
 				)}
-			</div>
+			</ProductGrid>
 			{pagination && (
 				<Pagination
 					className={"mt-8 flex flex-1 flex-col items-center justify-end"}
