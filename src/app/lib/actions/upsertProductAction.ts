@@ -4,6 +4,7 @@ import { authService } from "@/app/lib/services/auth";
 import { productService } from "@/app/lib/services/products";
 import { hasErrorResult } from "@/app/lib/utils";
 import { RedirectType, redirect } from "next/navigation";
+import type { Category } from "../services/categories";
 
 export async function upsertProductAction(
 	_: { message: string },
@@ -20,6 +21,8 @@ export async function upsertProductAction(
 	const price = Number(formData.get("price"));
 	const quantity = Number(formData.get("quantity"));
 	const image = formData.get("image") as File;
+	const categoriesJson = formData.get("categories") as string;
+	const categories: Category[] = JSON.parse(categoriesJson);
 
 	const payload = new FormData();
 	formData.append("userId", user.data.id);
@@ -28,6 +31,7 @@ export async function upsertProductAction(
 	payload.append("price", price.toString());
 	payload.append("quantity", quantity.toString());
 	payload.append("image", image);
+	payload.append("categories", JSON.stringify(categories));
 
 	if (id) {
 		payload.append("id", id);
@@ -36,6 +40,8 @@ export async function upsertProductAction(
 	const response = id
 		? await productService.updateProduct(id, payload)
 		: await productService.addProduct(payload);
+
+	console.log(`Response: ${JSON.stringify(response)}`);
 
 	if (hasErrorResult(response)) {
 		return {

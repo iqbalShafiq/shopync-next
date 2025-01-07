@@ -11,7 +11,6 @@ import {
 	PaginationPrevious,
 } from "@/components/ui/pagination";
 import { LucideSearchX } from "lucide-react";
-import { motion } from "motion/react";
 import ProductGrid from "@/app/(shop)/products/_component/productGrid";
 
 export default async function Products(props: {
@@ -51,6 +50,8 @@ export default async function Products(props: {
 		excludedProductId,
 	});
 
+	console.log(`products: ${JSON.stringify(products)}`);
+
 	if (hasErrorResult(user)) {
 		throw new Error(user.message);
 	}
@@ -65,18 +66,19 @@ export default async function Products(props: {
 	) {
 		return (
 			<div className={"flex flex-1 flex-col"}>
-				<h1 className={"font-semibold text-slate-900 text-xl"}>{title}</h1>
 				{search && (
-					<p className={"mt-1 font-light text-slate-500 text-sm"}>
-						Search results for: {search}
-					</p>
+					<div>
+						<h1 className={"font-semibold text-slate-900 text-xl"}>{title}</h1>
+						<p className={"mt-1 font-light text-slate-500 text-sm"}>
+							Search results for: {search}
+						</p>
+					</div>
 				)}
 				<div
 					className={
 						"mt-4 flex flex-1 flex-col items-center justify-center text-red-500"
 					}
 				>
-					<motion.div animate={{ scale: 2 }} />
 					<div>
 						<LucideSearchX size={32} />
 					</div>

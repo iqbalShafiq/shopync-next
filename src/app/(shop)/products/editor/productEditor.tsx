@@ -11,12 +11,31 @@ import { LucideTrash } from "lucide-react";
 import Link from "next/link";
 import React, { useActionState } from "react";
 import { motion } from "motion/react";
+import type { Category } from "@/app/lib/services/categories";
+import { MultiCombobox } from "@/components/ui/multi-combobox";
+import { Label } from "@/components/ui/label";
 
 type ProductEditorProps = {
 	product?: Product;
+	categories: Category[];
 };
 
-const ProductEditor = ({ product }: ProductEditorProps) => {
+const ProductEditor = ({ product, categories }: ProductEditorProps) => {
+	const existingCategories =
+		product?.categories?.map((data) => {
+			return { value: data.category.name, label: data.category.name };
+		}) || [];
+
+	const [selectedCategories, setSelectedCategories] =
+		React.useState<Array<{ value: string; label: string }>>(existingCategories);
+
+	const categoryOptions = (categories || []).map((category) => ({
+		value: category.name,
+		label: category.name,
+	}));
+
+	console.log(`CategoryOptions: ${JSON.stringify(categoryOptions)}`);
+
 	const initialState = {
 		message: "",
 		name: "",
@@ -149,6 +168,31 @@ const ProductEditor = ({ product }: ProductEditorProps) => {
 							id={"quantity"}
 							required={true}
 							placeholder={"100"}
+						/>
+					</motion.div>
+
+					<motion.div
+						variants={itemVariants}
+						className="mt-4 flex w-full flex-col"
+					>
+						<Label className="font-semibold">Categories</Label>
+						<MultiCombobox
+							options={categoryOptions}
+							selected={selectedCategories}
+							onChangeAction={setSelectedCategories}
+							placeholder="Select categories..."
+							className="mt-3"
+						/>
+
+						{/* Hidden input to send categories data */}
+						<input
+							type="hidden"
+							name="categories"
+							value={JSON.stringify(
+								selectedCategories.map((category) => ({
+									name: category.value,
+								})),
+							)}
 						/>
 					</motion.div>
 

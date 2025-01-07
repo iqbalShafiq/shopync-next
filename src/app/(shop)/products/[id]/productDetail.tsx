@@ -6,6 +6,7 @@ import ImageViewer from "@/app/components/shared/imageViewer";
 import type { ProductInCart } from "@/app/lib/services/cart";
 import type { Product } from "@/app/lib/services/products";
 import React from "react";
+import { Badge } from "@/components/ui/badge";
 
 interface ProductDetailProps {
 	productInCart: ProductInCart;
@@ -43,6 +44,18 @@ const ProductDetail = async ({
 					<p className={"mt-1 font-light text-md text-slate-800"}>
 						Rp{product.price.toLocaleString("id-ID")}
 					</p>
+
+					{/* Categories */}
+					<div className="mt-4">
+						<h3 className="font-medium text-sm">Categories:</h3>
+						<div className="mt-2 flex flex-wrap gap-2">
+							{product.categories?.map((cat) => (
+								<Badge variant={"secondary"} key={cat.category.id}>
+									{cat.category.name}
+								</Badge>
+							))}
+						</div>
+					</div>
 
 					{/* Description */}
 					<p className={"mt-3 font-semibold text-md text-slate-900"}>

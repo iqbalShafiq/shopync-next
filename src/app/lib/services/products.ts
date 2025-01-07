@@ -10,15 +10,6 @@ export interface ProductQueryParams {
 	excludedProductId?: string;
 }
 
-export interface AddProduct {
-	name: string;
-	price: number;
-	quantity: number;
-	userId: string;
-	description: string;
-	imageUrl: string | null;
-}
-
 export interface Product {
 	id: string;
 	name: string;
@@ -28,6 +19,13 @@ export interface Product {
 	userId: string;
 	imageUrl: string | null;
 	user?: Seller | null | undefined;
+	categories: {
+		category: {
+			id: string;
+			name: string;
+			description?: string;
+		};
+	}[];
 }
 
 export interface Seller {
