@@ -46,17 +46,15 @@ const ProductDetail = async ({
 					</p>
 
 					{/* Categories */}
-					<div className="mt-4">
-						<p className={"mt-3 font-semibold text-md text-slate-900"}>
-							Categories
-						</p>
-						<div className="mt-2 flex flex-wrap gap-2">
-							{product.categories?.map((cat) => (
-								<Badge variant={"secondary"} key={cat.category.id}>
-									{cat.category.name}
-								</Badge>
-							))}
-						</div>
+					<p className={"mt-3 font-semibold text-md text-slate-900"}>
+						Categories
+					</p>
+					<div className="mt-2 flex flex-wrap gap-2">
+						{product.categories?.map((cat) => (
+							<Badge variant={"secondary"} key={cat.category.id}>
+								{cat.category.name}
+							</Badge>
+						))}
 					</div>
 
 					{/* Description */}
