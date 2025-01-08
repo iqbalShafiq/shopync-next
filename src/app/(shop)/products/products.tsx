@@ -38,8 +38,6 @@ export default async function Products(props: {
 			: "Products";
 	const pagination = props.pagination !== undefined ? props.pagination : true;
 
-	console.log(`userId: ${userId} | excludedProductId: ${excludedProductId}`);
-
 	const user = await getUser();
 
 	const products = await productService.get({
@@ -49,8 +47,6 @@ export default async function Products(props: {
 		userId,
 		excludedProductId,
 	});
-
-	console.log(`products: ${JSON.stringify(products)}`);
 
 	if (hasErrorResult(user)) {
 		throw new Error(user.message);
@@ -80,9 +76,11 @@ export default async function Products(props: {
 					}
 				>
 					<div>
-						<LucideSearchX size={32} />
+						<LucideSearchX className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 lg:h-16 lg:w-16" />
 					</div>
-					<p className={"mt-3 font-semibold"}>No products found</p>
+					<p className={"mt-3 font-semibold text-xs md:text-lg"}>
+						No products found
+					</p>
 				</div>
 			</div>
 		);

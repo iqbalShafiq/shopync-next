@@ -47,7 +47,9 @@ const ProductDetail = async ({
 
 					{/* Categories */}
 					<div className="mt-4">
-						<h3 className="font-medium text-sm">Categories:</h3>
+						<p className={"mt-3 font-semibold text-md text-slate-900"}>
+							Categories
+						</p>
 						<div className="mt-2 flex flex-wrap gap-2">
 							{product.categories?.map((cat) => (
 								<Badge variant={"secondary"} key={cat.category.id}>

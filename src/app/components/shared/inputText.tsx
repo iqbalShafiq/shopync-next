@@ -29,7 +29,10 @@ const InputText = ({ startIcon, className, ...props }: InputProps) => {
 				</div>
 			)}
 			<Input
-				className={cn(`${defaultClass} ${startIcon && "pl-10"}`, className)}
+				className={cn(
+					`${defaultClass} ${startIcon && "pl-8 md:pl-10"}`,
+					className,
+				)}
 				{...props}
 			/>
 		</div>

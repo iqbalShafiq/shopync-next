@@ -42,7 +42,6 @@ export function MultiCombobox({
 	className,
 }: MultiComboboxProps) {
 	const [open, setOpen] = React.useState(false);
-	console.log(`Options: ${JSON.stringify(options)}`);
 
 	const handleSelect = (option: Option) => {
 		if (selected.some((item) => item.value === option.value)) {

@@ -28,7 +28,7 @@ const BorderlessInputText = ({
 			)}
 			<Input
 				className={cn(
-					"-p-4 rounded-none border-slate-200 border-x-0 border-t-0 border-b-2 bg-transparent font-medium text-slate-800 transition-all duration-150 focus-visible:my-2 focus-visible:rounded-lg focus-visible:p-3 focus-visible:ring-2",
+					"-p-4 rounded-none border-slate-200 border-x-0 border-t-0 border-b-2 bg-transparent font-medium text-slate-800 text-xs transition-all duration-150 focus-visible:my-2 focus-visible:rounded-lg focus-visible:p-3 focus-visible:ring-2 md:text-sm",
 					className,
 				)}
 				{...props}

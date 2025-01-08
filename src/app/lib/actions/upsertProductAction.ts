@@ -41,8 +41,6 @@ export async function upsertProductAction(
 		? await productService.updateProduct(id, payload)
 		: await productService.addProduct(payload);
 
-	console.log(`Response: ${JSON.stringify(response)}`);
-
 	if (hasErrorResult(response)) {
 		return {
 			message: response.message,

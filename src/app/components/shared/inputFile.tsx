@@ -78,7 +78,11 @@ const InputFile = ({ imageUrl, className, ...props }: InputFileProps) => {
 			/>
 			<div className={"flex flex-col items-center space-y-2"}>
 				<PlusIcon size={32} className={"text-slate-400"} />
-				<p className={"w-full flex-1 font-light text-lg text-slate-400"}>
+				<p
+					className={
+						"w-full flex-1 text-center font-light text-slate-400 text-xs md:text-lg"
+					}
+				>
 					Add Product Image
 				</p>
 			</div>

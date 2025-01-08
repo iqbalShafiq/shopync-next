@@ -15,13 +15,9 @@ const SearchBar = () => {
 			<InputText
 				placeholder={"Search Products"}
 				name={"search"}
-				className={"bg-white/30"}
+				className={"bg-white/30 text-xs md:text-sm"}
 				startIcon={
-					<MagnifyingGlassIcon
-						width={16}
-						height={16}
-						className="text-slate-900"
-					/>
+					<MagnifyingGlassIcon className="h-3 w-3 text-slate-900 md:h-4 md:w-4" />
 				}
 			/>
 		</form>

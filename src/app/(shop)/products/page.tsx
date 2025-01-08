@@ -2,7 +2,7 @@ import Products from "@/app/(shop)/products/products";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-	title: "Products",
+	title: "Shopync",
 	description: "Product list page",
 };
 

@@ -34,8 +34,6 @@ const ProductEditor = ({ product, categories }: ProductEditorProps) => {
 		label: category.name,
 	}));
 
-	console.log(`CategoryOptions: ${JSON.stringify(categoryOptions)}`);
-
 	const initialState = {
 		message: "",
 		name: "",
@@ -125,7 +123,10 @@ const ProductEditor = ({ product, categories }: ProductEditorProps) => {
 							defaultValue={product?.id}
 						/>
 					)}
-					<motion.div variants={itemVariants}>
+					<motion.div
+						variants={itemVariants}
+						className={"mr-0 mb-4 w-full md:mr-8 md:mb-0"}
+					>
 						<BorderlessInputText
 							label={"Product Name"}
 							labelFontWeight={"semibold"}
@@ -173,9 +174,11 @@ const ProductEditor = ({ product, categories }: ProductEditorProps) => {
 
 					<motion.div
 						variants={itemVariants}
-						className="mt-4 flex w-full flex-col"
+						className="mt-3 mb-4 flex w-full flex-col md:mb-0"
 					>
-						<Label className="font-semibold">Categories</Label>
+						<Label className={"block font-semibold text-slate-900 text-sm"}>
+							Categories
+						</Label>
 						<MultiCombobox
 							options={categoryOptions}
 							selected={selectedCategories}
@@ -212,7 +215,9 @@ const ProductEditor = ({ product, categories }: ProductEditorProps) => {
 					</motion.div>
 					<motion.div
 						variants={itemVariants}
-						className={"mt-8 flex w-full items-center justify-end space-x-3"}
+						className={
+							"mt-8 flex w-full flex-col items-center justify-end space-y-4 md:flex-row md:space-x-3 md:space-y-0"
+						}
 					>
 						{product?.id && (
 							<Link href={`/products/delete/${product?.id}`} tabIndex={-1}>
