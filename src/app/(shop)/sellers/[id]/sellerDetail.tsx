@@ -38,7 +38,7 @@ const SellerDetail = ({ productResult, seller }: SellerDetailProps) => {
 					</div>
 				</div>
 			</div>
-			<Products userId={seller?.id} title={`Products by ${seller?.name}`} />
+			<Products userId={seller?.id} />
 		</div>
 	);
 };
