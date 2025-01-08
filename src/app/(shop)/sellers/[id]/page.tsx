@@ -1,6 +1,12 @@
 import SellerDetail from "@/app/(shop)/sellers/[id]/sellerDetail";
 import { productService } from "@/app/lib/services/products";
 import { hasErrorResult } from "@/app/lib/utils";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: "Seller Profile",
+	description: "Seller profile page",
+};
 
 interface PageProps {
 	params: Promise<{
