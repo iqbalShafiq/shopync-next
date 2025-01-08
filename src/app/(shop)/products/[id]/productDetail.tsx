@@ -3,10 +3,12 @@ import RelatedProducts from "@/app/(shop)/products/[id]/_component/relatedProduc
 import SellerCard from "@/app/(shop)/products/[id]/_component/sellerCard";
 import HtmlContent from "@/app/components/shared/htmlContent";
 import ImageViewer from "@/app/components/shared/imageViewer";
+import { getUser } from "@/app/lib/context/AuthContext";
 import type { ProductInCart } from "@/app/lib/services/cart";
 import type { Product } from "@/app/lib/services/products";
-import React from "react";
+import { hasErrorResult } from "@/app/lib/utils";
 import { Badge } from "@/components/ui/badge";
+import React from "react";
 
 interface ProductDetailProps {
 	productInCart: ProductInCart;
@@ -17,6 +19,12 @@ const ProductDetail = async ({
 	productInCart,
 	product,
 }: ProductDetailProps) => {
+	const user = await getUser();
+	if (hasErrorResult(user)) {
+		throw new Error(user.message);
+	}
+	const mine = user.data?.id === product.userId;
+
 	return (
 		<div className={"flex flex-col"}>
 			<div className={"grid w-full grid-cols-1 gap-6 lg:grid-cols-6 lg:gap-8"}>
@@ -34,7 +42,9 @@ const ProductDetail = async ({
 					)}
 				</aside>
 
-				<main className={"col-span-1 lg:col-span-2"}>
+				<main
+					className={`col-span-1 ${mine ? "lg:col-span-4" : "lg:col-span-2"}`}
+				>
 					{/* Product name */}
 					<p className={"font-semibold text-md text-slate-900"}>Product Name</p>
 					<h1 className={"mt-1 font-light text-md"}>{product.name}</h1>
@@ -69,12 +79,14 @@ const ProductDetail = async ({
 				</main>
 
 				{/* Cart section */}
-				<aside className={"col-span-1 w-full lg:col-span-2"}>
-					<AddToCart
-						quantityInCart={productInCart?.quantity}
-						product={product}
-					/>
-				</aside>
+				{!mine && (
+					<aside className={"col-span-1 w-full lg:col-span-2"}>
+						<AddToCart
+							quantityInCart={productInCart?.quantity}
+							product={product}
+						/>
+					</aside>
+				)}
 			</div>
 
 			<RelatedProducts product={product} />
