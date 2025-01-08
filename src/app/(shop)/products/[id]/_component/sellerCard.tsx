@@ -31,7 +31,7 @@ const SellerCard = ({ seller, className }: SellerCardProps) => {
 
 				<LinkButton
 					variant={"default"}
-					href={`/products/${seller.id}`}
+					href={`/sellers/${seller.id}`}
 					className={"font-semibold text-sm"}
 				>
 					View Profile
