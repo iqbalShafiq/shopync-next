@@ -1,5 +1,5 @@
 <div align="center">
-  <h1>🛒 Shopync Frontend</h1>
+  <h1>🛍️ Shopync Frontend</h1>
   <p><i>A modern e-commerce frontend built with Next.js 15</i></p>
 
   <p>
