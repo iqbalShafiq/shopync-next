@@ -1,8 +1,5 @@
 "use client";
 
-import * as React from "react";
-import { Check, ChevronsUpDown } from "lucide-react";
-import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
 	Command,
@@ -17,6 +14,9 @@ import {
 	PopoverContent,
 	PopoverTrigger,
 } from "@/components/ui/popover";
+import { cn } from "@/lib/utils";
+import { Check, ChevronsUpDown, Plus } from "lucide-react";
+import * as React from "react";
 import { Badge } from "./badge";
 
 export type Option = {
@@ -28,6 +28,7 @@ interface MultiComboboxProps {
 	options: Option[];
 	selected: Option[];
 	onChangeAction: (selected: Option[]) => void;
+	onCreateOption?: (value: string) => void;
 	placeholder?: string;
 	emptyText?: string;
 	className?: string;
@@ -37,17 +38,31 @@ export function MultiCombobox({
 	options,
 	selected,
 	onChangeAction,
+	onCreateOption,
 	placeholder = "Select items...",
 	emptyText = "No item found.",
 	className,
 }: MultiComboboxProps) {
 	const [open, setOpen] = React.useState(false);
+	const [inputValue, setInputValue] = React.useState("");
+	const [localOptions, setLocalOptions] = React.useState<Option[]>(options);
 
 	const handleSelect = (option: Option) => {
 		if (selected.some((item) => item.value === option.value)) {
 			onChangeAction(selected.filter((item) => item.value !== option.value));
 		} else {
 			onChangeAction([...selected, option]);
+		}
+	};
+
+	const handleCreateOption = () => {
+		if (inputValue && onCreateOption) {
+			onCreateOption(inputValue);
+			setLocalOptions([
+				...localOptions,
+				{ value: inputValue, label: inputValue },
+			]);
+			setInputValue("");
 		}
 	};
 
@@ -75,11 +90,28 @@ export function MultiCombobox({
 			</PopoverTrigger>
 			<PopoverContent className="p-0">
 				<Command>
-					<CommandInput placeholder={placeholder} />
+					<CommandInput
+						placeholder={placeholder}
+						value={inputValue}
+						onValueChange={setInputValue}
+					/>
 					<CommandList>
-						<CommandEmpty>{emptyText}</CommandEmpty>
+						<CommandEmpty className={"p-4"}>
+							{onCreateOption && inputValue !== "" && (
+								<Button
+									variant="outline"
+									size="sm"
+									className="w-full justify-start"
+									onClick={handleCreateOption}
+								>
+									<Plus className="mr-2 h-4 w-4" />
+									Create "{inputValue}"
+								</Button>
+							)}
+							{!onCreateOption && emptyText}
+						</CommandEmpty>
 						<CommandGroup>
-							{(options || []).map((option) => (
+							{localOptions.map((option) => (
 								<CommandItem
 									key={option.value}
 									onSelect={() => handleSelect(option)}

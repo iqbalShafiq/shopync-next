@@ -3,17 +3,19 @@
 import BorderlessInputText from "@/app/components/shared/borderlessInputText";
 import InputFile from "@/app/components/shared/inputFile";
 import InputText from "@/app/components/shared/inputText";
+import { createCategoryAction } from "@/app/lib/actions/createCategoryAction";
 import { upsertProductAction } from "@/app/lib/actions/upsertProductAction";
+import type { Category } from "@/app/lib/services/categories";
 import type { Product } from "@/app/lib/services/products";
 import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+import { MultiCombobox } from "@/components/ui/multi-combobox";
 import { RichTextEditor } from "@/components/ui/rich-text-editor";
+import { toast } from "@/hooks/use-toast";
 import { LucideTrash } from "lucide-react";
+import { motion } from "motion/react";
 import Link from "next/link";
 import React, { useActionState } from "react";
-import { motion } from "motion/react";
-import type { Category } from "@/app/lib/services/categories";
-import { MultiCombobox } from "@/components/ui/multi-combobox";
-import { Label } from "@/components/ui/label";
 
 type ProductEditorProps = {
 	product?: Product;
@@ -87,6 +89,42 @@ const ProductEditor = ({ product, categories }: ProductEditorProps) => {
 			scale: 1.05,
 			transition: { type: "spring", stiffness: 400 },
 		},
+	};
+
+	const [isPending, startTransition] = React.useTransition();
+	const handleCreateCategory = (categoryName: string) => {
+		startTransition(async () => {
+			try {
+				const response = await createCategoryAction(categoryName);
+
+				if (!response.success || response.newCategory === undefined) {
+					toast({
+						title: "Failed to create category",
+						description: response.error,
+						variant: "destructive",
+					});
+					return;
+				}
+
+				// Add the new category to the options
+				const newCategory = response.newCategory;
+
+				// Update selected categories to include the new one
+				setSelectedCategories([...selectedCategories, newCategory]);
+
+				toast({
+					title: "Category created successfully",
+					description: `Category ${response.newCategory.value} has been created.`,
+				});
+			} catch (error) {
+				toast({
+					title: "Failed to create category",
+					description: "An error occurred while creating the category.",
+					variant: "destructive",
+				});
+				console.error(error);
+			}
+		});
 	};
 
 	return (
@@ -183,6 +221,9 @@ const ProductEditor = ({ product, categories }: ProductEditorProps) => {
 							options={categoryOptions}
 							selected={selectedCategories}
 							onChangeAction={setSelectedCategories}
+							onCreateOption={(categoryName) =>
+								handleCreateCategory(categoryName)
+							}
 							placeholder="Select categories..."
 							className="mt-3"
 						/>

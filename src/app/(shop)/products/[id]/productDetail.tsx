@@ -35,10 +35,7 @@ const ProductDetail = async ({
 					/>
 
 					{product.user && (
-						<div>
-							<div className={"mt-5 h-0 bg-gray-200"} />
-							<SellerCard seller={product.user} className={"mt-4"} />
-						</div>
+						<SellerCard className={"mt-8"} seller={product.user} />
 					)}
 				</aside>
 
@@ -46,19 +43,16 @@ const ProductDetail = async ({
 					className={`col-span-1 ${mine ? "lg:col-span-4" : "lg:col-span-2"}`}
 				>
 					{/* Product name */}
-					<p className={"font-semibold text-md text-slate-900"}>Product Name</p>
-					<h1 className={"mt-1 font-light text-md"}>{product.name}</h1>
+					<p className={"font-semibold text-lg text-slate-900"}>
+						{product.name}
+					</p>
 
 					{/* Price */}
-					<p className={"mt-3 font-semibold text-md text-slate-900"}>Price</p>
-					<p className={"mt-1 font-light text-md text-slate-800"}>
+					<p className={"mt-1 font-semibold text-2xl text-slate-800"}>
 						Rp{product.price.toLocaleString("id-ID")}
 					</p>
 
 					{/* Categories */}
-					<p className={"mt-3 font-semibold text-md text-slate-900"}>
-						Categories
-					</p>
 					<div className="mt-2 flex flex-wrap gap-2">
 						{product.categories?.map((cat) => (
 							<Badge variant={"secondary"} key={cat.category.id}>
@@ -69,12 +63,12 @@ const ProductDetail = async ({
 
 					{/* Description */}
 					<p className={"mt-3 font-semibold text-md text-slate-900"}>
-						Description
+						About this product
 					</p>
 					<HtmlContent
 						showAsHtml={true}
 						content={product.description}
-						className="mt-1 max-w-none font-light text-md text-slate-500"
+						className="mt-1 max-w-none font-light text-md text-slate-800"
 					/>
 				</main>
 

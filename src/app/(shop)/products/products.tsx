@@ -1,3 +1,4 @@
+import ProductGrid from "@/app/(shop)/products/_component/productGrid";
 import ProductItem from "@/app/(shop)/products/_component/productItem";
 import { getUser } from "@/app/lib/context/AuthContext";
 import { productService } from "@/app/lib/services/products";
@@ -11,7 +12,6 @@ import {
 	PaginationPrevious,
 } from "@/components/ui/pagination";
 import { LucideSearchX } from "lucide-react";
-import ProductGrid from "@/app/(shop)/products/_component/productGrid";
 
 export default async function Products(props: {
 	searchParams?: Promise<{
@@ -72,13 +72,13 @@ export default async function Products(props: {
 				)}
 				<div
 					className={
-						"mt-4 flex flex-1 flex-col items-center justify-center text-red-500"
+						"mt-4 flex flex-1 flex-col items-center justify-center text-red-500 opacity-50"
 					}
 				>
 					<div>
-						<LucideSearchX className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 lg:h-16 lg:w-16" />
+						<LucideSearchX className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12" />
 					</div>
-					<p className={"mt-3 font-semibold text-xs md:text-lg"}>
+					<p className={"mt-3 font-semibold text-xs md:text-sm"}>
 						No products found
 					</p>
 				</div>

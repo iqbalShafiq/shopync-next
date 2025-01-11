@@ -20,7 +20,7 @@ const TopBar = () => {
 				<div className={"block items-center justify-start space-x-6 md:flex"}>
 					{/* Logo */}
 					<Link href={"/"} className="text-slate-900">
-						<h1 className="font-semibold text-2xl">~</h1>
+						<h1 className="font-semibold text-2xl">Shopync</h1>
 					</Link>
 
 					{/* Desktop Navigation Links */}
