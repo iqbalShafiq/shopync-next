@@ -1,36 +1,132 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<div align="center">
+  <h1>🛒 Shopync Frontend</h1>
+  <p><i>A modern e-commerce frontend built with Next.js 15</i></p>
 
-## Getting Started
+  <p>
+    <a href="#tech-stack">Tech Stack</a> •
+    <a href="#features">Features</a> •
+    <a href="#prerequisites">Prerequisites</a> •
+    <a href="#getting-started">Getting Started</a> •
+    <a href="#future-enhancements">Future Enhancements</a>
+  </p>
+</div>
 
-First, run the development server:
+<div id="about">
+  <h2>📝 About</h2>
+  <p>
+    Shopync is a modern e-commerce web application built as part of the Devscale Indonesia cohort submission. This project demonstrates the implementation of a responsive, and user-friendly e-commerce interface using the latest React 19 with Next.js 15.
+  </p>
+</div>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+<div id="tech-stack">
+  <h2>🛠️ Tech Stack</h2>
+  <p align="center">
+    <img src="https://img.shields.io/badge/React-19.0.0-61DAFB?style=for-the-badge&logo=react&logoColor=white" alt="React 19" />
+    <img src="https://img.shields.io/badge/Next.js%2015-black?style=for-the-badge&logo=next.js&logoColor=white" alt="Next.js"/>
+    <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript"/>
+    <img src="https://img.shields.io/badge/Tailwind%20CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind"/>
+    <img src="https://img.shields.io/badge/shadcn%2Fui-000000?style=for-the-badge&logo=shadcnui&logoColor=white" alt="shadcn/ui"/>
+    <img src="https://img.shields.io/badge/Bun-000000?style=for-the-badge&logo=bun&logoColor=white" alt="Bun"/>
+  </p>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+  <ul>
+    <li>🔥 <strong>React 19</strong> - The latest version of React library with enhanced features</li>
+    <li>⚡ <strong>Next.js 15</strong> - Production-ready React framework with server-side capabilities</li>
+    <li>🎨 <strong>Tailwind CSS</strong> - Utility-first CSS framework</li>
+    <li>🎯 <strong>Shadcn/UI</strong> - Re-usable components built with Radix UI and Tailwind</li>
+    <li>🚀 <strong>Bun</strong> - All-in-one JavaScript runtime & toolkit</li>
+    <li>📘 <strong>TypeScript</strong> - For type safety and better developer experience</li>
+    <li>📝 <strong>React Quill</strong> - Rich text editor</li>
+    <li>✨ <strong>Lucide React</strong> - Beautiful icons</li>
+    <li>🎭 <strong>Biome</strong> - Fast formatter and linter</li>
+  </ul>
+</div>
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+<div id="features">
+  <h2>✨ Features</h2>
+  
+  <h3>🔐 User Authentication</h3>
+  <ul>
+    <li>User registration with email and password</li>
+    <li>User login with JWT token authentication</li>
+    <li>Protected routes for authenticated users</li>
+  </ul>
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+  <h3>📦 Product Management</h3>
+  <ul>
+    <li>Create new products with details (name, description, price, etc.)</li>
+    <li>Update existing product information</li>
+    <li>Delete products from inventory</li>
+    <li>View all products with pagination</li>
+    <li>Product categorization</li>
+  </ul>
 
-## Learn More
+  <h3>🛒 Shopping Cart</h3>
+  <ul>
+    <li>Add products to personal shopping cart</li>
+    <li>Update product quantities in cart</li>
+    <li>Remove items from cart</li>
+    <li>View cart total and item summary</li>
+  </ul>
+</div>
 
-To learn more about Next.js, take a look at the following resources:
+<div id="prerequisites">
+  <h2>📋 Prerequisites</h2>
+  <ul>
+    <li>Bun ≥ 1.1.36</li>
+  </ul>
+</div>
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+<div id="getting-started">
+  <h2>🚀 Getting Started</h2>
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+  ```bash
+  # Clone the repository
+  git clone https://github.com/iqbalShafiq/shopync-next.git
 
-## Deploy on Vercel
+  # Navigate to the project directory
+  cd shopync-next
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+  # Install dependencies
+  bun install
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+  # Run the development server
+  bun dev
+  ```
+</div>
+
+<div id="future-enhancements">
+  <h2>🔮 Future Enhancements</h2>
+  
+  <h3>💳 Payment Integration</h3>
+  <ul>
+    <li>Integration with popular payment gateways</li>
+    <li>Support for multiple payment methods</li>
+    <li>Secure payment processing</li>
+    <li>Payment history and transaction tracking</li>
+  </ul>
+
+  <h3>🚀 Platform Enhancement</h3>
+  <ul>
+    <li>Advanced product search and filtering</li>
+    <li>Product reviews and ratings system</li>
+    <li>User profile management</li>
+    <li>Order tracking and history</li>
+    <li>Admin dashboard for analytics</li>
+  </ul>
+
+  <h3>📱 Integration & Scaling</h3>
+  <ul>
+    <li>Automated testing and CI/CD pipeline</li>
+  </ul>
+</div>
+
+<div id="footer" align="center">
+  <p>
+    <img src="https://img.shields.io/badge/Built_with_❤️_by-Iqbal_Shafiq-red?style=for-the-badge&logo=github" alt="Built with love"/>
+  </p>
+  <p>
+    <sub>As part of Devscale Indonesia cohort submission</sub><br>
+    <sub>Powered by Bun 🥟</sub>
+  </p>
+</div>
